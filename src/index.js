@@ -1,15 +1,13 @@
+// Node modules.
 import React from 'react';
 import { render } from 'react-dom';
+
+//Relative Imports
 import './globalStyles.css';
-import App from './App';
+import App from "./components/App";
 import * as serviceWorker from './serviceWorker';
 
-render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
