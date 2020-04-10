@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './styles.css';
+import Login from '../Login';
 
 
 
@@ -22,7 +23,9 @@ class App extends Component {
   render() {
 
     return (
-      <div> ARE WE THERE YET</div>
+      <div className='app' >
+        <Login />
+      </div>
     )
   }
 

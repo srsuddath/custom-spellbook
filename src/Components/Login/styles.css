@@ -1,0 +1,13 @@
+.login-window{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: bisque;
+}
+
+.inputs{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
