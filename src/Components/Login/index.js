@@ -15,17 +15,23 @@ class Login extends Component {
   render() {
 
     return (
-      <div className="login-window">
-        <div className="inputs">
-          <h2>Username</h2>
-          <input type="text" className="username-box" />
-
-          <h2>Password</h2>
-          <input type="text" className="password-box" />
-
-          <h4>Register</h4>
+      <div className="background">
+        <div className="welcome">
+          <h1>Custom Spellbook Generator</h1>
         </div>
+        <div className="login-window">
+          <h2>Please Log In</h2>
+          <input type="text" className="input-box" placeholder="Username" />
+          <input type="text" className="input-box" placeholder="Password" />
+          <button>Sign In</button>
+          <hr />
+          <button>Register</button>
+          <h4>or</h4>
+          <button>Forgot Your Password?</button>
+          <br />
 
+        </div>
+        <div className="spacer" />
       </div>
     )
   }
