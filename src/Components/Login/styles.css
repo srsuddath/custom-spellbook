@@ -1,4 +1,4 @@
-.background{
+.background {
   align-items: center;
   display: flex;
   flex-grow: 1;
@@ -8,72 +8,71 @@
   text-align: center;
 }
 
-.welcome{
+.welcome {
   font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-image: linear-gradient( to bottom right, #6786dd, #5471c2);
+  background-image: linear-gradient(to bottom right, #6786dd, #5471c2);
   color: #ffffff;
 }
 
-.login-window{
+.login-window {
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  background-image: linear-gradient( #6786dd, #5471c2);
+  background-image: linear-gradient(#6786dd, #5471c2);
   border-radius: 8%;
   padding: 20px;
   text-align: center;
   color: #ffffff;
 }
 
-.inputs{
+.inputs {
   align-items: center;
   display: flex;
   flex-direction: column;
 }
 
-button{
-  width: 65%;
-  height: 15%;
+button {
   border-radius: 5px;
-  font-size: .9rem;
+  font-size: 0.9rem;
   border-color: #d8d8d8;
   border: 2px;
-  margin: .5rem;
+  margin: 3px;
+  padding: 5px 12px 5px;
   color: #445da1;
 }
-.input-box{
-  width: 65%;
-  height: 15%;
-  border-radius: 5px;
-  font-size: .9rem;
-  border-color: #d8d8d8;
+.input-box {
   border: 2px;
-  margin: .5rem;
-
+  margin: 4px;
+  padding: 8px 18px;
+  border-radius: 5px;
 }
-.spacer{
+.spacer {
   height: 30%;
   width: 100%;
 }
 
-h1{
-  margin: .5rem;
+h1 {
+  margin: 5px;
+  padding: 5px;
 }
-h2{
-  padding-top: 3%;
+h2 {
+  padding: 5px 5px 2px;
+  margin: 10px;
 }
-h3{
-  margin: .5rem;
+h3 {
+  padding: 5px 5px 2px;
+  margin: 10px;
 }
-h4{
-  margin: .2rem;
+h4 {
+  padding: 5px 5px 2px;
+  margin: 0px;
 }
 
-hr{
+hr {
   width: 90%;
 }

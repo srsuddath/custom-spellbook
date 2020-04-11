@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
-import './styles.css';
-import App from '../App';
+import "./styles.css";
 
 class Login extends Component {
   constructor(props) {
@@ -11,9 +10,9 @@ class Login extends Component {
       loggedIn: false,
       usernames: props.usernames,
       passwords: props.passwords,
-      usernameInput: '',
-      passwordInput: '',
-      message: '',
+      usernameInput: "",
+      passwordInput: "",
+      message: "",
     };
   }
 
@@ -21,13 +20,13 @@ class Login extends Component {
     const { usernames, usernameInput, passwords, passwordInput } = this.state;
     const index = usernames.indexOf(usernameInput);
     if (index === -1) {
-      this.setState({ message: 'Username not found, please Register' });
+      this.setState({ message: "Username not found, please Register" });
       return;
     }
     if (passwords[index] !== passwordInput) {
-      this.setState({ message: 'Incorrect password, please try again' });
+      this.setState({ message: "Incorrect password, please try again" });
     }
-    this.setState({ message: '' });
+    this.setState({ message: "" });
     this.props.onLoginUpdate(true);
   };
 
@@ -78,8 +77,9 @@ class Login extends Component {
 
           <br />
         </div>
-
-        <div className="spacer" />
+        <div />
+        <div />
+        <div />
       </div>
     );
   }
