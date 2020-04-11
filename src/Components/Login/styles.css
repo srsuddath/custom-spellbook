@@ -15,7 +15,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient( to bottom right, #b28df1, #7247ea);
+  background-image: linear-gradient( to bottom right, #6786dd, #5471c2);
+  color: #ffffff;
 }
 
 .login-window{
@@ -23,11 +24,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  background-image: linear-gradient( #b28df1, #7247ea);
+  background-image: linear-gradient( #6786dd, #5471c2);
   width: 25%;
   height: 50%;
   border-radius: 8%;
   text-align: center;
+  color: #ffffff;
 }
 
 .inputs{
@@ -44,6 +46,7 @@ button{
   border-color: #d8d8d8;
   border: 2px;
   margin: .5rem;
+  color: #445da1;
 }
 .input-box{
   width: 65%;
