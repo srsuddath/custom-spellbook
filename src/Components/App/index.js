@@ -1,15 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import './styles.css';
-import Login from '../Login';
+import "./styles.css";
+import Login from "../Login";
+// import Register from "../Register";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loggedIn: false,
-      savedUsers: ['admin'],
-      savedPasswords: ['password'],
+      registering: false,
+      activeUserID: undefined,
+      savedUsers: [
+        {
+          name: "Sam",
+          username: "admin",
+          password: "password",
+          userId: 1,
+        },
+      ],
     };
   }
 
@@ -21,12 +30,27 @@ class App extends Component {
     this.setState({ loggedIn });
   };
 
-  render() {
-    const { savedUsers, savedPasswords, loggedIn } = this.state;
+  onRegisteringUpdate = (registering) => {
+    this.setState({ registering });
+  };
 
+  onActiveUserIdUpdate = (activeUserId) => {
+    this.setState({ activeUserId });
+  };
+
+  render() {
+    const { savedUsers, loggedIn, registering } = this.state;
     return (
       <div className="app">
-        {!loggedIn && <Login onLoginUpdate={this.onLoginUpdate} usernames={savedUsers} passwords={savedPasswords} />}
+        {!loggedIn && !registering && (
+          <Login
+            onLoginUpdate={this.onLoginUpdate}
+            onRegisteringUpdate={this.onRegisteringUpdate}
+            savedUsers={savedUsers}
+            onActiveUserIdUpdate={this.onActiveUserIdUpdate}
+          />
+        )}
+        {/* {registering && <Register />} */}
       </div>
     );
   }
