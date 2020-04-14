@@ -6,3 +6,24 @@
   flex-grow: 1;
   background-color: #deebdd;
 }
+.welcome {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-image: linear-gradient(to bottom right, #6786dd, #5471c2);
+  color: #ffffff;
+}
+
+h1 {
+  margin: 5px;
+  padding: 5px;
+  color: #ffffff;
+}
+
+.message {
+  margin: 5px;
+  padding: 30px 15px 30px;
+  color: #5471c2;
+}

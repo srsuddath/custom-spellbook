@@ -8,16 +8,6 @@
   text-align: center;
 }
 
-.welcome {
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  background-image: linear-gradient(to bottom right, #6786dd, #5471c2);
-  color: #ffffff;
-}
-
 .login-window {
   align-items: center;
   display: flex;
@@ -25,10 +15,10 @@
   justify-content: space-evenly;
   background-image: linear-gradient(#6786dd, #5471c2);
   border-radius: 8%;
-  padding: 20px;
+  padding: 5px 30px 20px;
   text-align: center;
   color: #ffffff;
-  margin: 0px 0px 350px;
+  margin: 0px 0px 250px;
 }
 
 .inputs {
@@ -57,11 +47,6 @@ button {
   width: 100%;
 }
 
-h1 {
-  margin: 5px;
-  padding: 5px;
-  color: #ffffff;
-}
 h2 {
   padding: 5px 5px 2px;
   margin: 10px;

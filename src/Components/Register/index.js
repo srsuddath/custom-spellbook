@@ -7,17 +7,15 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
-      fullNameInput: "",
+      nameInput: "",
       usernameInput: "",
       passwordInput: "",
       retypePasswordInput: "",
-      message: "",
     };
   }
 
-  onFullNameChange = (event) => {
-    this.setState({ fullNameInput: event.target.value });
+  onNameChange = (event) => {
+    this.setState({ nameInput: event.target.value });
   };
 
   onUsernameChange = (event) => {
@@ -38,7 +36,7 @@ class Register extends Component {
 
   registerUser = () => {
     const {
-      fullNameInput,
+      nameInput,
       usernameInput,
       passwordInput,
       retypePasswordInput,
@@ -48,9 +46,9 @@ class Register extends Component {
     this.props.savedUsers.forEach((element) => {
       if (usernameInput === element.username) {
         console.log("Username already in use");
-        this.setState({
-          message: "Username already in use, please choose another",
-        });
+        this.props.onMessageUpdate(
+          "Username already in use, please choose another"
+        );
         alreadyInUseFlag = true;
         return;
       }
@@ -65,51 +63,48 @@ class Register extends Component {
     }
 
     if (passwordInput !== retypePasswordInput) {
-      console.log("password mismatch");
-      this.setState({ message: "Passwords do not match, please try again" });
-      this.setState({ passwordInput: "", retypePasswordInput: "" });
+      this.props.onMessageUpdate("Passwords do not match, please try again");
+      this.setState({
+        passwordInput: "",
+        retypePasswordInput: "",
+      });
       return;
     }
     if (
       passwordInput === "" ||
       retypePasswordInput === "" ||
       usernameInput === "" ||
-      fullNameInput === ""
+      nameInput === ""
     ) {
-      this.setState({ message: "All fields are required" });
+      this.props.onMessageUpdate("All fields are required");
       return;
     }
+
     const newUserId =
       this.props.savedUsers[this.props.savedUsers.length - 1].userId + 1;
-    this.props.onSavedUsersUpdate([
-      ...this.props.savedUsers,
-      {
-        name: fullNameInput,
-        username: usernameInput,
-        password: passwordInput,
-        userId: newUserId,
-      },
-    ]);
-    console.log("made a new user id");
+
+    const newUserProfile = {
+      name: nameInput,
+      username: usernameInput,
+      password: passwordInput,
+      userId: newUserId,
+    };
+    this.props.onSavedUsersUpdate([...this.props.savedUsers, newUserProfile]);
+    this.props.onRegisteringUpdate(false);
+    this.props.onMessageUpdate("Registration Success!");
   };
 
   render() {
-    const { message } = this.state;
-
     return (
       <div className="background">
-        <div className="welcome">
-          <h1>Custom Spellbook Generator</h1>
-        </div>
-        {message && <h3>{message}</h3>}
         <div className="registration-window">
           <h2>Enter Your Information</h2>
           <input
             type="text"
             className="input-box"
             placeholder="Full Name"
-            value={this.state.fullNameInput}
-            onChange={this.onFullNameChange}
+            value={this.state.nameInput}
+            onChange={this.onNameChange}
           />
           <input
             type="text"
@@ -144,7 +139,7 @@ class Register extends Component {
 }
 
 Register.propTypes = {
-  usernames: PropTypes.array,
+  savedUsers: PropTypes.array.isRequired,
 };
 
 export default Register;

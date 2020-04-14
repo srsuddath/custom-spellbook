@@ -10,27 +10,28 @@ class Login extends Component {
       loggedIn: false,
       usernameInput: "",
       passwordInput: "",
-      message: "",
     };
   }
 
   checkCredentials = (props) => {
     const { usernameInput, passwordInput } = this.state;
-    console.log("savedUsers:" + this.props.savedUsers);
+
+    console.log(this.props.savedUsers.length);
     for (let i = 0; i < this.props.savedUsers.length; i++) {
+      console.log(i);
       if (this.props.savedUsers[i].username === usernameInput) {
         if (this.props.savedUsers[i].password !== passwordInput) {
-          this.setState({ message: "Incorrect password, please try again" });
+          this.props.onMessageUpdate("Incorrect password, please try again");
           return;
         }
-        this.setState({ message: "" });
+        this.props.onMessageUpdate("");
         this.props.onLoginUpdate(true);
         this.props.onActiveUserIdUpdate(this.props.savedUsers[i].userId);
         return;
       }
-      this.setState({ message: "Username not found, please Register" });
-      return;
     }
+    this.props.onMessageUpdate("Username not found, please Register");
+    return;
   };
 
   onPasswordChange = (event) => {
@@ -43,17 +44,17 @@ class Login extends Component {
 
   startRegistering = () => {
     this.props.onRegisteringUpdate(true);
+    this.props.onMessageUpdate("");
+  };
+
+  forgotPassword = () => {
+    this.props.onForgottenPasswordUpdate(true);
+    this.props.onMessageUpdate("");
   };
 
   render() {
-    const { message } = this.state;
-
     return (
       <div className="background">
-        <div className="welcome">
-          <h1>Custom Spellbook Generator</h1>
-        </div>
-        {message && <h3>{message}</h3>}
         <div className="login-window">
           <h2>Please Log In</h2>
 
@@ -66,7 +67,7 @@ class Login extends Component {
           />
 
           <input
-            type="text"
+            type="password"
             className="input-box"
             placeholder="Password"
             value={this.state.passwordInput}
@@ -80,7 +81,7 @@ class Login extends Component {
 
           <h4>or</h4>
 
-          <button>Forgot Your Password?</button>
+          <button onClick={this.forgotPassword}>Forgot Your Password?</button>
         </div>
       </div>
     );
