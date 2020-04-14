@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./styles.css";
 import Login from "../Login";
-// import Register from "../Register";
+import Register from "../Register";
 
 class App extends Component {
   constructor(props) {
@@ -38,6 +38,10 @@ class App extends Component {
     this.setState({ activeUserId });
   };
 
+  onSavedUsersUpdate = (savedUsers) => {
+    this.setState({ savedUsers }, console.log(savedUsers));
+  };
+
   render() {
     const { savedUsers, loggedIn, registering } = this.state;
     return (
@@ -50,7 +54,13 @@ class App extends Component {
             onActiveUserIdUpdate={this.onActiveUserIdUpdate}
           />
         )}
-        {/* {registering && <Register />} */}
+        {registering && (
+          <Register
+            onRegisteringUpdate={this.onRegisteringUpdate}
+            savedUsers={savedUsers}
+            onSavedUsersUpdate={this.onSavedUsersUpdate}
+          />
+        )}
       </div>
     );
   }
