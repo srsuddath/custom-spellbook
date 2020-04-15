@@ -25,7 +25,10 @@ class App extends Component {
     console.log(savedUsers);
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    const { savedUsers } = this.state;
+    localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
+  }
 
   onLoginUpdate = (loggedIn) => {
     this.setState({ loggedIn });
@@ -41,8 +44,8 @@ class App extends Component {
 
   onSavedUsersUpdate = (savedUsers) => {
     this.setState({ savedUsers });
-    localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
-    console.log("Saved Memory Data");
+    // localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
+    // console.log("Saved Memory Data");
   };
 
   onForgottenPasswordUpdate = (forgottenPassword) => {
