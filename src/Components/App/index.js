@@ -14,20 +14,37 @@ class App extends Component {
       registering: false,
       forgottenPassword: false,
       activeUserID: undefined,
-      savedUsers: [
-        {
-          name: "Sam",
-          username: "admin",
-          password: "password",
-          userId: 1,
-        },
-      ],
+      savedUsers: JSON.parse(localStorage.getItem("savedUsers")) || [],
     };
   }
+  componenetDidMount() {
+    console.log("ComponentDidMount()");
+    this.setState({ message: "I MOUNTED" });
+    const savedUsers = JSON.parse(localStorage.getItem("savedUsers")) || [];
+    this.setState({ savedUsers });
+    console.log("Loaded Memory");
+    console.log(savedUsers);
+    return;
+  }
 
-  componenetDidMount() {}
+  componenetWillUnmount() {
+    console.log("ComponentWillUnmount()");
+    const { savedUsers } = this.state;
+    localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
+    console.log("Saved Memory Data");
+  }
 
-  componenetWillUnmount() {}
+  dataTestLoad = () => {
+    const savedUsers = JSON.parse(localStorage.getItem("savedUsers"));
+    this.setState({ savedUsers });
+    console.log(savedUsers);
+  };
+
+  dataTestSet = () => {
+    const { savedUsers } = this.state;
+    localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
+    console.log(savedUsers);
+  };
 
   onLoginUpdate = (loggedIn) => {
     this.setState({ loggedIn });
@@ -77,6 +94,7 @@ class App extends Component {
             savedUsers={savedUsers}
             onActiveUserIdUpdate={this.onActiveUserIdUpdate}
             onMessageUpdate={this.onMessageUpdate}
+            onSavedUsersUpdate={this.onSavedUsersUpdate}
           />
         )}
         {registering && !forgottenPassword && !loggedIn && (
@@ -95,6 +113,10 @@ class App extends Component {
             onMessageUpdate={this.onMessageUpdate}
           />
         )}
+        <div className="testButtons">
+          <button onClick={this.dataTestSet}>Data Test Set</button>
+          <button onClick={this.dataTestLoad}>Data Test Load</button>
+        </div>
       </div>
     );
   }

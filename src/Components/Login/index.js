@@ -15,10 +15,11 @@ class Login extends Component {
 
   checkCredentials = (props) => {
     const { usernameInput, passwordInput } = this.state;
-
-    console.log(this.props.savedUsers.length);
+    if (!this.props.savedUsers) {
+      this.props.onMessageUpdate("Username not found, please Register");
+      return;
+    }
     for (let i = 0; i < this.props.savedUsers.length; i++) {
-      console.log(i);
       if (this.props.savedUsers[i].username === usernameInput) {
         if (this.props.savedUsers[i].password !== passwordInput) {
           this.props.onMessageUpdate("Incorrect password, please try again");

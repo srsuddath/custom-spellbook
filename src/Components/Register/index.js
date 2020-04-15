@@ -79,19 +79,35 @@ class Register extends Component {
       this.props.onMessageUpdate("All fields are required");
       return;
     }
+    if (this.props.savedUsers.length !== 0) {
+      const newUserId =
+        this.props.savedUsers[this.props.savedUsers.length - 1].userId + 1;
 
-    const newUserId =
-      this.props.savedUsers[this.props.savedUsers.length - 1].userId + 1;
-
-    const newUserProfile = {
-      name: nameInput,
-      username: usernameInput,
-      password: passwordInput,
-      userId: newUserId,
-    };
-    this.props.onSavedUsersUpdate([...this.props.savedUsers, newUserProfile]);
+      const newUserProfile = {
+        name: nameInput,
+        username: usernameInput,
+        password: passwordInput,
+        userId: newUserId,
+      };
+      const savedUsers = [...this.props.savedUsers, newUserProfile];
+      this.props.onSavedUsersUpdate(savedUsers);
+      localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
+      this.props.onRegisteringUpdate(false);
+      this.props.onMessageUpdate("Registration Success!");
+      return;
+    }
+    const savedUsers = [
+      {
+        name: nameInput,
+        username: usernameInput,
+        password: passwordInput,
+        userId: 0,
+      },
+    ];
+    this.props.onSavedUsersUpdate(savedUsers);
     this.props.onRegisteringUpdate(false);
     this.props.onMessageUpdate("Registration Success!");
+    localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
   };
 
   render() {
