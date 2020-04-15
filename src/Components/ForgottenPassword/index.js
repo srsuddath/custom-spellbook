@@ -17,6 +17,28 @@ class ForgottenPassword extends Component {
     };
   }
 
+  componentDidMount() {
+    document.addEventListener("keydown", this.onKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.onKeyDown);
+  }
+
+  onKeyDown = (event) => {
+    const { usernameFound } = this.state;
+    if (event.keyCode === 13) {
+      if (!usernameFound) {
+        this.findUserInfo();
+        return;
+      }
+      if (usernameFound) {
+        this.updatePassword();
+        return;
+      }
+    }
+  };
+
   onNameChange = (event) => {
     this.setState({ nameInput: event.target.value });
   };

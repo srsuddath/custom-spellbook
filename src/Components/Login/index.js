@@ -13,6 +13,21 @@ class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    document.addEventListener("keydown", this.onKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.onKeyDown);
+  }
+
+  onKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      this.checkCredentials();
+      return;
+    }
+  };
+
   checkCredentials = (props) => {
     const { usernameInput, passwordInput } = this.state;
     if (!this.props.savedUsers) {

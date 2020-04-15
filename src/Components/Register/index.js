@@ -14,6 +14,21 @@ class Register extends Component {
     };
   }
 
+  componentDidMount() {
+    document.addEventListener("keydown", this.onKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.onKeyDown);
+  }
+
+  onKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      this.registerUser();
+      return;
+    }
+  };
+
   onNameChange = (event) => {
     this.setState({ nameInput: event.target.value });
   };

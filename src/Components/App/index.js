@@ -23,12 +23,20 @@ class App extends Component {
     this.setState({ savedUsers });
     console.log("Loaded Memory");
     console.log(savedUsers);
+
+    document.addEventListener("keydown", this.onKeyDown);
+    window.addEventListener("beforeunload", this.onBeforeUnload);
   }
 
   componentWillUnmount() {
+    this.onBeforeUnload();
+  }
+
+  onBeforeUnload = () => {
     const { savedUsers } = this.state;
     localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
-  }
+    window.removeEventListener("beforeunload", this.setStateToLocalStorage);
+  };
 
   onLoginUpdate = (loggedIn) => {
     this.setState({ loggedIn });
@@ -44,8 +52,6 @@ class App extends Component {
 
   onSavedUsersUpdate = (savedUsers) => {
     this.setState({ savedUsers });
-    // localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
-    // console.log("Saved Memory Data");
   };
 
   onForgottenPasswordUpdate = (forgottenPassword) => {
