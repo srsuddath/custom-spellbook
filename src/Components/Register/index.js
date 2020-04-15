@@ -91,23 +91,20 @@ class Register extends Component {
       };
       const savedUsers = [...this.props.savedUsers, newUserProfile];
       this.props.onSavedUsersUpdate(savedUsers);
-      localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
-      this.props.onRegisteringUpdate(false);
-      this.props.onMessageUpdate("Registration Success!");
-      return;
     }
-    const savedUsers = [
-      {
-        name: nameInput,
-        username: usernameInput,
-        password: passwordInput,
-        userId: 0,
-      },
-    ];
-    this.props.onSavedUsersUpdate(savedUsers);
+    if (this.props.savedUsers.length === 0) {
+      const savedUsers = [
+        {
+          name: nameInput,
+          username: usernameInput,
+          password: passwordInput,
+          userId: 0,
+        },
+      ];
+      this.props.onSavedUsersUpdate(savedUsers);
+    }
     this.props.onRegisteringUpdate(false);
     this.props.onMessageUpdate("Registration Success!");
-    localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
   };
 
   render() {

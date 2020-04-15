@@ -4,6 +4,7 @@ import "./styles.css";
 import Login from "../Login";
 import Register from "../Register";
 import ForgottenPassword from "../ForgottenPassword";
+import Mainpage from "../MainPage";
 
 class App extends Component {
   constructor(props) {
@@ -14,37 +15,17 @@ class App extends Component {
       registering: false,
       forgottenPassword: false,
       activeUserID: undefined,
-      savedUsers: JSON.parse(localStorage.getItem("savedUsers")) || [],
+      savedUsers: [],
     };
   }
-  componenetDidMount() {
-    console.log("ComponentDidMount()");
-    this.setState({ message: "I MOUNTED" });
+  componentDidMount() {
     const savedUsers = JSON.parse(localStorage.getItem("savedUsers")) || [];
     this.setState({ savedUsers });
     console.log("Loaded Memory");
     console.log(savedUsers);
-    return;
   }
 
-  componenetWillUnmount() {
-    console.log("ComponentWillUnmount()");
-    const { savedUsers } = this.state;
-    localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
-    console.log("Saved Memory Data");
-  }
-
-  dataTestLoad = () => {
-    const savedUsers = JSON.parse(localStorage.getItem("savedUsers"));
-    this.setState({ savedUsers });
-    console.log(savedUsers);
-  };
-
-  dataTestSet = () => {
-    const { savedUsers } = this.state;
-    localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
-    console.log(savedUsers);
-  };
+  componentWillUnmount() {}
 
   onLoginUpdate = (loggedIn) => {
     this.setState({ loggedIn });
@@ -60,6 +41,8 @@ class App extends Component {
 
   onSavedUsersUpdate = (savedUsers) => {
     this.setState({ savedUsers });
+    localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
+    console.log("Saved Memory Data");
   };
 
   onForgottenPasswordUpdate = (forgottenPassword) => {
@@ -113,10 +96,7 @@ class App extends Component {
             onMessageUpdate={this.onMessageUpdate}
           />
         )}
-        <div className="testButtons">
-          <button onClick={this.dataTestSet}>Data Test Set</button>
-          <button onClick={this.dataTestLoad}>Data Test Load</button>
-        </div>
+        {loggedIn && <Mainpage />}
       </div>
     );
   }
