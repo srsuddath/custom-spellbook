@@ -15,6 +15,7 @@ class App extends Component {
       registering: false,
       forgottenPassword: false,
       activeUserID: undefined,
+      activeUserName: undefined,
       savedUsers: [],
     };
   }
@@ -62,6 +63,10 @@ class App extends Component {
     this.setState({ message });
   };
 
+  onActiveUserNameUpdate = (activeUserName) => {
+    this.setState({ activeUserName });
+  };
+
   render() {
     const {
       savedUsers,
@@ -69,12 +74,14 @@ class App extends Component {
       registering,
       forgottenPassword,
       message,
+      activeUserName,
+      activeUserID,
     } = this.state;
     return (
       <div className="app">
-        <div className="welcome">
+        <header>
           <h1>Custom Spellbook Generator</h1>
-        </div>
+        </header>
 
         <h3 className="message">{message}</h3>
 
@@ -87,6 +94,7 @@ class App extends Component {
             onActiveUserIdUpdate={this.onActiveUserIdUpdate}
             onMessageUpdate={this.onMessageUpdate}
             onSavedUsersUpdate={this.onSavedUsersUpdate}
+            onActiveUserNameUpdate={this.onActiveUserNameUpdate}
           />
         )}
         {registering && !forgottenPassword && !loggedIn && (
@@ -105,7 +113,12 @@ class App extends Component {
             onMessageUpdate={this.onMessageUpdate}
           />
         )}
-        {loggedIn && <Mainpage />}
+        {loggedIn && (
+          <Mainpage
+            activeUserName={activeUserName}
+            activeUserID={activeUserID}
+          />
+        )}
       </div>
     );
   }
