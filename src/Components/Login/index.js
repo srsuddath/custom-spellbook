@@ -41,9 +41,9 @@ class Login extends Component {
           return;
         }
         this.props.onMessageUpdate("");
-        this.props.onLoginUpdate(true);
         this.props.onActiveUserIdUpdate(this.props.savedUsers[i].userId);
         this.props.onActiveUserNameUpdate(this.props.savedUsers[i].name);
+        this.props.onLoginUpdate(true);
         return;
       }
     }

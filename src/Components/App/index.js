@@ -14,8 +14,8 @@ class App extends Component {
       loggedIn: false,
       registering: false,
       forgottenPassword: false,
-      activeUserID: undefined,
-      activeUserName: undefined,
+      activeUserID: "",
+      activeUserName: "",
       savedUsers: [],
     };
   }
@@ -49,6 +49,7 @@ class App extends Component {
 
   onActiveUserIdUpdate = (activeUserId) => {
     this.setState({ activeUserId });
+    console.log("Active User ID was set to: " + activeUserId);
   };
 
   onSavedUsersUpdate = (savedUsers) => {
@@ -117,8 +118,11 @@ class App extends Component {
           <Mainpage
             activeUserName={activeUserName}
             activeUserID={activeUserID}
+            onMessageUpdate={this.onMessageUpdate}
           />
         )}
+
+        <div>{activeUserID}</div>
       </div>
     );
   }
