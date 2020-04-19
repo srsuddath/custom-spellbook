@@ -8,13 +8,17 @@ class MainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeUserID: this.props.activeUserID,
+      activeUserId: this.props.activeUserId,
       inputTitle: "",
       inputSchool: "",
       inputLevel: "",
-      inputDurationQuantifier: "",
+      inputConcentration: false,
       inputDuration: "",
+      inputRitual: false,
       inputDescription: "",
+      inputVerbal: false,
+      inputMaterial: false,
+      inputSomatic: false,
       savedSpells: [],
     };
   }
@@ -22,8 +26,9 @@ class MainPage extends Component {
   componentDidMount() {
     const savedSpells = JSON.parse(localStorage.getItem("savedSpells")) || [];
     this.setState({ savedSpells });
-    window.addEventListener("beforeunload", this.onBeforeUnload);
+    console.log("Saved Spells: ");
     console.log(savedSpells);
+    window.addEventListener("beforeunload", this.onBeforeUnload);
   }
 
   componentWillUnmount() {
@@ -35,21 +40,26 @@ class MainPage extends Component {
     localStorage.setItem("savedSpells", JSON.stringify(savedSpells));
     window.removeEventListener("beforeunload", this.setStateToLocalStorage);
   };
+
   createSpell = () => {
     const {
-      activeUserID,
+      activeUserId,
       inputTitle,
       inputSchool,
       inputLevel,
-      inputDurationQuantifier,
+      inputConcentration,
       inputDuration,
+      inputRitual,
       inputDescription,
+      inputVerbal,
+      inputMaterial,
+      inputSomatic,
       savedSpells,
     } = this.state;
 
     let spellAlreadyExists = false;
     savedSpells.forEach((element) => {
-      if (element.userID === activeUserID && element.title === inputTitle) {
+      if (element.userId === activeUserId && element.title === inputTitle) {
         this.props.onMessageUpdate(
           "Spell name is already taken, please try again"
         );
@@ -62,8 +72,8 @@ class MainPage extends Component {
       return;
     }
 
-    if (activeUserID === "") {
-      console.log("Error with User ID");
+    if (activeUserId === "") {
+      console.log("Error with User Id");
       return;
     }
     if (inputTitle === "") {
@@ -78,10 +88,6 @@ class MainPage extends Component {
       console.log("All spells must have a valid level");
       return;
     }
-    if (inputDurationQuantifier === "") {
-      console.log("A duration quantifier must be chosen");
-      return;
-    }
     if (inputDuration === "") {
       console.log("Must have a valid duration");
       return;
@@ -91,28 +97,52 @@ class MainPage extends Component {
       return;
     }
     const newSpell = {
-      userID: activeUserID,
+      userId: activeUserId,
       title: inputTitle,
       school: inputSchool,
       level: inputLevel,
-      durationQuantifier: inputDurationQuantifier,
       duration: inputDuration,
       description: inputDescription,
+      concentration: inputConcentration,
+      ritual: inputRitual,
+      verbalComponents: inputVerbal,
+      somaticComponents: inputSomatic,
+      materialComponents: inputMaterial,
     };
-    console.log(newSpell);
     const newSavedSpells = [...savedSpells, newSpell];
     this.setState({
       savedSpells: newSavedSpells,
       inputTitle: "",
       inputSchool: "",
       inputLevel: "",
-      inputDurationQuantifier: "",
+      inputConcentration: false,
       inputDuration: "",
+      inputRitual: false,
       inputDescription: "",
+      inputVerbal: false,
+      inputMaterial: false,
+      inputSomatic: false,
     });
     this.props.onMessageUpdate("Spell Successfully Added");
   };
 
+  generateSpellList = () => {
+    const { savedSpells, activeUserId } = this.state;
+    return savedSpells.map((spell) => {
+      if (spell.userId === activeUserId) {
+        return (
+          <div className="spell" key={spell.title}>
+            <span className="spell-title">{spell.title}</span>
+            <div className="spell-details">
+              <span>{spell.level}</span>
+              <span>{spell.school}</span>
+            </div>
+          </div>
+        );
+      }
+      return null;
+    });
+  };
   onInputTitleChange = (event) => {
     this.setState({ inputTitle: event.target.value });
   };
@@ -125,16 +155,32 @@ class MainPage extends Component {
     this.setState({ inputLevel: event.target.value });
   };
 
-  onInputDurationQuantifierChange = (event) => {
-    this.setState({ inputDurationQuantifier: event.target.value });
-  };
-
   onInputDurationChange = (event) => {
     this.setState({ inputDuration: event.target.value });
   };
 
   onInputDescriptionChange = (event) => {
     this.setState({ inputDescription: event.target.value });
+  };
+
+  onInputMaterialChange = (event) => {
+    this.setState({ inputMaterial: event.target.value });
+  };
+
+  onInputSomaticChange = (event) => {
+    this.setState({ inputSomatic: event.target.value });
+  };
+
+  onInputVerbalChange = (event) => {
+    this.setState({ inputVerbal: event.target.value });
+  };
+
+  onInputConcentrationChange = (event) => {
+    this.setState({ inputConcentration: event.target.value });
+  };
+
+  onInputRitualChange = (event) => {
+    this.setState({ inputRitual: event.target.value });
   };
 
   render() {
@@ -197,21 +243,6 @@ class MainPage extends Component {
                 <div className="durations">
                   <select
                     type="selection-box"
-                    className="duration-modifer"
-                    value={this.state.inputDurationQuantifier}
-                    onChange={this.onInputDurationQuantifierChange}
-                  >
-                    <option value="">Duration Quantifier</option>
-                    <option value="--">--</option>
-                    <option value="Concentration, Up to: ">
-                      Concentration, Up to:
-                    </option>
-                    <option value="Until Dismissed, Up to: ">
-                      Until Dismissed, Up to:
-                    </option>
-                  </select>
-                  <select
-                    type="selection-box"
                     className="duration"
                     value={this.state.inputDuration}
                     onChange={this.onInputDurationChange}
@@ -227,6 +258,40 @@ class MainPage extends Component {
                     <option value="1 Month">1 Month</option>
                     <option value="1 Year">1 Year</option>
                   </select>
+
+                  <input
+                    type="checkbox"
+                    checked={this.state.inputConcentration}
+                    onChange={this.onInputConcentrationChange}
+                  />
+                  <label>Concentration</label>
+
+                  <input
+                    type="checkbox"
+                    checked={this.state.inputRitual}
+                    onChange={this.onInputRitualChange}
+                  />
+                  <label>Ritual</label>
+                </div>
+                <div className="spell-components">
+                  <input
+                    type="checkbox"
+                    checked={this.state.inputSomatic}
+                    onChange={this.onInputSomaticChange}
+                  />
+                  <label>Somatic</label>
+                  <input
+                    type="checkbox"
+                    checked={this.state.inputVerbal}
+                    onChange={this.onInputVerbalChange}
+                  />
+                  <label>Verbal</label>
+                  <input
+                    type="checkbox"
+                    checked={this.state.inputMaterial}
+                    onChange={this.onInputMaterialChange}
+                  />
+                  <label>Material</label>
                 </div>
                 <input
                   type="text"
@@ -237,6 +302,8 @@ class MainPage extends Component {
                 />
                 <button onClick={this.createSpell}>Submit</button>
               </div>
+
+              <div className="spell-list">{this.generateSpellList()}</div>
             </div>
           </main>
         </div>
@@ -246,6 +313,9 @@ class MainPage extends Component {
   }
 }
 
-MainPage.propTypes = {};
+MainPage.propTypes = {
+  activeUserId: PropTypes.number.isRequired,
+  activeUserName: PropTypes.string.isRequired,
+};
 
 export default MainPage;

@@ -14,7 +14,7 @@ class App extends Component {
       loggedIn: false,
       registering: false,
       forgottenPassword: false,
-      activeUserID: "",
+      activeUserId: "",
       activeUserName: "",
       savedUsers: [],
     };
@@ -22,7 +22,7 @@ class App extends Component {
   componentDidMount() {
     const savedUsers = JSON.parse(localStorage.getItem("savedUsers")) || [];
     this.setState({ savedUsers });
-    console.log("Loaded Memory");
+    console.log("Saved Users: ");
     console.log(savedUsers);
 
     document.addEventListener("keydown", this.onKeyDown);
@@ -49,7 +49,6 @@ class App extends Component {
 
   onActiveUserIdUpdate = (activeUserId) => {
     this.setState({ activeUserId });
-    console.log("Active User ID was set to: " + activeUserId);
   };
 
   onSavedUsersUpdate = (savedUsers) => {
@@ -68,6 +67,19 @@ class App extends Component {
     this.setState({ activeUserName });
   };
 
+  deleteMemory = () => {
+    this.setState({
+      message: "",
+      loggedIn: false,
+      registering: false,
+      forgottenPassword: false,
+      activeUserId: "",
+      activeUserName: "",
+      savedUsers: [],
+    });
+    localStorage.clear();
+  };
+
   render() {
     const {
       savedUsers,
@@ -76,7 +88,7 @@ class App extends Component {
       forgottenPassword,
       message,
       activeUserName,
-      activeUserID,
+      activeUserId,
     } = this.state;
     return (
       <div className="app">
@@ -117,12 +129,11 @@ class App extends Component {
         {loggedIn && (
           <Mainpage
             activeUserName={activeUserName}
-            activeUserID={activeUserID}
+            activeUserId={activeUserId}
             onMessageUpdate={this.onMessageUpdate}
           />
         )}
-
-        <div>{activeUserID}</div>
+        <button onClick={this.deleteMemory}>Clear All Memory</button>
       </div>
     );
   }
