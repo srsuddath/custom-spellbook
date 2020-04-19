@@ -137,6 +137,9 @@ class MainPage extends Component {
               <span>{spell.level}</span>
               <span>{spell.school}</span>
             </div>
+            <div className="spell-detail">
+              <span>{spell.duration}</span>
+            </div>
           </div>
         );
       }
@@ -164,23 +167,23 @@ class MainPage extends Component {
   };
 
   onInputMaterialChange = (event) => {
-    this.setState({ inputMaterial: event.target.value });
+    this.setState({ inputMaterial: event.target.checked });
   };
 
   onInputSomaticChange = (event) => {
-    this.setState({ inputSomatic: event.target.value });
+    this.setState({ inputSomatic: event.target.checked });
   };
 
   onInputVerbalChange = (event) => {
-    this.setState({ inputVerbal: event.target.value });
+    this.setState({ inputVerbal: event.target.checked });
   };
 
   onInputConcentrationChange = (event) => {
-    this.setState({ inputConcentration: event.target.value });
+    this.setState({ inputConcentration: event.target.checked });
   };
 
   onInputRitualChange = (event) => {
-    this.setState({ inputRitual: event.target.value });
+    this.setState({ inputRitual: event.target.checked });
   };
 
   render() {
@@ -293,10 +296,10 @@ class MainPage extends Component {
                   />
                   <label>Material</label>
                 </div>
-                <input
-                  type="text"
+                <textarea
                   className="spell-description-box"
                   placeholder="Spell Description"
+                  rows="5"
                   value={this.state.inputDescription}
                   onChange={this.onInputDescriptionChange}
                 />
