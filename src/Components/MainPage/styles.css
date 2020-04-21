@@ -84,8 +84,17 @@ hr {
   width: 90%;
   color: #ffffff;
 }
+textarea {
+  resize: none;
+}
 .spell-form {
   background-color: #445da1;
   display: flex;
   flex-direction: column;
+}
+
+.spell {
+  padding: 5px;
+  margin: 5px;
+  background-color: grey;
 }

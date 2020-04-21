@@ -14,6 +14,7 @@ class MainPage extends Component {
       inputLevel: "",
       inputConcentration: false,
       inputDuration: "",
+      inputRange: "",
       inputRitual: false,
       inputDescription: "",
       inputVerbal: false,
@@ -50,6 +51,7 @@ class MainPage extends Component {
       inputConcentration,
       inputDuration,
       inputRitual,
+      inputRange,
       inputDescription,
       inputVerbal,
       inputMaterial,
@@ -88,6 +90,10 @@ class MainPage extends Component {
       console.log("All spells must have a valid level");
       return;
     }
+    if (inputRange === "") {
+      console.log("All spells must have a valid range");
+      return;
+    }
     if (inputDuration === "") {
       console.log("Must have a valid duration");
       return;
@@ -105,9 +111,11 @@ class MainPage extends Component {
       description: inputDescription,
       concentration: inputConcentration,
       ritual: inputRitual,
+      range: inputRange,
       verbalComponents: inputVerbal,
       somaticComponents: inputSomatic,
       materialComponents: inputMaterial,
+      readOnly: true,
     };
     const newSavedSpells = [...savedSpells, newSpell];
     this.setState({
@@ -117,6 +125,7 @@ class MainPage extends Component {
       inputLevel: "",
       inputConcentration: false,
       inputDuration: "",
+      inputRange: "",
       inputRitual: false,
       inputDescription: "",
       inputVerbal: false,
@@ -126,22 +135,66 @@ class MainPage extends Component {
     this.props.onMessageUpdate("Spell Successfully Added");
   };
 
+  unlockSpell = (index) => {
+    let { savedSpells } = this.state;
+    savedSpells[index].readOnly = false;
+    this.setState({ savedSpells });
+  };
+
   generateSpellList = () => {
     const { savedSpells, activeUserId } = this.state;
-    return savedSpells.map((spell) => {
+    return savedSpells.map((spell, index) => {
       if (spell.userId === activeUserId) {
-        return (
-          <div className="spell" key={spell.title}>
-            <span className="spell-title">{spell.title}</span>
-            <div className="spell-details">
-              <span>{spell.level}</span>
-              <span>{spell.school}</span>
+        if (spell.readOnly) {
+          return (
+            <div className="spell" key={spell.title}>
+              <span className="spell-title">{spell.title}</span>
+              <button onClick={() => this.unlockSpell(index)}>Unlock</button>
+              <div className="spell-detail">
+                <span>{spell.level}</span>
+                <span> - </span>
+                <span>{spell.school}</span>
+              </div>
+              <div className="spell-detail">
+                <label>Duration: </label>
+                <span>{spell.duration}</span>
+              </div>
+              <div className="spell-detail">
+                <label>Range: </label>
+                <span>{spell.range}</span>
+              </div>
+              <div className="spell-detail">
+                <input type="checkbox" checked={spell.concentration} readOnly />
+                <label>Concentration</label>
+                <input type="checkbox" checked={spell.ritual} readOnly />
+                <label>Ritual</label>
+              </div>
+              <div className="spell-detail">
+                <input
+                  type="checkbox"
+                  checked={spell.materialComponents}
+                  readOnly
+                />
+                <label>Material</label>
+                <input
+                  type="checkbox"
+                  checked={spell.somaticComponents}
+                  readOnly
+                />
+                <label>Somatic</label>
+                <input
+                  type="checkbox"
+                  checked={spell.verbalComponents}
+                  readOnly
+                />
+                <label>Verbal</label>
+              </div>
+              <p className="spell-descript-text" readOnly>
+                {spell.description}
+              </p>
             </div>
-            <div className="spell-detail">
-              <span>{spell.duration}</span>
-            </div>
-          </div>
-        );
+          );
+        }
       }
       return null;
     });
@@ -186,6 +239,10 @@ class MainPage extends Component {
     this.setState({ inputRitual: event.target.checked });
   };
 
+  onInputRangeChange = (event) => {
+    this.setState({ inputRange: event.target.checked });
+  };
+
   render() {
     return (
       <div className="background">
@@ -206,7 +263,7 @@ class MainPage extends Component {
                   value={this.state.inputTitle}
                   onChange={this.onInputTitleChange}
                 />
-                <div className="spell-categorization">
+                <div className="spell-category-options">
                   <select
                     type="selection-box"
                     className="spell-level"
@@ -243,7 +300,25 @@ class MainPage extends Component {
                     <option value="Transmutation">Transmutation</option>
                   </select>
                 </div>
-                <div className="durations">
+                <div className="range-selection-options">
+                  <select
+                    type="selection-box"
+                    className="range"
+                    value={this.state.inputRange}
+                    onChange={this.onInputRangeChange}
+                  >
+                    <option value="">Range</option>
+                    <option value="Touch">Touch</option>
+                    <option value="15 Feet">15 Feet</option>
+                    <option value="30 Feet">30 Feet</option>
+                    <option value="60 Feet">60 Feet</option>
+                    <option value="120 Feet">120 Feet</option>
+                    <option value="500 Feet">500 Feet</option>
+                    <option value="1 Mile">1 Mile</option>
+                    <option value="10 Miles">10 Miles</option>
+                  </select>
+                </div>
+                <div className="duration-selection-options">
                   <select
                     type="selection-box"
                     className="duration"
@@ -261,14 +336,14 @@ class MainPage extends Component {
                     <option value="1 Month">1 Month</option>
                     <option value="1 Year">1 Year</option>
                   </select>
-
+                </div>
+                <div className="casting-modifier-options">
                   <input
                     type="checkbox"
                     checked={this.state.inputConcentration}
                     onChange={this.onInputConcentrationChange}
                   />
                   <label>Concentration</label>
-
                   <input
                     type="checkbox"
                     checked={this.state.inputRitual}
@@ -277,6 +352,12 @@ class MainPage extends Component {
                   <label>Ritual</label>
                 </div>
                 <div className="spell-components">
+                  <input
+                    type="checkbox"
+                    checked={this.state.inputMaterial}
+                    onChange={this.onInputMaterialChange}
+                  />
+                  <label>Material</label>
                   <input
                     type="checkbox"
                     checked={this.state.inputSomatic}
@@ -289,12 +370,6 @@ class MainPage extends Component {
                     onChange={this.onInputVerbalChange}
                   />
                   <label>Verbal</label>
-                  <input
-                    type="checkbox"
-                    checked={this.state.inputMaterial}
-                    onChange={this.onInputMaterialChange}
-                  />
-                  <label>Material</label>
                 </div>
                 <textarea
                   className="spell-description-box"
