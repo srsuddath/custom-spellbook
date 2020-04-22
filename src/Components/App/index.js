@@ -17,6 +17,7 @@ class App extends Component {
       activeUserId: "",
       activeUserName: "",
       savedUsers: [],
+      dontSave: false,
     };
   }
   componentDidMount() {
@@ -76,6 +77,7 @@ class App extends Component {
       activeUserId: "",
       activeUserName: "",
       savedUsers: [],
+      dontSave: true,
     });
     localStorage.clear();
   };
@@ -89,6 +91,7 @@ class App extends Component {
       message,
       activeUserName,
       activeUserId,
+      dontSave,
     } = this.state;
     return (
       <div className="app">
@@ -131,6 +134,7 @@ class App extends Component {
             activeUserName={activeUserName}
             activeUserId={activeUserId}
             onMessageUpdate={this.onMessageUpdate}
+            dontSave={dontSave}
           />
         )}
         <button onClick={this.deleteMemory}>Clear All Memory</button>
