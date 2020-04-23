@@ -1,33 +1,34 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import "./styles.css";
-import Login from "../Login";
-import Register from "../Register";
-import ForgottenPassword from "../ForgottenPassword";
-import Mainpage from "../MainPage";
+import './styles.css';
+import Login from '../Login';
+import Register from '../Register';
+import ForgottenPassword from '../ForgottenPassword';
+import Mainpage from '../MainPage';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: "",
+      message: '',
       loggedIn: false,
       registering: false,
       forgottenPassword: false,
-      activeUserId: "",
-      activeUserName: "",
+      activeUserId: '',
+      activeUserName: '',
       savedUsers: [],
       dontSave: false,
     };
   }
+
   componentDidMount() {
-    const savedUsers = JSON.parse(localStorage.getItem("savedUsers")) || [];
+    const savedUsers = JSON.parse(localStorage.getItem('savedUsers')) || [];
     this.setState({ savedUsers });
-    console.log("Saved Users: ");
+    console.log('Saved Users: ');
     console.log(savedUsers);
 
-    document.addEventListener("keydown", this.onKeyDown);
-    window.addEventListener("beforeunload", this.onBeforeUnload);
+    document.addEventListener('keydown', this.onKeyDown);
+    window.addEventListener('beforeunload', this.onBeforeUnload);
   }
 
   componentWillUnmount() {
@@ -36,8 +37,8 @@ class App extends Component {
 
   onBeforeUnload = () => {
     const { savedUsers } = this.state;
-    localStorage.setItem("savedUsers", JSON.stringify(savedUsers));
-    window.removeEventListener("beforeunload", this.setStateToLocalStorage);
+    localStorage.setItem('savedUsers', JSON.stringify(savedUsers));
+    window.removeEventListener('beforeunload', this.setStateToLocalStorage);
   };
 
   onLoginUpdate = (loggedIn) => {
@@ -70,12 +71,12 @@ class App extends Component {
 
   deleteMemory = () => {
     this.setState({
-      message: "",
+      message: '',
       loggedIn: false,
       registering: false,
       forgottenPassword: false,
-      activeUserId: "",
-      activeUserName: "",
+      activeUserId: '',
+      activeUserName: '',
       savedUsers: [],
       dontSave: true,
     });
@@ -137,7 +138,9 @@ class App extends Component {
             dontSave={dontSave}
           />
         )}
-        <button onClick={this.deleteMemory}>Clear All Memory</button>
+        <button type="button" onClick={this.deleteMemory}>
+          Clear All Memory
+        </button>
       </div>
     );
   }

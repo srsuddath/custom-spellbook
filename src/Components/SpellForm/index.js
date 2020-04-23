@@ -215,17 +215,17 @@ class SpellForm extends Component {
             checked={this.state.inputConcentration}
             onChange={this.onCheckboxChange('inputConcentration')}
           />
-          <label>Concentration</label>
+          <span>Concentration</span>
           <input type="checkbox" checked={this.state.inputRitual} onChange={this.onCheckboxChange('inputRitual')} />
-          <label>Ritual</label>
+          <span>Ritual</span>
         </div>
         <div className="spell-components">
           <input type="checkbox" checked={this.state.inputMaterial} onChange={this.onCheckboxChange('inputMaterial')} />
-          <label>Material</label>
+          <span>Material</span>
           <input type="checkbox" checked={this.state.inputSomatic} onChange={this.onCheckboxChange('inputSomatic')} />
-          <label>Somatic</label>
+          <span>Somatic</span>
           <input type="checkbox" checked={this.state.inputVerbal} onChange={this.onCheckboxChange('inputVerbal')} />
-          <label>Verbal</label>
+          <span>Verbal</span>
         </div>
         <textarea
           className="spell-description-box"
@@ -234,18 +234,31 @@ class SpellForm extends Component {
           value={this.state.inputDescription}
           onChange={this.onInputChange('inputDescription')}
         />
-        <button onClick={this.createSpell}>Submit</button>
+        <button type="button" onClick={this.createSpell}>
+          Submit
+        </button>
       </div>
     );
   }
 }
-
 SpellForm.propTypes = {
   activeUserId: PropTypes.number.isRequired,
   savedSpells: PropTypes.array.isRequired,
+  defaultInputTitle: PropTypes.string,
+  defaultInputSchool: PropTypes.string,
+  defaultInputLevel: PropTypes.string,
+  defaultInputConcetration: PropTypes.bool,
+  defaultInputDuration: PropTypes.string,
+  defaultInputRange: PropTypes.string,
+  defaultInputRitual: PropTypes.bool,
+  defaultInputDescription: PropTypes.string,
+  defaultInputVerbal: PropTypes.bool,
+  defaultInputMaterial: PropTypes.bool,
+  defaultInputSomatic: PropTypes.bool,
+  onMessageUpdate: PropTypes.func,
+  onSavedSpellsUpdate: PropTypes.func,
 };
 SpellForm.defaultProps = {
-  activeUserId: undefined,
   defaultInputTitle: '',
   defaultInputSchool: '',
   defaultInputLevel: '',
