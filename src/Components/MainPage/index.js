@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import icon from "./userIcon.png";
+import editIcon from "../../assets/edit.svg";
 
 import "./styles.css";
 import SpellForm from "../SpellForm";
@@ -38,16 +39,15 @@ class MainPage extends Component {
     this.setState({ savedSpells });
   };
 
-  unlockSpell = (index) => {
-    const { savedSpells } = this.state;
-    const updatedSavedSpells = {
-      ...savedSpells,
-      [index]: {
-        ...savedSpells[index],
-        readOnly: !savedSpells[index].readOnly,
-      },
-    };
-    this.setState({ savedSpells: updatedSavedSpells });
+  toggleReadOnly = (index) => {
+    // Create deep clone of saved spells.
+    const clonedSpells = JSON.parse(JSON.stringify(this.state.savedSpells));
+
+    // Modify read only state of spell.
+    clonedSpells[index].readOnly = !clonedSpells[index].readOnly;
+
+    // Update state.
+    this.setState({ savedSpells: clonedSpells });
   };
 
   generateSpellList = () => {
@@ -58,8 +58,17 @@ class MainPage extends Component {
         if (spell.readOnly) {
           return (
             <div className="spell" key={spell.title}>
+              {/* Title */}
               <span className="spell-title">{spell.title}</span>
-              <button onClick={() => this.unlockSpell(index)}>Unlock</button>
+
+              {/* Edit Icon */}
+              <img
+                alt="unlock icon"
+                src={editIcon}
+                className="unlock-icon"
+                onClick={() => this.toggleReadOnly(index)}
+              />
+
               <div className="spell-detail">
                 <span>{spell.level}</span>
                 <span> - </span>
@@ -126,17 +135,6 @@ class MainPage extends Component {
               <SpellForm
                 savedSpells={savedSpells}
                 activeUserId={activeUserId}
-                defaultInputTitle={""}
-                defaultInputSchoo={""}
-                defaultInputLevel={""}
-                defaultInputConcetration={false}
-                defaultInputDuraton={""}
-                defaultInputRange={""}
-                defaultInputRitua={false}
-                defaultInputDescrption={""}
-                defaultInputVerba={false}
-                defaultInputMateral={false}
-                defaultInputSomatc={false}
                 onSavedSpellsUpdate={this.onSavedSpellsUpdate}
                 onMessageUpdate={this.props.onMessageUpdate}
               />
