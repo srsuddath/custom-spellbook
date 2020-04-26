@@ -13,28 +13,13 @@
       "experimentalObjectRestSpread": true
     }
   },
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react"
-  ],
-  "plugins": [
-    "prettier",
-    "redux-saga",
-    "react",
-    "jsx-a11y"
-  ],
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": ["prettier", "redux-saga", "react", "jsx-a11y"],
   "rules": {
     "prettier/prettier": "warn",
-    "arrow-body-style": [
-      2,
-      "as-needed"
-    ],
+    "arrow-body-style": [2, "as-needed"],
     "class-methods-use-this": 0,
-    "comma-dangle": [
-      2,
-      "always-multiline"
-    ],
+    "comma-dangle": [2, "always-multiline"],
     "consistent-return": 0,
     "default-case": 2,
     "import/imports-first": 0,
@@ -76,11 +61,9 @@
     "react/forbid-prop-types": 0,
     "react/jsx-closing-tag-location": 0,
     "react/jsx-filename-extension": 0,
-    "react/jsx-first-prop-new-line": [
-      2,
-      "multiline"
-    ],
+    //"react/jsx-first-prop-new-line": [1, "multiline-multiprop"],
     "react/jsx-no-target-blank": 0,
+    //"react/jsx-max-props-per-line": [1, { "maximum": 1, "when": "always" }],
     "react/jsx-props-no-spreading": 0,
     "react/no-access-state-in-setstate": 0,
     "react/no-find-dom-node": 0,
@@ -88,10 +71,18 @@
     "react/require-extension": 0,
     "react/self-closing-comp": 0,
     "react/sort-comp": 0,
-    "react/static-property-placement": [
-      2,
-      "static public field"
+    "react/jsx-sort-props": [
+      1,
+      {
+        "callbacksLast": true,
+        "shorthandFirst": false,
+        "shorthandLast": false,
+        "ignoreCase": true,
+        "noSortAlphabetically": false,
+        "reservedFirst": false
+      }
     ],
+    "react/static-property-placement": [2, "static public field"],
     "redux-saga/no-yield-in-race": 2,
     "redux-saga/yield-effects": 2,
     "require-yield": 0
