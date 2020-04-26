@@ -1,31 +1,37 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
-import "./styles.css";
+import './styles.css';
 
 class Register extends Component {
+  static propTypes = {
+    savedUsers: PropTypes.array.isRequired,
+    onRegisteringUpdate: PropTypes.func.isRequired,
+    onMessageUpdate: PropTypes.func.isRequired,
+    onSavedUsersUpdate: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
-      nameInput: "",
-      usernameInput: "",
-      passwordInput: "",
-      retypePasswordInput: "",
+      nameInput: '',
+      usernameInput: '',
+      passwordInput: '',
+      retypePasswordInput: '',
     };
   }
 
   componentDidMount() {
-    document.addEventListener("keydown", this.onKeyDown);
+    document.addEventListener('keydown', this.onKeyDown);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.onKeyDown);
+    document.removeEventListener('keydown', this.onKeyDown);
   }
 
   onKeyDown = (event) => {
     if (event.keyCode === 13) {
       this.registerUser();
-      return;
     }
   };
 
@@ -50,53 +56,39 @@ class Register extends Component {
   };
 
   registerUser = () => {
-    const {
-      nameInput,
-      usernameInput,
-      passwordInput,
-      retypePasswordInput,
-    } = this.state;
+    const { nameInput, usernameInput, passwordInput, retypePasswordInput } = this.state;
 
     let alreadyInUseFlag = false;
     this.props.savedUsers.forEach((element) => {
       if (usernameInput === element.username) {
-        console.log("Username already in use");
-        this.props.onMessageUpdate(
-          "Username already in use, please choose another"
-        );
+        console.log('Username already in use');
+        this.props.onMessageUpdate('Username already in use, please choose another');
         alreadyInUseFlag = true;
-        return;
       }
     });
     if (alreadyInUseFlag) {
       this.setState({
-        passwordInput: "",
-        retypePasswordInput: "",
-        username: "",
+        passwordInput: '',
+        retypePasswordInput: '',
+        usernameInput: '',
       });
       return;
     }
 
     if (passwordInput !== retypePasswordInput) {
-      this.props.onMessageUpdate("Passwords do not match, please try again");
+      this.props.onMessageUpdate('Passwords do not match, please try again');
       this.setState({
-        passwordInput: "",
-        retypePasswordInput: "",
+        passwordInput: '',
+        retypePasswordInput: '',
       });
       return;
     }
-    if (
-      passwordInput === "" ||
-      retypePasswordInput === "" ||
-      usernameInput === "" ||
-      nameInput === ""
-    ) {
-      this.props.onMessageUpdate("All fields are required");
+    if (passwordInput === '' || retypePasswordInput === '' || usernameInput === '' || nameInput === '') {
+      this.props.onMessageUpdate('All fields are required');
       return;
     }
     if (this.props.savedUsers.length !== 0) {
-      const newUserId =
-        this.props.savedUsers[this.props.savedUsers.length - 1].userId + 1;
+      const newUserId = this.props.savedUsers[this.props.savedUsers.length - 1].userId + 1;
 
       const newUserProfile = {
         name: nameInput,
@@ -119,7 +111,7 @@ class Register extends Component {
       this.props.onSavedUsersUpdate(savedUsers);
     }
     this.props.onRegisteringUpdate(false);
-    this.props.onMessageUpdate("Registration Success!");
+    this.props.onMessageUpdate('Registration Success!');
   };
 
   render() {
@@ -155,19 +147,17 @@ class Register extends Component {
             value={this.state.retypePasswordInput}
             onChange={this.onRetypePasswordChange}
           />
-          <button onClick={this.registerUser}>Register</button>
+          <button type="button" onClick={this.registerUser}>
+            Register
+          </button>
         </div>
 
-        <button className="small-button" onClick={this.goHome}>
+        <button type="button" className="small-button" onClick={this.goHome}>
           Return To Sign In
         </button>
       </div>
     );
   }
 }
-
-Register.propTypes = {
-  savedUsers: PropTypes.array.isRequired,
-};
 
 export default Register;

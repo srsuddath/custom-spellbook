@@ -4,6 +4,38 @@ import React, { Component } from 'react';
 import './styles.css';
 
 class SpellForm extends Component {
+  static propTypes = {
+    activeUserId: PropTypes.number.isRequired,
+    savedSpells: PropTypes.array.isRequired,
+    defaultInputTitle: PropTypes.string,
+    defaultInputSchool: PropTypes.string,
+    defaultInputLevel: PropTypes.string,
+    defaultInputConcetration: PropTypes.bool,
+    defaultInputDuration: PropTypes.string,
+    defaultInputRange: PropTypes.string,
+    defaultInputRitual: PropTypes.bool,
+    defaultInputDescription: PropTypes.string,
+    defaultInputVerbal: PropTypes.bool,
+    defaultInputMaterial: PropTypes.bool,
+    defaultInputSomatic: PropTypes.bool,
+    onMessageUpdate: PropTypes.func,
+    onSavedSpellsUpdate: PropTypes.func,
+  };
+
+  static defaultProps = {
+    defaultInputTitle: '',
+    defaultInputSchool: '',
+    defaultInputLevel: '',
+    defaultInputConcetration: false,
+    defaultInputDuration: '',
+    defaultInputRange: '',
+    defaultInputRitual: false,
+    defaultInputDescription: '',
+    defaultInputVerbal: false,
+    defaultInputMaterial: false,
+    defaultInputSomatic: false,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -241,35 +273,5 @@ class SpellForm extends Component {
     );
   }
 }
-SpellForm.propTypes = {
-  activeUserId: PropTypes.number.isRequired,
-  savedSpells: PropTypes.array.isRequired,
-  defaultInputTitle: PropTypes.string,
-  defaultInputSchool: PropTypes.string,
-  defaultInputLevel: PropTypes.string,
-  defaultInputConcetration: PropTypes.bool,
-  defaultInputDuration: PropTypes.string,
-  defaultInputRange: PropTypes.string,
-  defaultInputRitual: PropTypes.bool,
-  defaultInputDescription: PropTypes.string,
-  defaultInputVerbal: PropTypes.bool,
-  defaultInputMaterial: PropTypes.bool,
-  defaultInputSomatic: PropTypes.bool,
-  onMessageUpdate: PropTypes.func,
-  onSavedSpellsUpdate: PropTypes.func,
-};
-SpellForm.defaultProps = {
-  defaultInputTitle: '',
-  defaultInputSchool: '',
-  defaultInputLevel: '',
-  defaultInputConcetration: false,
-  defaultInputDuration: '',
-  defaultInputRange: '',
-  defaultInputRitual: false,
-  defaultInputDescription: '',
-  defaultInputVerbal: false,
-  defaultInputMaterial: false,
-  defaultInputSomatic: false,
-};
 
 export default SpellForm;

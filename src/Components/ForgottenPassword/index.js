@@ -1,16 +1,23 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
-import "./styles.css";
+import './styles.css';
 
 class ForgottenPassword extends Component {
+  static propTypes = {
+    savedUsers: PropTypes.array.isRequired,
+    onMessageUpdate: PropTypes.func.isRequired,
+    onForgottenPasswordUpdate: PropTypes.func.isRequired,
+    onSavedUsersUpdate: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
-      nameInput: "",
-      usernameInput: "",
-      passwordInput: "",
-      retypePasswordInput: "",
+      nameInput: '',
+      usernameInput: '',
+      passwordInput: '',
+      retypePasswordInput: '',
       usernameFound: false,
       userIndex: undefined,
       preserveUserID: undefined,
@@ -18,11 +25,11 @@ class ForgottenPassword extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener("keydown", this.onKeyDown);
+    document.addEventListener('keydown', this.onKeyDown);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.onKeyDown);
+    document.removeEventListener('keydown', this.onKeyDown);
   }
 
   onKeyDown = (event) => {
@@ -34,7 +41,6 @@ class ForgottenPassword extends Component {
       }
       if (usernameFound) {
         this.updatePassword();
-        return;
       }
     }
   };
@@ -71,37 +77,30 @@ class ForgottenPassword extends Component {
           usernameFound: true,
           preserveUserID: element.userId,
         });
-        this.props.onMessageUpdate("User Info Found");
+        this.props.onMessageUpdate('User Info Found');
       }
     });
 
     if (!userFoundFlag) {
       this.setState({
-        usernameInput: "",
-        nameInput: "",
+        usernameInput: '',
+        nameInput: '',
       });
 
-      this.props.onMessageUpdate("User Info Not Found");
+      this.props.onMessageUpdate('User Info Not Found');
     }
   };
 
   updatePassword = () => {
-    const {
-      passwordInput,
-      retypePasswordInput,
-      usernameInput,
-      nameInput,
-      userIndex,
-      preserveUserID,
-    } = this.state;
+    const { passwordInput, retypePasswordInput, usernameInput, nameInput, userIndex, preserveUserID } = this.state;
 
     if (passwordInput !== retypePasswordInput) {
-      console.log("password mismatch");
+      console.log('password mismatch');
       this.setState({
-        passwordInput: "",
-        retypePasswordInput: "",
+        passwordInput: '',
+        retypePasswordInput: '',
       });
-      this.props.onMessageUpdate("Passwords do not match, please try again");
+      this.props.onMessageUpdate('Passwords do not match, please try again');
       return;
     }
     const updatedUser = {
@@ -144,13 +143,15 @@ class ForgottenPassword extends Component {
                 value={this.state.usernameInput}
                 onChange={this.onUsernameChange}
               />
-              <button onClick={this.findUserInfo}>Find User Account</button>
+              <button type="submit" onClick={this.findUserInfo}>
+                Find User Account
+              </button>
             </div>
           )}
           {usernameFound && (
             <div className="prompt-divider">
-              <h3>{"Name: " + nameInput}</h3>
-              <h3>{"Username: " + usernameInput}</h3>
+              <h3>{`Name: ${nameInput}`}</h3>
+              <h3>{`Username: ${usernameInput}`}</h3>
               <hr />
               <h3>Enter New Password</h3>
               <input
@@ -167,20 +168,18 @@ class ForgottenPassword extends Component {
                 value={this.state.retypePasswordInput}
                 onChange={this.onRetypePasswordChange}
               />
-              <button onClick={this.updatePassword}>Update Password</button>
+              <button type="button" onClick={this.updatePassword}>
+                Update Password
+              </button>
             </div>
           )}
         </div>
-        <button className="small-button" onClick={this.goHome}>
+        <button type="button" className="small-button" onClick={this.goHome}>
           Return To Sign In
         </button>
       </div>
     );
   }
 }
-
-ForgottenPassword.propTypes = {
-  savedUsers: PropTypes.array.isRequired,
-};
 
 export default ForgottenPassword;

@@ -1,54 +1,65 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
-import "./styles.css";
+import './styles.css';
 
 class Login extends Component {
+  static propTypes = {
+    savedUsers: PropTypes.array.isRequired,
+    onMessageUpdate: PropTypes.func,
+    onActiveUserIdUpdate: PropTypes.func,
+    onActiveUserNameUpdate: PropTypes.func,
+    onLoginUpdate: PropTypes.func,
+    onRegisteringUpdate: PropTypes.func,
+    onForgottenPasswordUpdate: PropTypes.func,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
-      usernameInput: "",
-      passwordInput: "",
+      usernameInput: '',
+      passwordInput: '',
     };
   }
 
   componentDidMount() {
-    document.addEventListener("keydown", this.onKeyDown);
+    document.addEventListener('keydown', this.onKeyDown);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.onKeyDown);
+    document.removeEventListener('keydown', this.onKeyDown);
   }
 
   onKeyDown = (event) => {
     if (event.keyCode === 13) {
       this.checkCredentials();
-      return;
     }
   };
 
-  checkCredentials = (props) => {
+  checkCredentials = () => {
     const { usernameInput, passwordInput } = this.state;
     if (!this.props.savedUsers) {
-      this.props.onMessageUpdate("Username not found, please Register");
+      this.props.onMessageUpdate('Username not found, please Register');
       return;
     }
-    for (let i = 0; i < this.props.savedUsers.length; i++) {
-      if (this.props.savedUsers[i].username === usernameInput) {
-        if (this.props.savedUsers[i].password !== passwordInput) {
-          this.props.onMessageUpdate("Incorrect password, please try again");
-          return;
-        }
-        this.props.onMessageUpdate("");
-        this.props.onActiveUserIdUpdate(this.props.savedUsers[i].userId);
-        this.props.onActiveUserNameUpdate(this.props.savedUsers[i].name);
+
+    let userFound = false;
+    this.props.savedUsers.forEach((user) => {
+      if (user.username === usernameInput && user.password === passwordInput) {
+        userFound = true;
+        this.props.onMessageUpdate('');
+        this.props.onActiveUserIdUpdate(user.userId);
+        this.props.onActiveUserNameUpdate(user.name);
         this.props.onLoginUpdate(true);
-        return;
       }
+      if (user.username === usernameInput && user.password !== passwordInput) {
+        userFound = true;
+        this.props.onMessageUpdate('Incorrect password, please try again');
+      }
+    });
+    if (userFound === false) {
+      this.props.onMessageUpdate('Username not found, please Register');
     }
-    this.props.onMessageUpdate("Username not found, please Register");
-    return;
   };
 
   onPasswordChange = (event) => {
@@ -61,12 +72,12 @@ class Login extends Component {
 
   startRegistering = () => {
     this.props.onRegisteringUpdate(true);
-    this.props.onMessageUpdate("");
+    this.props.onMessageUpdate('');
   };
 
   forgotPassword = () => {
     this.props.onForgottenPasswordUpdate(true);
-    this.props.onMessageUpdate("");
+    this.props.onMessageUpdate('');
   };
 
   render() {
@@ -90,23 +101,25 @@ class Login extends Component {
             value={this.state.passwordInput}
             onChange={this.onPasswordChange}
           />
-          <button onClick={this.checkCredentials}>Sign In</button>
+          <button type="button" onClick={this.checkCredentials}>
+            Sign In
+          </button>
 
           <hr />
 
-          <button onClick={this.startRegistering}>Register</button>
+          <button type="button" onClick={this.startRegistering}>
+            Register
+          </button>
 
           <h4>or</h4>
 
-          <button onClick={this.forgotPassword}>Forgot Your Password?</button>
+          <button type="button" onClick={this.forgotPassword}>
+            Forgot Your Password?
+          </button>
         </div>
       </div>
     );
   }
 }
-
-Login.propTypes = {
-  usernames: PropTypes.array,
-};
 
 export default Login;

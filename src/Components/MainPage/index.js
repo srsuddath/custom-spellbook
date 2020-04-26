@@ -7,6 +7,13 @@ import './styles.css';
 import SpellForm from '../SpellForm';
 
 class MainPage extends Component {
+  static propTypes = {
+    activeUserId: PropTypes.number.isRequired,
+    activeUserName: PropTypes.string.isRequired,
+    dontSave: PropTypes.bool,
+    onMessageUpdate: PropTypes.func,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -60,7 +67,6 @@ class MainPage extends Component {
             <div className="spell" key={spell.title}>
               {/* Title */}
               <span className="spell-title">{spell.title}</span>
-
               {/* Edit Icon */}
               <img
                 alt="unlock icon"
@@ -68,7 +74,6 @@ class MainPage extends Component {
                 className="unlock-icon"
                 onClick={() => this.toggleReadOnly(index)}
               />
-
               <div className="spell-detail">
                 <span>{spell.level}</span>
                 <span> - </span>
@@ -137,12 +142,5 @@ class MainPage extends Component {
     );
   }
 }
-
-MainPage.propTypes = {
-  activeUserId: PropTypes.number.isRequired,
-  activeUserName: PropTypes.string.isRequired,
-  dontSave: PropTypes.bool,
-  onMessageUpdate: PropTypes.func,
-};
 
 export default MainPage;
