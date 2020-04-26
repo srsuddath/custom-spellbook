@@ -13,13 +13,28 @@
       "experimentalObjectRestSpread": true
     }
   },
-  "extends": ["airbnb", "prettier", "prettier/react"],
-  "plugins": ["prettier", "redux-saga", "react", "jsx-a11y"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
+  "plugins": [
+    "prettier",
+    "redux-saga",
+    "react",
+    "jsx-a11y"
+  ],
   "rules": {
     "prettier/prettier": "warn",
-    "arrow-body-style": [2, "as-needed"],
+    "arrow-body-style": [
+      2,
+      "as-needed"
+    ],
     "class-methods-use-this": 0,
-    "comma-dangle": [2, "always-multiline"],
+    "comma-dangle": [
+      2,
+      "always-multiline"
+    ],
     "consistent-return": 0,
     "default-case": 2,
     "import/imports-first": 0,
@@ -82,7 +97,10 @@
         "reservedFirst": false
       }
     ],
-    "react/static-property-placement": [2, "static public field"],
+    "react/static-property-placement": [
+      2,
+      "static public field"
+    ],
     "redux-saga/no-yield-in-race": 2,
     "redux-saga/yield-effects": 2,
     "require-yield": 0

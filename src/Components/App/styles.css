@@ -4,26 +4,29 @@
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
-  background-color: #deebdd;
 }
 header {
-  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-image: linear-gradient(to bottom right, #6786dd, #5471c2);
+  background: #222736;
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
   color: #ffffff;
 }
 
 h1 {
   margin: 5px;
   padding: 5px;
+  font-size: 1rem;
   color: #ffffff;
 }
 
 .message {
   margin: 5px;
   padding: 30px 15px 30px;
-  color: #5471c2;
+  color: #ffffff;
+  font-size: 0.8rem;
 }

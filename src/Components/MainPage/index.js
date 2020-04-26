@@ -83,10 +83,10 @@ class MainPage extends Component {
                 className="unlock-icon"
                 onClick={() => this.toggleReadOnly(index)}
               /> */}
-              <button type="button" className="unlock-icon" onClick={() => this.toggleReadOnly(index)}>
+              <button className="unlock-icon" type="button" onClick={() => this.toggleReadOnly(index)}>
                 Edit
               </button>
-              <button type="button" className="delete-icon" onClick={() => this.deleteSpell(index)}>
+              <button className="delete-icon" type="button" onClick={() => this.deleteSpell(index)}>
                 Delete
               </button>
               <div className="spell-detail">
@@ -103,17 +103,17 @@ class MainPage extends Component {
                 <span>{spell.range}</span>
               </div>
               <div className="spell-detail">
-                <input type="checkbox" checked={spell.concentration} readOnly />
+                <input checked={spell.concentration} readOnly type="checkbox" />
                 <span>Concentration</span>
-                <input type="checkbox" checked={spell.ritual} readOnly />
+                <input checked={spell.ritual} readOnly type="checkbox" />
                 <span>Ritual</span>
               </div>
               <div className="spell-detail">
-                <input type="checkbox" checked={spell.materialComponents} readOnly />
+                <input checked={spell.materialComponents} readOnly type="checkbox" />
                 <span>Material</span>
-                <input type="checkbox" checked={spell.somaticComponents} readOnly />
+                <input checked={spell.somaticComponents} readOnly type="checkbox" />
                 <span>Somatic</span>
-                <input type="checkbox" checked={spell.verbalComponents} readOnly />
+                <input checked={spell.verbalComponents} readOnly type="checkbox" />
                 <span>Verbal</span>
               </div>
               <p className="spell-descript-text" readOnly>
@@ -124,22 +124,22 @@ class MainPage extends Component {
         }
         return (
           <ModifySpellForm
-            key={spell.title}
             activeUserId={activeUserId}
-            savedSpells={savedSpells}
-            defaultInputTitle={spell.title}
-            defaultInputSchool={spell.school}
-            defaultInputLevel={spell.level}
             defaultInputConcetration={spell.concentration}
+            defaultInputDescription={spell.description}
             defaultInputDuration={spell.duration}
+            defaultInputLevel={spell.level}
+            defaultInputMaterial={spell.materialComponents}
             defaultInputRange={spell.range}
             defaultInputRitual={spell.ritual}
-            defaultInputDescription={spell.description}
-            defaultInputVerbal={spell.verbalComponents}
-            defaultInputMaterial={spell.materialComponents}
+            defaultInputSchool={spell.school}
             defaultInputSomatic={spell.somaticComponents}
-            onSavedSpellsUpdate={this.onSavedSpellsUpdate}
+            defaultInputTitle={spell.title}
+            defaultInputVerbal={spell.verbalComponents}
+            key={spell.title}
+            savedSpells={savedSpells}
             onMessageUpdate={this.props.onMessageUpdate}
+            onSavedSpellsUpdate={this.onSavedSpellsUpdate}
           />
         );
       }
@@ -153,23 +153,23 @@ class MainPage extends Component {
       <div className="background">
         <div className="window">
           <aside>
-            <img src={icon} alt="User Icon" height="50" width="50" />
+            <img alt="User Icon" height="50" src={icon} width="50" />
             <h3>{this.props.activeUserName}</h3>
           </aside>
           <main>
             <div className="SpellContainer">
               <h2>Container of Spells</h2>
               <CreateSpellForm
-                savedSpells={savedSpells}
                 activeUserId={activeUserId}
-                onSavedSpellsUpdate={this.onSavedSpellsUpdate}
+                savedSpells={savedSpells}
                 onMessageUpdate={this.props.onMessageUpdate}
+                onSavedSpellsUpdate={this.onSavedSpellsUpdate}
               />
               <div className="spell-list">{this.generateSpellList()}</div>
             </div>
           </main>
         </div>
-        <button type="button" className="small-button">
+        <button className="small-button" type="button">
           LogOut
         </button>
       </div>
