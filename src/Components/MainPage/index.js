@@ -4,7 +4,7 @@ import icon from './userIcon.png';
 import editIcon from '../../assets/edit.svg';
 
 import './styles.css';
-import SpellForm from '../SpellForm';
+import CreateSpellForm from '../CreateSpellForm';
 
 class MainPage extends Component {
   static propTypes = {
@@ -134,7 +134,7 @@ class MainPage extends Component {
           <main>
             <div className="SpellContainer">
               <h2>Container of Spells</h2>
-              <SpellForm
+              <CreateSpellForm
                 savedSpells={savedSpells}
                 activeUserId={activeUserId}
                 onSavedSpellsUpdate={this.onSavedSpellsUpdate}

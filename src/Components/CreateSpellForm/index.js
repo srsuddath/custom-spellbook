@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import './styles.css';
 
-class SpellForm extends Component {
+class CreateSpellForm extends Component {
   static propTypes = {
     activeUserId: PropTypes.number.isRequired,
     savedSpells: PropTypes.array.isRequired,
@@ -274,4 +274,4 @@ class SpellForm extends Component {
   }
 }
 
-export default SpellForm;
+export default CreateSpellForm;
