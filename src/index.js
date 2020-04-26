@@ -2,9 +2,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-//Relative Imports
+// Relative Imports
 import './globalStyles.css';
-import App from "./components/App";
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
 render(<App />, document.getElementById('root'));

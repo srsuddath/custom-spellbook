@@ -119,8 +119,18 @@ class Register extends Component {
       <Wrapper>
         <div className="window">
           <h2>Register</h2>
-          <input placeholder="Full Name" type="text" value={this.state.nameInput} onChange={this.onNameChange} />
-          <input placeholder="Username" type="text" value={this.state.usernameInput} onChange={this.onUsernameChange} />
+          <input
+            placeholder="Full Name"
+            type="text"
+            value={this.state.nameInput}
+            onChange={this.onNameChange}
+          />
+          <input
+            placeholder="Username"
+            type="text"
+            value={this.state.usernameInput}
+            onChange={this.onUsernameChange}
+          />
           <input
             placeholder="Password"
             type="password"
@@ -133,10 +143,18 @@ class Register extends Component {
             value={this.state.retypePasswordInput}
             onChange={this.onRetypePasswordChange}
           />
-          <button className="action-button" type="button" onClick={this.registerUser}>
+          <button
+            className="action-button"
+            type="button"
+            onClick={this.registerUser}
+          >
             Sign Up
           </button>
-          <button className="link" type="button" onClick={this.goHome}>
+          <button
+            className="link"
+            type="button"
+            onClick={this.goHome}
+          >
             Return To Login
           </button>
         </div>

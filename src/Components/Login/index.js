@@ -131,15 +131,27 @@ class Login extends Component {
           />
 
           {/* Login Button */}
-          <button className="action-button" type="button" onClick={this.checkCredentials}>
+          <button
+            className="action-button"
+            type="button"
+            onClick={this.checkCredentials}
+          >
             Sign In
           </button>
           {/* Register Button */}
-          <button className="link" type="button" onClick={this.startRegistering}>
+          <button
+            className="link"
+            type="button"
+            onClick={this.startRegistering}
+          >
             Register
           </button>
           {/* Password Change Button */}
-          <button className="link" type="button" onClick={this.forgotPassword}>
+          <button
+            className="link"
+            type="button"
+            onClick={this.forgotPassword}
+          >
             Forgot Your Password?
           </button>
         </div>
