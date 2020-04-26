@@ -68,12 +68,21 @@ class MainPage extends Component {
               {/* Title */}
               <span className="spell-title">{spell.title}</span>
               {/* Edit Icon */}
-              <img
+              {/* <img
                 alt="unlock icon"
                 src={editIcon}
                 className="unlock-icon"
                 onClick={() => this.toggleReadOnly(index)}
-              />
+              /> */}
+              <button
+                type="button"
+                alt="unlock icon"
+                src={editIcon}
+                className="unlock-icon"
+                onClick={() => this.toggleReadOnly(index)}
+              >
+                Edit
+              </button>
               <div className="spell-detail">
                 <span>{spell.level}</span>
                 <span> - </span>

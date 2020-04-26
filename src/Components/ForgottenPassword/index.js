@@ -110,14 +110,15 @@ class ForgottenPassword extends Component {
       userId: preserveUserID,
     };
 
-    const savedUsers = this.props.savedUsers.map((element, index) => {
+    const newSavedUsers = this.props.savedUsers.map((element, index) => {
       if (index === userIndex) {
         return updatedUser;
       }
       return element;
     });
-
-    this.props.onSavedUsersUpdate(savedUsers);
+    this.props.onMessageUpdate('Password successfully updated!');
+    this.props.onSavedUsersUpdate(newSavedUsers);
+    this.props.onForgottenPasswordUpdate(false);
   };
 
   render() {

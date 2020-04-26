@@ -5,19 +5,19 @@ import './styles.css';
 
 class Register extends Component {
   static propTypes = {
-    savedUsers: PropTypes.array.isRequired,
-    onRegisteringUpdate: PropTypes.func.isRequired,
     onMessageUpdate: PropTypes.func.isRequired,
+    onRegisteringUpdate: PropTypes.func.isRequired,
     onSavedUsersUpdate: PropTypes.func.isRequired,
+    savedUsers: PropTypes.array.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       nameInput: '',
-      usernameInput: '',
       passwordInput: '',
       retypePasswordInput: '',
+      usernameInput: '',
     };
   }
 
