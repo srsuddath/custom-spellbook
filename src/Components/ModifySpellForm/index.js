@@ -124,13 +124,7 @@ class ModifySpellForm extends Component {
     return (
       <div className="spell-form">
         <h3>Create a New Spell</h3>
-        <input
-          type="text"
-          className="spell-title-box"
-          placeholder="Spell Title"
-          value={this.state.inputTitle}
-          readOnly
-        />
+        <span>{this.state.inputTitle}</span>
         <div className="spell-category-options">
           <select
             type="selection-box"

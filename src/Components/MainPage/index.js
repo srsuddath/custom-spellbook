@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import icon from './userIcon.png';
-import editIcon from '../../assets/edit.svg';
+// import editIcon from '../../assets/edit.svg';
 
 import './styles.css';
 import CreateSpellForm from '../CreateSpellForm';
@@ -58,6 +58,14 @@ class MainPage extends Component {
     this.setState({ savedSpells: clonedSpells });
   };
 
+  deleteSpell = (index) => {
+    // Create deep clone of saved spells.
+    const updatedSpells = this.state.savedSpells;
+    updatedSpells.splice(index, 1);
+    // Update state.
+    this.setState({ savedSpells: updatedSpells });
+  };
+
   generateSpellList = () => {
     const { savedSpells, activeUserId } = this.state;
 
@@ -75,14 +83,11 @@ class MainPage extends Component {
                 className="unlock-icon"
                 onClick={() => this.toggleReadOnly(index)}
               /> */}
-              <button
-                type="button"
-                alt="unlock icon"
-                src={editIcon}
-                className="unlock-icon"
-                onClick={() => this.toggleReadOnly(index)}
-              >
+              <button type="button" className="unlock-icon" onClick={() => this.toggleReadOnly(index)}>
                 Edit
+              </button>
+              <button type="button" className="delete-icon" onClick={() => this.deleteSpell(index)}>
+                Delete
               </button>
               <div className="spell-detail">
                 <span>{spell.level}</span>
