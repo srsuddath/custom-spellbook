@@ -57,12 +57,6 @@ class CreateSpellForm extends Component {
     };
   }
 
-  // no did mount functionality
-  componentDidMount() {}
-
-  // no will unmount functionality
-  componentWillUnmount() {}
-
   // creates a new spell and adds it to the array of saved spells
   createSpell = () => {
     // get all relevant state data (inputs from forms)
@@ -97,48 +91,56 @@ class CreateSpellForm extends Component {
     // break out of creation if spell already exists
     if (spellAlreadyExists) {
       console.log('Spell name is already taken, please try again');
+      this.props.onMessageUpdate('Spell already exists, please try again');
       return;
     }
 
     // break out of creation if there is an issue with the activeuserId
     if (activeUserId === '') {
       console.log('Error with User Id');
+      this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
 
     // break out of creation if no title has been input
     if (inputTitle === '') {
-      console.log("Can't have an empty title");
+      console.log('Can\'t have an empty title');
+      this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
 
     // break out of creation if spell school wasnt set
     if (inputSchool === '') {
       console.log('All spells must have a valid school');
+      this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
 
     // break out of creation if no level was selected
     if (inputLevel === '') {
       console.log('All spells must have a valid level');
+      this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
 
     // break out of creation if no range was selected
     if (inputRange === '') {
       console.log('All spells must have a valid range');
+      this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
 
     // break out of creation if no duration was selected
     if (inputDuration === '') {
       console.log('Must have a valid duration');
+      this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
 
     // break out of creation if no description was input
     if (inputDescription === '') {
-      console.log("Can't have an empty description");
+      console.log('Can\'t have an empty description');
+      this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
 
@@ -297,22 +299,39 @@ class CreateSpellForm extends Component {
           <span>Concentration</span>
 
           {/* Ritual Checkbox */}
-          <input checked={this.state.inputRitual} type="checkbox" onChange={this.onCheckboxChange('inputRitual')} />
+          <input
+            checked={this.state.inputRitual}
+            type="checkbox"
+            onChange={this.onCheckboxChange('inputRitual')}
+          />
           <span>Ritual</span>
         </div>
 
         {/* Spell Components Checkboxes */}
         <div className="spell-components">
           {/* Material Components Checkbox */}
-          <input checked={this.state.inputMaterial} type="checkbox" onChange={this.onCheckboxChange('inputMaterial')} />
+          <input
+            checked={this.state.inputMaterial}
+            type="checkbox"
+            onChange={this.onCheckboxChange('inputMaterial')}
+          />
           <span>Material</span>
 
           {/* Somatic Components Checkbox */}
-          <input checked={this.state.inputSomatic} type="checkbox" onChange={this.onCheckboxChange('inputSomatic')} />
+          <input
+            checked={this.state.inputSomatic}
+            type="checkbox"
+            onChange={this.onCheckboxChange('inputSomatic')}
+          />
           <span>Somatic</span>
 
           {/* Verbal Components Checkbox */}
-          <input checked={this.state.inputVerbal} type="checkbox" onChange={this.onCheckboxChange('inputVerbal')} />
+          <input
+            checked={this.state.inputVerbal}
+            type="checkbox"
+            onChange={this.onCheckboxChange('inputVerbal')}
+          />
+
           <span>Verbal</span>
         </div>
 
@@ -326,7 +345,10 @@ class CreateSpellForm extends Component {
         />
 
         {/* Create New Spell Button */}
-        <button type="button" onClick={this.createSpell}>
+        <button
+          type="button"
+          onClick={this.createSpell}
+        >
           Submit
         </button>
       </Wrapper>

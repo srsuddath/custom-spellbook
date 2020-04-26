@@ -19,13 +19,11 @@
     "prettier/react"
   ],
   "plugins": [
-    "prettier",
     "redux-saga",
     "react",
     "jsx-a11y"
   ],
   "rules": {
-    "prettier/prettier": "warn",
     "arrow-body-style": [
       2,
       "as-needed"
@@ -52,6 +50,14 @@
         "SwitchCase": 1
       }
     ],
+    "semi": [
+      2,
+      "always"
+    ],
+    "quotes": [
+      2,
+      "single"
+    ],
     "jsx-a11y/aria-props": 2,
     "jsx-a11y/click-events-have-key-events": 1,
     "jsx-a11y/heading-has-content": 0,
@@ -62,7 +68,6 @@
     "jsx-a11y/no-static-element-interactions": 1,
     "jsx-a11y/role-has-required-aria-props": 2,
     "jsx-a11y/role-supports-aria-props": 2,
-    "max-len": 0,
     "newline-per-chained-call": 0,
     "no-confusing-arrow": 0,
     "no-console": 0,
@@ -72,12 +77,37 @@
     "no-shadow": 0,
     "no-use-before-define": 0,
     "prefer-template": 2,
+    "max-len": [
+      1,
+      {
+        "code": 120,
+        "tabWidth": 2
+      }
+    ],
+    "arrow-parens": [
+      2,
+      "always"
+    ],
     "react/destructuring-assignment": 0,
     "react/forbid-prop-types": 0,
     "react/jsx-closing-tag-location": 0,
     "react/jsx-filename-extension": 0,
     "react/jsx-no-target-blank": 0,
-    //"react/jsx-max-props-per-line": [1, { "maximum": 1, "when": "always" }],
+    "react/jsx-max-props-per-line": [
+      1,
+      {
+        "maximum": 1,
+        "when": "always"
+      }
+    ],
+    "react/jsx-closing-bracket-location": [
+      1,
+      "line-aligned"
+    ],
+    "react/jsx-first-prop-new-line": [
+      1,
+      "multiline"
+    ],
     "react/jsx-props-no-spreading": 0,
     "react/no-access-state-in-setstate": 0,
     "react/no-find-dom-node": 0,
