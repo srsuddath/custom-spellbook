@@ -81,7 +81,7 @@ class ForgottenPassword extends Component {
           preserveUserID: element.userId,
         });
         // set message
-        this.props.onMessageUpdate('User Info Found');
+        this.props.onMessageUpdate('User account found');
       }
     });
 
@@ -91,7 +91,7 @@ class ForgottenPassword extends Component {
         usernameInput: '',
         nameInput: '',
       });
-      this.props.onMessageUpdate('User Info Not Found');
+      this.props.onMessageUpdate('User info not found');
     }
   };
 
@@ -138,17 +138,17 @@ class ForgottenPassword extends Component {
   };
 
   render() {
-    const { usernameFound, nameInput, usernameInput } = this.state;
+    const { usernameFound } = this.state;
 
     return (
       <Wrapper>
         {/* "window" for password reset options to appear in */}
-        <div className="forgotten-password-window">
+        <div className="window">
           {/* Option set 1: user name hasnt been found yet */}
           {!usernameFound && (
-            <div className="prompt-divider">
+            <>
               {/* User instruction propmt */}
-              <h2>Enter User Information</h2>
+              <h2>Your Account</h2>
 
               {/* input for name */}
               <input
@@ -167,22 +167,18 @@ class ForgottenPassword extends Component {
                 value={this.state.usernameInput}
                 onChange={this.onInputChange('usernameInput')}
               />
-              <button type="submit" onClick={this.findUserInfo}>
-                Find User Account
+              <button className="action-button" type="submit" onClick={this.findUserInfo}>
+                Find Me
               </button>
-            </div>
+            </>
           )}
 
           {/* Option 2: Username has been found and loaded, show fields for changing password */}
           {usernameFound && (
-            <div className="prompt-divider">
+            <>
               {/* Display found user data */}
-              <h3>{`Name: ${nameInput}`}</h3>
-              <h3>{`Username: ${usernameInput}`}</h3>
-              <hr />
-
               {/* instructions */}
-              <h3>Enter New Password</h3>
+              <h3>Update Password</h3>
 
               {/* new password input */}
               <input
@@ -203,17 +199,16 @@ class ForgottenPassword extends Component {
               />
 
               {/* submit button to update password */}
-              <button type="button" onClick={this.updatePassword}>
-                Update Password
+              <button className="action-button" type="button" onClick={this.updatePassword}>
+                Update
               </button>
-            </div>
+            </>
           )}
+          {/* button to "quit out" and return to login screen */}
+          <button className="link" type="button" onClick={this.goHome}>
+            Return To Sign In
+          </button>
         </div>
-
-        {/* button to "quit out" and return to login screen */}
-        <button className="small-button" type="button" onClick={this.goHome}>
-          Return To Sign In
-        </button>
       </Wrapper>
     );
   }

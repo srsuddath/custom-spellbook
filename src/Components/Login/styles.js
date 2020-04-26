@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  .login-window {
+  .window {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -15,6 +15,7 @@ export const Wrapper = styled.div`
     -webkit-box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.4);
     box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.4);
+    min-width: 255px;
 
     h2 {
       padding: 5px 5px 2px;
@@ -32,7 +33,7 @@ export const Wrapper = styled.div`
       }
     }
 
-    .login-button {
+    .action-button {
       margin: 10px 0px 20px;
       padding: 6px 0px;
       width: 100%;

@@ -110,7 +110,7 @@ class Login extends Component {
     return (
       <Wrapper>
         {/* Window to display forms */}
-        <div className="login-window">
+        <div className="window">
           {/* Instructions for user */}
           <h2>Login</h2>
 
@@ -131,7 +131,7 @@ class Login extends Component {
           />
 
           {/* Login Button */}
-          <button className="login-button" type="button" onClick={this.checkCredentials}>
+          <button className="action-button" type="button" onClick={this.checkCredentials}>
             Sign In
           </button>
           {/* Register Button */}

@@ -117,44 +117,29 @@ class Register extends Component {
   render() {
     return (
       <Wrapper>
-        <div className="registration-window">
-          <h2>Enter Your Information</h2>
+        <div className="window">
+          <h2>Register</h2>
+          <input placeholder="Full Name" type="text" value={this.state.nameInput} onChange={this.onNameChange} />
+          <input placeholder="Username" type="text" value={this.state.usernameInput} onChange={this.onUsernameChange} />
           <input
-            className="input-box"
-            placeholder="Full Name"
-            type="text"
-            value={this.state.nameInput}
-            onChange={this.onNameChange}
-          />
-          <input
-            className="input-box"
-            placeholder="Username"
-            type="text"
-            value={this.state.usernameInput}
-            onChange={this.onUsernameChange}
-          />
-          <input
-            className="input-box"
             placeholder="Password"
             type="password"
             value={this.state.passwordInput}
             onChange={this.onPasswordChange}
           />
           <input
-            className="input-box"
             placeholder="Retype Password"
             type="password"
             value={this.state.retypePasswordInput}
             onChange={this.onRetypePasswordChange}
           />
-          <button type="button" onClick={this.registerUser}>
-            Register
+          <button className="action-button" type="button" onClick={this.registerUser}>
+            Sign Up
+          </button>
+          <button className="link" type="button" onClick={this.goHome}>
+            Return To Login
           </button>
         </div>
-
-        <button className="small-button" type="button" onClick={this.goHome}>
-          Return To Sign In
-        </button>
       </Wrapper>
     );
   }
