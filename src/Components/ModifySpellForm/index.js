@@ -102,7 +102,7 @@ class ModifySpellForm extends Component {
     };
 
     const newSavedSpells = this.props.savedSpells.map((spell) => {
-      if (spell.title === inputTitle) {
+      if (spell.title === inputTitle && spell.userId === activeUserId) {
         return updatedSpell;
       }
       return spell;

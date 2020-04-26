@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import './styles.css';
 
 class CreateSpellForm extends Component {
+  // type checking for props
   static propTypes = {
     activeUserId: PropTypes.number.isRequired,
     savedSpells: PropTypes.array.isRequired,
@@ -22,6 +23,7 @@ class CreateSpellForm extends Component {
     onSavedSpellsUpdate: PropTypes.func,
   };
 
+  // set default values for props
   static defaultProps = {
     defaultInputTitle: '',
     defaultInputSchool: '',
@@ -36,6 +38,7 @@ class CreateSpellForm extends Component {
     defaultInputSomatic: false,
   };
 
+  // constructor, set initial value for state variables to prop inputs
   constructor(props) {
     super(props);
     this.state = {
@@ -54,11 +57,15 @@ class CreateSpellForm extends Component {
     };
   }
 
+  // no did mount functionality
   componentDidMount() {}
 
+  // no will unmount functionality
   componentWillUnmount() {}
 
+  // creates a new spell and adds it to the array of saved spells
   createSpell = () => {
+    // get all relevant state data (inputs from forms)
     const {
       activeUserId,
       inputTitle,
@@ -74,46 +81,68 @@ class CreateSpellForm extends Component {
       inputSomatic,
     } = this.state;
 
+    // check to make sure that spell name isnt already taken for that user
+    // set flag to false
     let spellAlreadyExists = false;
+
+    // check each spell to make sure that name & user id combo is not already in user
     this.props.savedSpells.forEach((element) => {
       if (element.userId === activeUserId && element.title === inputTitle) {
+        // if spell already exists, set flag and message
         this.props.onMessageUpdate('Spell name is already taken, please try again');
         spellAlreadyExists = true;
       }
     });
 
+    // break out of creation if spell already exists
     if (spellAlreadyExists) {
       console.log('Spell name is already taken, please try again');
       return;
     }
+
+    // break out of creation if there is an issue with the activeuserId
     if (activeUserId === '') {
       console.log('Error with User Id');
       return;
     }
+
+    // break out of creation if no title has been input
     if (inputTitle === '') {
       console.log("Can't have an empty title");
       return;
     }
+
+    // break out of creation if spell school wasnt set
     if (inputSchool === '') {
       console.log('All spells must have a valid school');
       return;
     }
+
+    // break out of creation if no level was selected
     if (inputLevel === '') {
       console.log('All spells must have a valid level');
       return;
     }
+
+    // break out of creation if no range was selected
     if (inputRange === '') {
       console.log('All spells must have a valid range');
       return;
     }
+
+    // break out of creation if no duration was selected
     if (inputDuration === '') {
       console.log('Must have a valid duration');
       return;
     }
+
+    // break out of creation if no description was input
     if (inputDescription === '') {
       console.log("Can't have an empty description");
       return;
     }
+
+    // make a new spell using all the of input fields for its data
     const newSpell = {
       userId: activeUserId,
       title: inputTitle,
@@ -129,8 +158,11 @@ class CreateSpellForm extends Component {
       materialComponents: inputMaterial,
       readOnly: true,
     };
+
+    // make a new array of saved spells, with the existing array + our newly created spell
     const newSavedSpells = [...this.props.savedSpells, newSpell];
 
+    // reset the input form to be "blank"
     this.setState({
       inputTitle: '',
       inputSchool: '',
@@ -144,14 +176,18 @@ class CreateSpellForm extends Component {
       inputMaterial: false,
       inputSomatic: false,
     });
+
+    // set the message state and update saved spells
     this.props.onMessageUpdate('Spell Successfully Added');
     this.props.onSavedSpellsUpdate(newSavedSpells);
   };
 
+  // function for updating all checkbox inputs
   onCheckboxChange = (key) => (event) => {
     this.setState({ [key]: event.target.checked });
   };
 
+  // function for updating all regular input fields
   onInputChange = (key) => (event) => {
     this.setState({ [key]: event.target.value });
   };
@@ -159,7 +195,10 @@ class CreateSpellForm extends Component {
   render() {
     return (
       <div className="spell-form">
+        {/* Title for form */}
         <h3>Create a New Spell</h3>
+
+        {/* Spell Title Input */}
         <input
           type="text"
           className="spell-title-box"
@@ -167,7 +206,10 @@ class CreateSpellForm extends Component {
           value={this.state.inputTitle}
           onChange={this.onInputChange('inputTitle')}
         />
+
+        {/* Spell Level and School */}
         <div className="spell-category-options">
+          {/* Spell Level Selection */}
           <select
             type="selection-box"
             className="spell-level"
@@ -186,6 +228,8 @@ class CreateSpellForm extends Component {
             <option value="8th Level">8th Level</option>
             <option value="9th Level">9th Level</option>
           </select>
+
+          {/* Spell School Selection */}
           <select
             type="selection-box"
             className="spell-school"
@@ -204,61 +248,75 @@ class CreateSpellForm extends Component {
             <option value="Transmutation">Transmutation</option>
           </select>
         </div>
-        <div className="range-selection-options">
-          <select
-            type="selection-box"
-            className="range"
-            value={this.state.inputRange}
-            onChange={this.onInputChange('inputRange')}
-          >
-            <option value="">Range</option>
-            <option value="Touch">Touch</option>
-            <option value="15 Feet">15 Feet</option>
-            <option value="30 Feet">30 Feet</option>
-            <option value="60 Feet">60 Feet</option>
-            <option value="120 Feet">120 Feet</option>
-            <option value="500 Feet">500 Feet</option>
-            <option value="1 Mile">1 Mile</option>
-            <option value="10 Miles">10 Miles</option>
-          </select>
-        </div>
-        <div className="duration-selection-options">
-          <select
-            type="selection-box"
-            className="duration"
-            value={this.state.inputDuration}
-            onChange={this.onInputChange('inputDuration')}
-          >
-            <option value="">Duration</option>
-            <option value="Instantaneous">Instantaneous</option>
-            <option value="1 Round">1 Round</option>
-            <option value="1 Minute">1 Minute</option>
-            <option value="10 Minutes">10 Minutes</option>
-            <option value="1 Hour">1 Hour</option>
-            <option value="8 Hours">8 Hours</option>
-            <option value="1 Day">1 Day</option>
-            <option value="1 Month">1 Month</option>
-            <option value="1 Year">1 Year</option>
-          </select>
-        </div>
+
+        {/* Spell Range Selection */}
+        <select
+          type="selection-box"
+          className="range"
+          value={this.state.inputRange}
+          onChange={this.onInputChange('inputRange')}
+        >
+          <option value="">Range</option>
+          <option value="Touch">Touch</option>
+          <option value="15 Feet">15 Feet</option>
+          <option value="30 Feet">30 Feet</option>
+          <option value="60 Feet">60 Feet</option>
+          <option value="120 Feet">120 Feet</option>
+          <option value="500 Feet">500 Feet</option>
+          <option value="1 Mile">1 Mile</option>
+          <option value="10 Miles">10 Miles</option>
+        </select>
+
+        {/* Spell Duration Selection */}
+        <select
+          type="selection-box"
+          className="duration"
+          value={this.state.inputDuration}
+          onChange={this.onInputChange('inputDuration')}
+        >
+          <option value="">Duration</option>
+          <option value="Instantaneous">Instantaneous</option>
+          <option value="1 Round">1 Round</option>
+          <option value="1 Minute">1 Minute</option>
+          <option value="10 Minutes">10 Minutes</option>
+          <option value="1 Hour">1 Hour</option>
+          <option value="8 Hours">8 Hours</option>
+          <option value="1 Day">1 Day</option>
+          <option value="1 Month">1 Month</option>
+          <option value="1 Year">1 Year</option>
+        </select>
+
+        {/* Casting Modifier Checkboxes */}
         <div className="casting-modifier-options">
+          {/* Concentration Checkbox */}
           <input
-            type="checkbox"
             checked={this.state.inputConcentration}
             onChange={this.onCheckboxChange('inputConcentration')}
+            type="checkbox"
           />
           <span>Concentration</span>
+
+          {/* Ritual Checkbox */}
           <input type="checkbox" checked={this.state.inputRitual} onChange={this.onCheckboxChange('inputRitual')} />
           <span>Ritual</span>
         </div>
+
+        {/* Spell Components Checkboxes */}
         <div className="spell-components">
+          {/* Material Components Checkbox */}
           <input type="checkbox" checked={this.state.inputMaterial} onChange={this.onCheckboxChange('inputMaterial')} />
           <span>Material</span>
+
+          {/* Somatic Components Checkbox */}
           <input type="checkbox" checked={this.state.inputSomatic} onChange={this.onCheckboxChange('inputSomatic')} />
           <span>Somatic</span>
+
+          {/* Verbal Components Checkbox */}
           <input type="checkbox" checked={this.state.inputVerbal} onChange={this.onCheckboxChange('inputVerbal')} />
           <span>Verbal</span>
         </div>
+
+        {/* Description Multi-line text box */}
         <textarea
           className="spell-description-box"
           placeholder="Spell Description"
@@ -266,6 +324,8 @@ class CreateSpellForm extends Component {
           value={this.state.inputDescription}
           onChange={this.onInputChange('inputDescription')}
         />
+
+        {/* Create New Spell Button */}
         <button type="button" onClick={this.createSpell}>
           Submit
         </button>
