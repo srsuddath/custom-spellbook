@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import './styles.css';
+import { Wrapper } from './styles';
 
 class CreateSpellForm extends Component {
   // type checking for props
@@ -194,15 +194,15 @@ class CreateSpellForm extends Component {
 
   render() {
     return (
-      <div className="spell-form">
+      <Wrapper>
         {/* Title for form */}
         <h3>Create a New Spell</h3>
 
         {/* Spell Title Input */}
         <input
-          type="text"
           className="spell-title-box"
           placeholder="Spell Title"
+          type="text"
           value={this.state.inputTitle}
           onChange={this.onInputChange('inputTitle')}
         />
@@ -211,8 +211,8 @@ class CreateSpellForm extends Component {
         <div className="spell-category-options">
           {/* Spell Level Selection */}
           <select
-            type="selection-box"
             className="spell-level"
+            type="selection-box"
             value={this.state.inputLevel}
             onChange={this.onInputChange('inputLevel')}
           >
@@ -231,8 +231,8 @@ class CreateSpellForm extends Component {
 
           {/* Spell School Selection */}
           <select
-            type="selection-box"
             className="spell-school"
+            type="selection-box"
             value={this.state.inputSchool}
             onChange={this.onInputChange('inputSchool')}
           >
@@ -251,8 +251,8 @@ class CreateSpellForm extends Component {
 
         {/* Spell Range Selection */}
         <select
-          type="selection-box"
           className="range"
+          type="selection-box"
           value={this.state.inputRange}
           onChange={this.onInputChange('inputRange')}
         >
@@ -269,8 +269,8 @@ class CreateSpellForm extends Component {
 
         {/* Spell Duration Selection */}
         <select
-          type="selection-box"
           className="duration"
+          type="selection-box"
           value={this.state.inputDuration}
           onChange={this.onInputChange('inputDuration')}
         >
@@ -291,28 +291,28 @@ class CreateSpellForm extends Component {
           {/* Concentration Checkbox */}
           <input
             checked={this.state.inputConcentration}
-            onChange={this.onCheckboxChange('inputConcentration')}
             type="checkbox"
+            onChange={this.onCheckboxChange('inputConcentration')}
           />
           <span>Concentration</span>
 
           {/* Ritual Checkbox */}
-          <input type="checkbox" checked={this.state.inputRitual} onChange={this.onCheckboxChange('inputRitual')} />
+          <input checked={this.state.inputRitual} type="checkbox" onChange={this.onCheckboxChange('inputRitual')} />
           <span>Ritual</span>
         </div>
 
         {/* Spell Components Checkboxes */}
         <div className="spell-components">
           {/* Material Components Checkbox */}
-          <input type="checkbox" checked={this.state.inputMaterial} onChange={this.onCheckboxChange('inputMaterial')} />
+          <input checked={this.state.inputMaterial} type="checkbox" onChange={this.onCheckboxChange('inputMaterial')} />
           <span>Material</span>
 
           {/* Somatic Components Checkbox */}
-          <input type="checkbox" checked={this.state.inputSomatic} onChange={this.onCheckboxChange('inputSomatic')} />
+          <input checked={this.state.inputSomatic} type="checkbox" onChange={this.onCheckboxChange('inputSomatic')} />
           <span>Somatic</span>
 
           {/* Verbal Components Checkbox */}
-          <input type="checkbox" checked={this.state.inputVerbal} onChange={this.onCheckboxChange('inputVerbal')} />
+          <input checked={this.state.inputVerbal} type="checkbox" onChange={this.onCheckboxChange('inputVerbal')} />
           <span>Verbal</span>
         </div>
 
@@ -329,7 +329,7 @@ class CreateSpellForm extends Component {
         <button type="button" onClick={this.createSpell}>
           Submit
         </button>
-      </div>
+      </Wrapper>
     );
   }
 }

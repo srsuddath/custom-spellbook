@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import './styles.css';
+import { Wrapper } from './styles';
 
 class ModifySpellForm extends Component {
   static propTypes = {
@@ -122,13 +122,13 @@ class ModifySpellForm extends Component {
 
   render() {
     return (
-      <div className="spell-form">
+      <Wrapper>
         <h3>Create a New Spell</h3>
         <span>{this.state.inputTitle}</span>
         <div className="spell-category-options">
           <select
-            type="selection-box"
             className="spell-level"
+            type="selection-box"
             value={this.state.inputLevel}
             onChange={this.onInputChange('inputLevel')}
           >
@@ -145,8 +145,8 @@ class ModifySpellForm extends Component {
             <option value="9th Level">9th Level</option>
           </select>
           <select
-            type="selection-box"
             className="spell-school"
+            type="selection-box"
             value={this.state.inputSchool}
             onChange={this.onInputChange('inputSchool')}
           >
@@ -164,8 +164,8 @@ class ModifySpellForm extends Component {
         </div>
         <div className="range-selection-options">
           <select
-            type="selection-box"
             className="range"
+            type="selection-box"
             value={this.state.inputRange}
             onChange={this.onInputChange('inputRange')}
           >
@@ -182,8 +182,8 @@ class ModifySpellForm extends Component {
         </div>
         <div className="duration-selection-options">
           <select
-            type="selection-box"
             className="duration"
+            type="selection-box"
             value={this.state.inputDuration}
             onChange={this.onInputChange('inputDuration')}
           >
@@ -201,20 +201,20 @@ class ModifySpellForm extends Component {
         </div>
         <div className="casting-modifier-options">
           <input
-            type="checkbox"
             checked={this.state.inputConcentration}
+            type="checkbox"
             onChange={this.onCheckboxChange('inputConcentration')}
           />
           <span>Concentration</span>
-          <input type="checkbox" checked={this.state.inputRitual} onChange={this.onCheckboxChange('inputRitual')} />
+          <input checked={this.state.inputRitual} type="checkbox" onChange={this.onCheckboxChange('inputRitual')} />
           <span>Ritual</span>
         </div>
         <div className="spell-components">
-          <input type="checkbox" checked={this.state.inputMaterial} onChange={this.onCheckboxChange('inputMaterial')} />
+          <input checked={this.state.inputMaterial} type="checkbox" onChange={this.onCheckboxChange('inputMaterial')} />
           <span>Material</span>
-          <input type="checkbox" checked={this.state.inputSomatic} onChange={this.onCheckboxChange('inputSomatic')} />
+          <input checked={this.state.inputSomatic} type="checkbox" onChange={this.onCheckboxChange('inputSomatic')} />
           <span>Somatic</span>
-          <input type="checkbox" checked={this.state.inputVerbal} onChange={this.onCheckboxChange('inputVerbal')} />
+          <input checked={this.state.inputVerbal} type="checkbox" onChange={this.onCheckboxChange('inputVerbal')} />
           <span>Verbal</span>
         </div>
         <textarea
@@ -227,7 +227,7 @@ class ModifySpellForm extends Component {
         <button type="button" onClick={this.updateSpell}>
           Update
         </button>
-      </div>
+      </Wrapper>
     );
   }
 }

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import './styles.css';
+import { Wrapper } from './styles';
 
 class Login extends Component {
   // do type checking for all props
@@ -108,7 +108,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="background">
+      <Wrapper>
         {/* Window to display forms */}
         <div className="login-window">
           {/* Instructions for user */}
@@ -152,7 +152,7 @@ class Login extends Component {
             Forgot Your Password?
           </button>
         </div>
-      </div>
+      </Wrapper>
     );
   }
 }

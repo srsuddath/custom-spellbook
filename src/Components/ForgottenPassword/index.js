@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import './styles.css';
+import { Wrapper } from './styles';
 
 class ForgottenPassword extends Component {
   // type checking for props
@@ -141,7 +141,7 @@ class ForgottenPassword extends Component {
     const { usernameFound, nameInput, usernameInput } = this.state;
 
     return (
-      <div className="background">
+      <Wrapper>
         {/* "window" for password reset options to appear in */}
         <div className="forgotten-password-window">
           {/* Option set 1: user name hasnt been found yet */}
@@ -214,7 +214,7 @@ class ForgottenPassword extends Component {
         <button className="small-button" type="button" onClick={this.goHome}>
           Return To Sign In
         </button>
-      </div>
+      </Wrapper>
     );
   }
 }

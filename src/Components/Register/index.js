@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import './styles.css';
+import { Wrapper } from './styles';
 
 class Register extends Component {
   static propTypes = {
@@ -116,34 +116,34 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="background">
+      <Wrapper>
         <div className="registration-window">
           <h2>Enter Your Information</h2>
           <input
-            type="text"
             className="input-box"
             placeholder="Full Name"
+            type="text"
             value={this.state.nameInput}
             onChange={this.onNameChange}
           />
           <input
-            type="text"
             className="input-box"
             placeholder="Username"
+            type="text"
             value={this.state.usernameInput}
             onChange={this.onUsernameChange}
           />
           <input
-            type="password"
             className="input-box"
             placeholder="Password"
+            type="password"
             value={this.state.passwordInput}
             onChange={this.onPasswordChange}
           />
           <input
-            type="password"
             className="input-box"
             placeholder="Retype Password"
+            type="password"
             value={this.state.retypePasswordInput}
             onChange={this.onRetypePasswordChange}
           />
@@ -152,10 +152,10 @@ class Register extends Component {
           </button>
         </div>
 
-        <button type="button" className="small-button" onClick={this.goHome}>
+        <button className="small-button" type="button" onClick={this.goHome}>
           Return To Sign In
         </button>
-      </div>
+      </Wrapper>
     );
   }
 }

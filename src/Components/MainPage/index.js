@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import icon from './userIcon.png';
 // import editIcon from '../../assets/edit.svg';
 
-import './styles.css';
+import { Wrapper } from './styles';
 import CreateSpellForm from '../CreateSpellForm';
 import ModifySpellForm from '../ModifySpellForm';
 
@@ -150,7 +150,7 @@ class MainPage extends Component {
   render() {
     const { activeUserId, savedSpells } = this.state;
     return (
-      <div className="background">
+      <Wrapper>
         <div className="window">
           <aside>
             <img alt="User Icon" height="50" src={icon} width="50" />
@@ -172,7 +172,7 @@ class MainPage extends Component {
         <button className="small-button" type="button">
           LogOut
         </button>
-      </div>
+      </Wrapper>
     );
   }
 }

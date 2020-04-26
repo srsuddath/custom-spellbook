@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './styles.css';
+import { Wrapper } from './styles';
 import Login from '../Login';
 import Register from '../Register';
 import ForgottenPassword from '../ForgottenPassword';
@@ -124,7 +124,7 @@ class App extends Component {
 
     // render return
     return (
-      <div className="app">
+      <Wrapper>
         {/* Title */}
         <header>
           <h1>Custom Spellbook Generator</h1>
@@ -136,24 +136,24 @@ class App extends Component {
         {/* Login Component */}
         {!loggedIn && !registering && !forgottenPassword && (
           <Login
-            onLoginUpdate={this.onLoginUpdate}
-            onRegisteringUpdate={this.onRegisteringUpdate}
-            onForgottenPasswordUpdate={this.onForgottenPasswordUpdate}
             savedUsers={savedUsers}
             onActiveUserIdUpdate={this.onActiveUserIdUpdate}
-            onMessageUpdate={this.onMessageUpdate}
-            onSavedUsersUpdate={this.onSavedUsersUpdate}
             onActiveUserNameUpdate={this.onActiveUserNameUpdate}
+            onForgottenPasswordUpdate={this.onForgottenPasswordUpdate}
+            onLoginUpdate={this.onLoginUpdate}
+            onMessageUpdate={this.onMessageUpdate}
+            onRegisteringUpdate={this.onRegisteringUpdate}
+            onSavedUsersUpdate={this.onSavedUsersUpdate}
           />
         )}
 
         {/* Component used to register users */}
         {registering && !forgottenPassword && !loggedIn && (
           <Register
-            onRegisteringUpdate={this.onRegisteringUpdate}
             savedUsers={savedUsers}
-            onSavedUsersUpdate={this.onSavedUsersUpdate}
             onMessageUpdate={this.onMessageUpdate}
+            onRegisteringUpdate={this.onRegisteringUpdate}
+            onSavedUsersUpdate={this.onSavedUsersUpdate}
           />
         )}
 
@@ -161,19 +161,19 @@ class App extends Component {
         {forgottenPassword && !loggedIn && !registering && (
           <ForgottenPassword
             savedUsers={savedUsers}
-            onSavedUsersUpdate={this.onSavedUsersUpdate}
             onForgottenPasswordUpdate={this.onForgottenPasswordUpdate}
             onMessageUpdate={this.onMessageUpdate}
+            onSavedUsersUpdate={this.onSavedUsersUpdate}
           />
         )}
 
         {/* Component where spells are displayed / added / deleted / modified */}
         {loggedIn && (
           <Mainpage
-            activeUserName={activeUserName}
             activeUserId={activeUserId}
-            onMessageUpdate={this.onMessageUpdate}
+            activeUserName={activeUserName}
             dontSave={dontSave}
+            onMessageUpdate={this.onMessageUpdate}
           />
         )}
 
@@ -181,7 +181,7 @@ class App extends Component {
         <button type="button" onClick={this.deleteMemory}>
           Clear All Memory
         </button>
-      </div>
+      </Wrapper>
     );
   }
 }
