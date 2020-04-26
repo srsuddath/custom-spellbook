@@ -5,6 +5,7 @@ import editIcon from '../../assets/edit.svg';
 
 import './styles.css';
 import CreateSpellForm from '../CreateSpellForm';
+import ModifySpellForm from '../ModifySpellForm';
 
 class MainPage extends Component {
   static propTypes = {
@@ -116,7 +117,26 @@ class MainPage extends Component {
             </div>
           );
         }
-        return <p key={spell.title}>spell is not read only</p>;
+        return (
+          <ModifySpellForm
+            key={spell.title}
+            activeUserId={activeUserId}
+            savedSpells={savedSpells}
+            defaultInputTitle={spell.title}
+            defaultInputSchool={spell.school}
+            defaultInputLevel={spell.level}
+            defaultInputConcetration={spell.concentration}
+            defaultInputDuration={spell.duration}
+            defaultInputRange={spell.range}
+            defaultInputRitual={spell.ritual}
+            defaultInputDescription={spell.description}
+            defaultInputVerbal={spell.verbalComponents}
+            defaultInputMaterial={spell.materialComponents}
+            defaultInputSomatic={spell.somaticComponents}
+            onSavedSpellsUpdate={this.onSavedSpellsUpdate}
+            onMessageUpdate={this.props.onMessageUpdate}
+          />
+        );
       }
       return <p key={spell.title}>spell hidden</p>;
     });
