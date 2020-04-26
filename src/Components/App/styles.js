@@ -4,7 +4,6 @@ export const Wrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   flex-grow: 1;
 
   header {
@@ -17,19 +16,20 @@ export const Wrapper = styled.div`
     -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
     color: #ffffff;
-  }
 
-  h1 {
-    margin: 5px;
-    padding: 5px;
-    font-size: 1rem;
-    color: #ffffff;
+    h1 {
+      margin: 5px;
+      padding: 5px;
+      font-size: 1rem;
+      color: #ffffff;
+    }
   }
 
   .message {
-    margin: 5px;
-    padding: 30px 15px 30px;
+    margin: 50px 0px 25px;
+    padding: 0px 20px;
     color: #ffffff;
+    min-height: 15px;
     font-size: 0.8rem;
   }
 `;

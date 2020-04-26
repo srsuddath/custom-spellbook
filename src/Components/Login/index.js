@@ -112,11 +112,10 @@ class Login extends Component {
         {/* Window to display forms */}
         <div className="login-window">
           {/* Instructions for user */}
-          <h2>Please Log In</h2>
+          <h2>Login</h2>
 
           {/* Input Field for Username */}
           <input
-            className="input-box"
             placeholder="Username"
             type="text"
             value={this.state.usernameInput}
@@ -125,7 +124,6 @@ class Login extends Component {
 
           {/* input field for password */}
           <input
-            className="input-box"
             placeholder="Password"
             type="password"
             value={this.state.passwordInput}
@@ -133,22 +131,15 @@ class Login extends Component {
           />
 
           {/* Login Button */}
-          <button type="button" onClick={this.checkCredentials}>
+          <button className="login-button" type="button" onClick={this.checkCredentials}>
             Sign In
           </button>
-
-          <hr />
-
           {/* Register Button */}
-          <button type="button" onClick={this.startRegistering}>
+          <button className="link" type="button" onClick={this.startRegistering}>
             Register
           </button>
-
-          {/* Divider */}
-          <h4>or</h4>
-
           {/* Password Change Button */}
-          <button type="button" onClick={this.forgotPassword}>
+          <button className="link" type="button" onClick={this.forgotPassword}>
             Forgot Your Password?
           </button>
         </div>

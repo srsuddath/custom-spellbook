@@ -94,21 +94,6 @@ class App extends Component {
     this.setState({ activeUserName });
   };
 
-  // function to delete local storage memory (only during DEV)
-  deleteMemory = () => {
-    this.setState({
-      message: '',
-      loggedIn: false,
-      registering: false,
-      forgottenPassword: false,
-      activeUserId: '',
-      activeUserName: '',
-      savedUsers: [],
-      dontSave: true,
-    });
-    localStorage.clear();
-  };
-
   render() {
     // grab relevant state variables
     const {
@@ -176,11 +161,6 @@ class App extends Component {
             onMessageUpdate={this.onMessageUpdate}
           />
         )}
-
-        {/* delete all memory button (dev only) */}
-        <button type="button" onClick={this.deleteMemory}>
-          Clear All Memory
-        </button>
       </Wrapper>
     );
   }
