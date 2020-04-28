@@ -5,6 +5,7 @@ import { get } from 'lodash';
 import { Wrapper } from './styles';
 import CreateSpellForm from '../CreateSpellForm';
 import ModifySpellForm from '../ModifySpellForm';
+import fireIcon from '../../assets/fire.svg';
 
 class SpellsList extends Component {
   static propTypes = {
@@ -62,6 +63,36 @@ class SpellsList extends Component {
     updatedSpells.splice(index, 1);
     // Update state.
     this.setState({ savedSpells: updatedSpells });
+  };
+
+  deriveSchoolIcon = (school) => {
+    if (school === 'Abjuration') {
+      return null;
+    }
+    if (school === 'Conjuration') {
+      return null;
+    }
+    if (school === 'Divination') {
+      return null;
+    }
+    if (school === 'Dunamancy') {
+      return null;
+    }
+    if (school === 'Enchantment') {
+      return null;
+    }
+    if (school === 'Evocation') {
+      return fireIcon;
+    }
+    if (school === 'Illusion') {
+      return null;
+    }
+    if (school === 'Necromancy') {
+      return null;
+    }
+    if (school === 'Transmutation') {
+      return null;
+    }
   };
 
   render() {
@@ -127,7 +158,7 @@ class SpellsList extends Component {
                 <div className="spell-detail">
                   <span>{level}</span>
                   <span> - </span>
-                  <span>{school}</span>
+                  <img alt="no you" src={this.deriveSchoolIcon(school)} />
                 </div>
                 <div className="spell-detail">
                   <span>Duration: </span>
