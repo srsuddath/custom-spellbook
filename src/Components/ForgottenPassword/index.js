@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 
 import { Wrapper } from './styles';
 
+import { LOGIN } from '../App/PAGES';
+
 class ForgottenPassword extends Component {
   // type checking for props
   static propTypes = {
-    onForgottenPasswordUpdate: PropTypes.func.isRequired,
+    changePage: PropTypes.func.isRequired,
     onMessageUpdate: PropTypes.func.isRequired,
     onSavedUsersUpdate: PropTypes.func.isRequired,
     savedUsers: PropTypes.array.isRequired,
@@ -57,7 +59,7 @@ class ForgottenPassword extends Component {
 
   // function to return to login page
   goHome = () => {
-    this.props.onForgottenPasswordUpdate(false);
+    this.props.changePage(LOGIN);
   };
 
   // function to find existing user data for password changing
@@ -98,14 +100,7 @@ class ForgottenPassword extends Component {
   // function to update a found user's password
   updatePassword = () => {
     // get state data
-    const {
-      passwordInput,
-      retypePasswordInput,
-      usernameInput,
-      nameInput,
-      userIndex,
-      preserveUserID,
-    } = this.state;
+    const { passwordInput, retypePasswordInput, usernameInput, nameInput, userIndex, preserveUserID } = this.state;
 
     // check to make sure passwords match
     if (passwordInput !== retypePasswordInput) {
@@ -141,7 +136,7 @@ class ForgottenPassword extends Component {
     this.props.onSavedUsersUpdate(newSavedUsers);
 
     // set flag to return to login screen
-    this.props.onForgottenPasswordUpdate(false);
+    this.props.changePage(LOGIN);
   };
 
   render() {

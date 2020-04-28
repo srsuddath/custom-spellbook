@@ -2,11 +2,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import { Wrapper } from './styles';
+import { LOGIN } from '../App/PAGES';
 
 class Register extends Component {
   static propTypes = {
+    changePage: PropTypes.func.isRequired,
     onMessageUpdate: PropTypes.func.isRequired,
-    onRegisteringUpdate: PropTypes.func.isRequired,
     onSavedUsersUpdate: PropTypes.func.isRequired,
     savedUsers: PropTypes.array.isRequired,
   };
@@ -52,7 +53,7 @@ class Register extends Component {
   };
 
   goHome = () => {
-    this.props.onRegisteringUpdate(false);
+    this.props.changePage(LOGIN);
   };
 
   registerUser = () => {
@@ -92,9 +93,9 @@ class Register extends Component {
 
       const newUserProfile = {
         name: nameInput,
-        username: usernameInput,
         password: passwordInput,
         userId: newUserId,
+        username: usernameInput,
       };
       const savedUsers = [...this.props.savedUsers, newUserProfile];
       this.props.onSavedUsersUpdate(savedUsers);
@@ -103,14 +104,14 @@ class Register extends Component {
       const savedUsers = [
         {
           name: nameInput,
-          username: usernameInput,
           password: passwordInput,
           userId: 0,
+          username: usernameInput,
         },
       ];
       this.props.onSavedUsersUpdate(savedUsers);
     }
-    this.props.onRegisteringUpdate(false);
+    this.props.changePage(LOGIN);
     this.props.onMessageUpdate('Registration Success!');
   };
 

@@ -4,7 +4,8 @@ import { Wrapper } from './styles';
 import Login from '../Login';
 import Register from '../Register';
 import ForgottenPassword from '../ForgottenPassword';
-import Mainpage from '../MainPage';
+import SpellsList from '../SpellsList';
+import { LOGIN, REGISTER, SPELLS_LIST, FORGOTTEN_PASSWORD } from './PAGES';
 
 class App extends Component {
   constructor(props) {
@@ -13,10 +14,8 @@ class App extends Component {
     this.state = {
       activeUserId: '',
       activeUserName: '',
-      forgottenPassword: false,
-      loggedIn: false,
       message: '',
-      registering: false,
+      page: LOGIN,
       savedUsers: [],
     };
   }
@@ -58,14 +57,8 @@ class App extends Component {
     window.removeEventListener('beforeunload', this.onBeforeUnload);
   };
 
-  // function to update app state loggedIn from components
-  onLoginUpdate = (loggedIn) => {
-    this.setState({ loggedIn });
-  };
-
-  // function to update app state registering from components
-  onRegisteringUpdate = (registering) => {
-    this.setState({ registering });
+  changePage = (page) => {
+    this.setState({ page });
   };
 
   // function to update app state activeUserId from components
@@ -76,11 +69,6 @@ class App extends Component {
   // function to update app statesavedUsers from components
   onSavedUsersUpdate = (savedUsers) => {
     this.setState({ savedUsers });
-  };
-
-  // function to update app state forgottenPassword from components
-  onForgottenPasswordUpdate = (forgottenPassword) => {
-    this.setState({ forgottenPassword });
   };
 
   // function to update app state message from components
@@ -99,7 +87,7 @@ class App extends Component {
 
   render() {
     // grab relevant state variables
-    const { savedUsers, loggedIn, registering, forgottenPassword, message, activeUserName, activeUserId } = this.state;
+    const { savedUsers, message, activeUserName, activeUserId, page } = this.state;
 
     // render return
     return (
@@ -127,47 +115,42 @@ class App extends Component {
         <h3 className="message">{message}</h3>
 
         {/* Login Component */}
-        {!loggedIn && !registering && !forgottenPassword && (
+        {page === LOGIN && (
           <Login
+            changePage={this.changePage}
             savedUsers={savedUsers}
             onActiveUserIdUpdate={this.onActiveUserIdUpdate}
             onActiveUserNameUpdate={this.onActiveUserNameUpdate}
-            onForgottenPasswordUpdate={this.onForgottenPasswordUpdate}
-            onLoginUpdate={this.onLoginUpdate}
             onMessageUpdate={this.onMessageUpdate}
-            onRegisteringUpdate={this.onRegisteringUpdate}
             onSavedUsersUpdate={this.onSavedUsersUpdate}
           />
         )}
 
         {/* Component used to register users */}
-        {registering && !forgottenPassword && !loggedIn && (
+        {page === REGISTER && (
           <Register
+            changePage={this.changePage}
             savedUsers={savedUsers}
             onMessageUpdate={this.onMessageUpdate}
-            onRegisteringUpdate={this.onRegisteringUpdate}
             onSavedUsersUpdate={this.onSavedUsersUpdate}
           />
         )}
 
         {/* Component used to change passwords */}
-        {forgottenPassword && !loggedIn && !registering && (
+        {page === FORGOTTEN_PASSWORD && (
           <ForgottenPassword
+            changePage={this.changePage}
             savedUsers={savedUsers}
-            onForgottenPasswordUpdate={this.onForgottenPasswordUpdate}
             onMessageUpdate={this.onMessageUpdate}
             onSavedUsersUpdate={this.onSavedUsersUpdate}
           />
         )}
 
         {/* Component where spells are displayed / added / deleted / modified */}
-        {loggedIn && (
-          <Mainpage
-            activeUserId={activeUserId}
-            activeUserName={activeUserName}
-            onMessageUpdate={this.onMessageUpdate}
-          />
-        )}
+        {page === SPELLS_LIST && <SpellsList
+          activeUserId={activeUserId}
+          onMessageUpdate={this.onMessageUpdate}
+        />}
       </Wrapper>
     );
   }

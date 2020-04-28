@@ -3,24 +3,24 @@ import React, { Component } from 'react';
 
 import { Wrapper } from './styles';
 
+import { REGISTER, FORGOTTEN_PASSWORD, SPELLS_LIST } from '../App/PAGES';
+
 class Login extends Component {
   // do type checking for all props
   static propTypes = {
-    savedUsers: PropTypes.array.isRequired,
-    onMessageUpdate: PropTypes.func,
+    changePage: PropTypes.func,
     onActiveUserIdUpdate: PropTypes.func,
     onActiveUserNameUpdate: PropTypes.func,
-    onLoginUpdate: PropTypes.func,
-    onRegisteringUpdate: PropTypes.func,
-    onForgottenPasswordUpdate: PropTypes.func,
+    onMessageUpdate: PropTypes.func,
+    savedUsers: PropTypes.array.isRequired,
   };
 
   // set initial state values
   constructor(props) {
     super(props);
     this.state = {
-      usernameInput: '',
       passwordInput: '',
+      usernameInput: '',
     };
   }
 
@@ -71,7 +71,7 @@ class Login extends Component {
         this.props.onActiveUserNameUpdate(user.name);
 
         // set logged in flag to load main page
-        this.props.onLoginUpdate(true);
+        this.props.changePage(SPELLS_LIST);
       }
 
       // if correct username is entered, but password doesnt match
@@ -96,13 +96,13 @@ class Login extends Component {
 
   // func to set registering flag to switch to "registration page"
   startRegistering = () => {
-    this.props.onRegisteringUpdate(true);
+    this.props.changePage(REGISTER);
     this.props.onMessageUpdate('');
   };
 
   // func to set forgotten password flag to switch to "password reset page"
   forgotPassword = () => {
-    this.props.onForgottenPasswordUpdate(true);
+    this.props.changePage(FORGOTTEN_PASSWORD);
     this.props.onMessageUpdate('');
   };
 

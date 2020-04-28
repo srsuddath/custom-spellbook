@@ -1,16 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import icon from './userIcon.png';
-// import editIcon from '../../assets/edit.svg';
 
 import { Wrapper } from './styles';
 import CreateSpellForm from '../CreateSpellForm';
 import ModifySpellForm from '../ModifySpellForm';
 
-class MainPage extends Component {
+class SpellsList extends Component {
   static propTypes = {
     activeUserId: PropTypes.number.isRequired,
-    activeUserName: PropTypes.string.isRequired,
     dontSave: PropTypes.bool,
     onMessageUpdate: PropTypes.func,
   };
@@ -186,15 +183,6 @@ class MainPage extends Component {
     return (
       <Wrapper>
         <div className="window">
-          <aside>
-            <img
-              alt="User Icon"
-              height="50"
-              src={icon}
-              width="50"
-            />
-            <h3>{this.props.activeUserName}</h3>
-          </aside>
           <main>
             <div className="SpellContainer">
               <h2>Container of Spells</h2>
@@ -213,4 +201,4 @@ class MainPage extends Component {
   }
 }
 
-export default MainPage;
+export default SpellsList;
