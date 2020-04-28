@@ -6,37 +6,37 @@ import { Wrapper } from './styles';
 class ModifySpellForm extends Component {
   static propTypes = {
     activeUserId: PropTypes.number.isRequired,
-    savedSpells: PropTypes.array.isRequired,
-    defaultInputTitle: PropTypes.string.isRequired,
-    defaultInputSchool: PropTypes.string.isRequired,
-    defaultInputLevel: PropTypes.string.isRequired,
     defaultInputConcetration: PropTypes.bool.isRequired,
+    defaultInputDescription: PropTypes.string.isRequired,
     defaultInputDuration: PropTypes.string.isRequired,
+    defaultInputLevel: PropTypes.string.isRequired,
+    defaultInputMaterial: PropTypes.bool.isRequired,
     defaultInputRange: PropTypes.string.isRequired,
     defaultInputRitual: PropTypes.bool.isRequired,
-    defaultInputDescription: PropTypes.string.isRequired,
-    defaultInputVerbal: PropTypes.bool.isRequired,
-    defaultInputMaterial: PropTypes.bool.isRequired,
+    defaultInputSchool: PropTypes.string.isRequired,
     defaultInputSomatic: PropTypes.bool.isRequired,
+    defaultInputTitle: PropTypes.string.isRequired,
+    defaultInputVerbal: PropTypes.bool.isRequired,
     onMessageUpdate: PropTypes.func.isRequired,
     onSavedSpellsUpdate: PropTypes.func.isRequired,
+    savedSpells: PropTypes.array.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       activeUserId: this.props.activeUserId,
-      inputTitle: this.props.defaultInputTitle,
-      inputSchool: this.props.defaultInputSchool,
-      inputLevel: this.props.defaultInputLevel,
       inputConcentration: this.props.defaultInputConcetration,
+      inputDescription: this.props.defaultInputDescription,
       inputDuration: this.props.defaultInputDuration,
+      inputLevel: this.props.defaultInputLevel,
+      inputMaterial: this.props.defaultInputMaterial,
       inputRange: this.props.defaultInputRange,
       inputRitual: this.props.defaultInputRitual,
-      inputDescription: this.props.defaultInputDescription,
-      inputVerbal: this.props.defaultInputVerbal,
-      inputMaterial: this.props.defaultInputMaterial,
+      inputSchool: this.props.defaultInputSchool,
       inputSomatic: this.props.defaultInputSomatic,
+      inputTitle: this.props.defaultInputTitle,
+      inputVerbal: this.props.defaultInputVerbal,
     };
   }
 
@@ -86,19 +86,19 @@ class ModifySpellForm extends Component {
     }
 
     const updatedSpell = {
-      userId: activeUserId,
-      title: inputTitle,
-      school: inputSchool,
-      level: inputLevel,
-      duration: inputDuration,
-      description: inputDescription,
       concentration: inputConcentration,
-      ritual: inputRitual,
-      range: inputRange,
-      verbalComponents: inputVerbal,
-      somaticComponents: inputSomatic,
+      description: inputDescription,
+      duration: inputDuration,
+      level: inputLevel,
       materialComponents: inputMaterial,
+      range: inputRange,
       readOnly: true,
+      ritual: inputRitual,
+      school: inputSchool,
+      somaticComponents: inputSomatic,
+      title: inputTitle,
+      userId: activeUserId,
+      verbalComponents: inputVerbal,
     };
 
     const newSavedSpells = this.props.savedSpells.map((spell) => {

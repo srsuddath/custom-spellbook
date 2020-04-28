@@ -73,7 +73,10 @@ class MainPage extends Component {
       if (spell.userId === activeUserId) {
         if (spell.readOnly) {
           return (
-            <div className="spell" key={spell.title}>
+            <div
+              className="spell"
+              key={spell.title}
+            >
               {/* Title */}
               <span className="spell-title">{spell.title}</span>
               {/* Edit Icon */}
@@ -83,10 +86,18 @@ class MainPage extends Component {
                 className="unlock-icon"
                 onClick={() => this.toggleReadOnly(index)}
               /> */}
-              <button className="unlock-icon" type="button" onClick={() => this.toggleReadOnly(index)}>
+              <button
+                className="unlock-icon"
+                type="button"
+                onClick={() => this.toggleReadOnly(index)}
+              >
                 Edit
               </button>
-              <button className="delete-icon" type="button" onClick={() => this.deleteSpell(index)}>
+              <button
+                className="delete-icon"
+                type="button"
+                onClick={() => this.deleteSpell(index)}
+              >
                 Delete
               </button>
               <div className="spell-detail">
@@ -103,20 +114,43 @@ class MainPage extends Component {
                 <span>{spell.range}</span>
               </div>
               <div className="spell-detail">
-                <input checked={spell.concentration} readOnly type="checkbox" />
+                <input
+                  checked={spell.concentration}
+                  readOnly
+                  type="checkbox"
+                />
                 <span>Concentration</span>
-                <input checked={spell.ritual} readOnly type="checkbox" />
+                <input
+                  checked={spell.ritual}
+                  readOnly
+                  type="checkbox"
+                />
                 <span>Ritual</span>
               </div>
               <div className="spell-detail">
-                <input checked={spell.materialComponents} readOnly type="checkbox" />
+                <input
+                  checked={spell.materialComponents}
+                  readOnly
+                  type="checkbox"
+                />
                 <span>Material</span>
-                <input checked={spell.somaticComponents} readOnly type="checkbox" />
+                <input
+                  checked={spell.somaticComponents}
+                  readOnly
+                  type="checkbox"
+                />
                 <span>Somatic</span>
-                <input checked={spell.verbalComponents} readOnly type="checkbox" />
+                <input
+                  checked={spell.verbalComponents}
+                  readOnly
+                  type="checkbox"
+                />
                 <span>Verbal</span>
               </div>
-              <p className="spell-descript-text" readOnly>
+              <p
+                className="spell-descript-text"
+                readOnly
+              >
                 {spell.description}
               </p>
             </div>
@@ -153,7 +187,12 @@ class MainPage extends Component {
       <Wrapper>
         <div className="window">
           <aside>
-            <img alt="User Icon" height="50" src={icon} width="50" />
+            <img
+              alt="User Icon"
+              height="50"
+              src={icon}
+              width="50"
+            />
             <h3>{this.props.activeUserName}</h3>
           </aside>
           <main>
@@ -169,9 +208,6 @@ class MainPage extends Component {
             </div>
           </main>
         </div>
-        <button className="small-button" type="button">
-          LogOut
-        </button>
       </Wrapper>
     );
   }

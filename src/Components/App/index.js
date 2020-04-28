@@ -11,14 +11,13 @@ class App extends Component {
     super(props);
     // set initial state values
     this.state = {
-      message: '',
-      loggedIn: false,
-      registering: false,
-      forgottenPassword: false,
       activeUserId: '',
       activeUserName: '',
+      forgottenPassword: false,
+      loggedIn: false,
+      message: '',
+      registering: false,
       savedUsers: [],
-      dontSave: false,
     };
   }
 
@@ -94,25 +93,34 @@ class App extends Component {
     this.setState({ activeUserName });
   };
 
+  logout = () => {
+    window.location.reload();
+  };
+
   render() {
     // grab relevant state variables
-    const {
-      savedUsers,
-      loggedIn,
-      registering,
-      forgottenPassword,
-      message,
-      activeUserName,
-      activeUserId,
-      dontSave,
-    } = this.state;
+    const { savedUsers, loggedIn, registering, forgottenPassword, message, activeUserName, activeUserId } = this.state;
 
     // render return
     return (
       <Wrapper>
         {/* Title */}
         <header>
+          <div />
           <h1>Custom Spellbook Generator</h1>
+          <div className="user-info">
+            {activeUserName && (
+              <>
+                <p>{activeUserName}</p>
+                <button
+                  type="button"
+                  onClick={this.logout}
+                >
+                  Logout
+                </button>
+              </>
+            )}
+          </div>
         </header>
 
         {/* Message  */}
@@ -157,7 +165,6 @@ class App extends Component {
           <Mainpage
             activeUserId={activeUserId}
             activeUserName={activeUserName}
-            dontSave={dontSave}
             onMessageUpdate={this.onMessageUpdate}
           />
         )}

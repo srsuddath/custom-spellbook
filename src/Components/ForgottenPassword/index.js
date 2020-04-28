@@ -98,7 +98,14 @@ class ForgottenPassword extends Component {
   // function to update a found user's password
   updatePassword = () => {
     // get state data
-    const { passwordInput, retypePasswordInput, usernameInput, nameInput, userIndex, preserveUserID } = this.state;
+    const {
+      passwordInput,
+      retypePasswordInput,
+      usernameInput,
+      nameInput,
+      userIndex,
+      preserveUserID,
+    } = this.state;
 
     // check to make sure passwords match
     if (passwordInput !== retypePasswordInput) {

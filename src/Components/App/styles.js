@@ -9,13 +9,14 @@ export const Wrapper = styled.div`
   header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     background: #222736;
     -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
     color: #ffffff;
+    padding: 0 20px;
 
     h1 {
       margin: 5px;
@@ -23,6 +24,27 @@ export const Wrapper = styled.div`
       font-size: 1rem;
       color: #ffffff;
     }
+
+    div{
+      flex: 1;
+    }
+
+    .user-info{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      
+      p{
+        margin: 0;
+      }
+
+      button{
+        margin: 0 0 0 15px;
+        padding: 5px 15px;
+      }
+    }
+
   }
 
   .message {
