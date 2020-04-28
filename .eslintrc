@@ -21,7 +21,8 @@
   "plugins": [
     "redux-saga",
     "react",
-    "jsx-a11y"
+    "jsx-a11y",
+    "sort-keys-fix"
   ],
   "rules": {
     "arrow-body-style": [
@@ -75,6 +76,7 @@
     "no-param-reassign": 0,
     "no-restricted-syntax": 0,
     "no-shadow": 0,
+    "sort-keys-fix/sort-keys-fix": 1,
     "no-use-before-define": 0,
     "prefer-template": 2,
     "max-len": [

@@ -6,10 +6,10 @@ import { Wrapper } from './styles';
 class ForgottenPassword extends Component {
   // type checking for props
   static propTypes = {
-    savedUsers: PropTypes.array.isRequired,
-    onMessageUpdate: PropTypes.func.isRequired,
     onForgottenPasswordUpdate: PropTypes.func.isRequired,
+    onMessageUpdate: PropTypes.func.isRequired,
     onSavedUsersUpdate: PropTypes.func.isRequired,
+    savedUsers: PropTypes.array.isRequired,
   };
 
   // constructor, set initial value for state variables to prop inputs
@@ -17,12 +17,12 @@ class ForgottenPassword extends Component {
     super(props);
     this.state = {
       nameInput: '',
-      usernameInput: '',
       passwordInput: '',
-      retypePasswordInput: '',
-      usernameFound: false,
-      userIndex: undefined,
       preserveUserID: undefined,
+      retypePasswordInput: '',
+      userIndex: undefined,
+      usernameFound: false,
+      usernameInput: '',
     };
   }
 
@@ -76,9 +76,9 @@ class ForgottenPassword extends Component {
         userFoundFlag = true;
         // set state data
         this.setState({
+          preserveUserID: element.userId,
           userIndex: index,
           usernameFound: true,
-          preserveUserID: element.userId,
         });
         // set message
         this.props.onMessageUpdate('User account found');
@@ -88,8 +88,8 @@ class ForgottenPassword extends Component {
     // if user is not found from input data, clear inputs and prompt to try again
     if (!userFoundFlag) {
       this.setState({
-        usernameInput: '',
         nameInput: '',
+        usernameInput: '',
       });
       this.props.onMessageUpdate('User info not found');
     }
@@ -114,9 +114,9 @@ class ForgottenPassword extends Component {
     // create new user with updated data
     const updatedUser = {
       name: nameInput,
-      username: usernameInput,
       password: passwordInput,
       userId: preserveUserID,
+      username: usernameInput,
     };
 
     // create new array of saved users, replacing the old instance of this user with the updated user
