@@ -104,7 +104,7 @@ class CreateSpellForm extends Component {
 
     // break out of creation if no title has been input
     if (inputTitle === '') {
-      console.log('Can\'t have an empty title');
+      console.log("Can't have an empty title");
       this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
@@ -139,7 +139,7 @@ class CreateSpellForm extends Component {
 
     // break out of creation if no description was input
     if (inputDescription === '') {
-      console.log('Can\'t have an empty description');
+      console.log("Can't have an empty description");
       this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
@@ -299,38 +299,22 @@ class CreateSpellForm extends Component {
           <span>Concentration</span>
 
           {/* Ritual Checkbox */}
-          <input
-            checked={this.state.inputRitual}
-            type="checkbox"
-            onChange={this.onCheckboxChange('inputRitual')}
-          />
+          <input checked={this.state.inputRitual} type="checkbox" onChange={this.onCheckboxChange('inputRitual')} />
           <span>Ritual</span>
         </div>
 
         {/* Spell Components Checkboxes */}
         <div className="spell-components">
           {/* Material Components Checkbox */}
-          <input
-            checked={this.state.inputMaterial}
-            type="checkbox"
-            onChange={this.onCheckboxChange('inputMaterial')}
-          />
+          <input checked={this.state.inputMaterial} type="checkbox" onChange={this.onCheckboxChange('inputMaterial')} />
           <span>Material</span>
 
           {/* Somatic Components Checkbox */}
-          <input
-            checked={this.state.inputSomatic}
-            type="checkbox"
-            onChange={this.onCheckboxChange('inputSomatic')}
-          />
+          <input checked={this.state.inputSomatic} type="checkbox" onChange={this.onCheckboxChange('inputSomatic')} />
           <span>Somatic</span>
 
           {/* Verbal Components Checkbox */}
-          <input
-            checked={this.state.inputVerbal}
-            type="checkbox"
-            onChange={this.onCheckboxChange('inputVerbal')}
-          />
+          <input checked={this.state.inputVerbal} type="checkbox" onChange={this.onCheckboxChange('inputVerbal')} />
 
           <span>Verbal</span>
         </div>
@@ -345,10 +329,7 @@ class CreateSpellForm extends Component {
         />
 
         {/* Create New Spell Button */}
-        <button
-          type="button"
-          onClick={this.createSpell}
-        >
+        <button type="button" onClick={this.createSpell}>
           Submit
         </button>
       </Wrapper>

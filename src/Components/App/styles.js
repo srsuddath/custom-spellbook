@@ -25,26 +25,25 @@ export const Wrapper = styled.div`
       color: #ffffff;
     }
 
-    div{
+    div {
       flex: 1;
     }
 
-    .user-info{
+    .user-info {
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
       align-items: center;
-      
-      p{
+
+      p {
         margin: 0;
       }
 
-      button{
+      button {
         margin: 0 0 0 15px;
         padding: 5px 15px;
       }
     }
-
   }
 
   .message {

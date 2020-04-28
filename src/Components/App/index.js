@@ -100,10 +100,7 @@ class App extends Component {
             {activeUserName && (
               <>
                 <p>{activeUserName}</p>
-                <button
-                  type="button"
-                  onClick={this.logout}
-                >
+                <button type="button" onClick={this.logout}>
                   Logout
                 </button>
               </>
@@ -147,10 +144,7 @@ class App extends Component {
         )}
 
         {/* Component where spells are displayed / added / deleted / modified */}
-        {page === SPELLS_LIST && <SpellsList
-          activeUserId={activeUserId}
-          onMessageUpdate={this.onMessageUpdate}
-        />}
+        {page === SPELLS_LIST && <SpellsList activeUserId={activeUserId} onMessageUpdate={this.onMessageUpdate} />}
       </Wrapper>
     );
   }

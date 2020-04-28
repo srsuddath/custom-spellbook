@@ -40,9 +40,9 @@ class ModifySpellForm extends Component {
     };
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
 
-  componentWillUnmount() { }
+  componentWillUnmount() {}
 
   updateSpell = () => {
     const {
@@ -81,7 +81,7 @@ class ModifySpellForm extends Component {
       return;
     }
     if (inputDescription === '') {
-      console.log('Can\'t have an empty description');
+      console.log("Can't have an empty description");
       return;
     }
 
@@ -206,31 +206,15 @@ class ModifySpellForm extends Component {
             onChange={this.onCheckboxChange('inputConcentration')}
           />
           <span>Concentration</span>
-          <input
-            checked={this.state.inputRitual}
-            type="checkbox"
-            onChange={this.onCheckboxChange('inputRitual')}
-          />
+          <input checked={this.state.inputRitual} type="checkbox" onChange={this.onCheckboxChange('inputRitual')} />
           <span>Ritual</span>
         </div>
         <div className="spell-components">
-          <input
-            checked={this.state.inputMaterial}
-            type="checkbox"
-            onChange={this.onCheckboxChange('inputMaterial')}
-          />
+          <input checked={this.state.inputMaterial} type="checkbox" onChange={this.onCheckboxChange('inputMaterial')} />
           <span>Material</span>
-          <input
-            checked={this.state.inputSomatic}
-            type="checkbox"
-            onChange={this.onCheckboxChange('inputSomatic')}
-          />
+          <input checked={this.state.inputSomatic} type="checkbox" onChange={this.onCheckboxChange('inputSomatic')} />
           <span>Somatic</span>
-          <input
-            checked={this.state.inputVerbal}
-            type="checkbox"
-            onChange={this.onCheckboxChange('inputVerbal')}
-          />
+          <input checked={this.state.inputVerbal} type="checkbox" onChange={this.onCheckboxChange('inputVerbal')} />
           <span>Verbal</span>
         </div>
         <textarea
@@ -240,10 +224,7 @@ class ModifySpellForm extends Component {
           value={this.state.inputDescription}
           onChange={this.onInputChange('inputDescription')}
         />
-        <button
-          type="button"
-          onClick={this.updateSpell}
-        >
+        <button type="button" onClick={this.updateSpell}>
           Update
         </button>
       </Wrapper>
