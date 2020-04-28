@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
+import { get } from 'lodash';
 import { Wrapper } from './styles';
 import CreateSpellForm from '../CreateSpellForm';
 import ModifySpellForm from '../ModifySpellForm';
@@ -48,7 +49,7 @@ class SpellsList extends Component {
     // Create deep clone of saved spells.
     const clonedSpells = JSON.parse(JSON.stringify(this.state.savedSpells));
 
-    // Modify read only state of spell.
+    // Modify read only state of
     clonedSpells[index].readOnly = !clonedSpells[index].readOnly;
 
     // Update state.
@@ -63,138 +64,99 @@ class SpellsList extends Component {
     this.setState({ savedSpells: updatedSpells });
   };
 
-  generateSpellList = () => {
-    const { savedSpells, activeUserId } = this.state;
-
-    return savedSpells.map((spell, index) => {
-      if (spell.userId === activeUserId) {
-        if (spell.readOnly) {
-          return (
-            <div
-              className="spell"
-              key={spell.title}
-            >
-              {/* Title */}
-              <span className="spell-title">{spell.title}</span>
-              {/* Edit Icon */}
-              {/* <img
-                alt="unlock icon"
-                src={editIcon}
-                className="unlock-icon"
-                onClick={() => this.toggleReadOnly(index)}
-              /> */}
-              <button
-                className="unlock-icon"
-                type="button"
-                onClick={() => this.toggleReadOnly(index)}
-              >
-                Edit
-              </button>
-              <button
-                className="delete-icon"
-                type="button"
-                onClick={() => this.deleteSpell(index)}
-              >
-                Delete
-              </button>
-              <div className="spell-detail">
-                <span>{spell.level}</span>
-                <span> - </span>
-                <span>{spell.school}</span>
-              </div>
-              <div className="spell-detail">
-                <span>Duration: </span>
-                <span>{spell.duration}</span>
-              </div>
-              <div className="spell-detail">
-                <span>Range: </span>
-                <span>{spell.range}</span>
-              </div>
-              <div className="spell-detail">
-                <input
-                  checked={spell.concentration}
-                  readOnly
-                  type="checkbox"
-                />
-                <span>Concentration</span>
-                <input
-                  checked={spell.ritual}
-                  readOnly
-                  type="checkbox"
-                />
-                <span>Ritual</span>
-              </div>
-              <div className="spell-detail">
-                <input
-                  checked={spell.materialComponents}
-                  readOnly
-                  type="checkbox"
-                />
-                <span>Material</span>
-                <input
-                  checked={spell.somaticComponents}
-                  readOnly
-                  type="checkbox"
-                />
-                <span>Somatic</span>
-                <input
-                  checked={spell.verbalComponents}
-                  readOnly
-                  type="checkbox"
-                />
-                <span>Verbal</span>
-              </div>
-              <p
-                className="spell-descript-text"
-                readOnly
-              >
-                {spell.description}
-              </p>
-            </div>
-          );
-        }
-        return (
-          <ModifySpellForm
-            activeUserId={activeUserId}
-            defaultInputConcetration={spell.concentration}
-            defaultInputDescription={spell.description}
-            defaultInputDuration={spell.duration}
-            defaultInputLevel={spell.level}
-            defaultInputMaterial={spell.materialComponents}
-            defaultInputRange={spell.range}
-            defaultInputRitual={spell.ritual}
-            defaultInputSchool={spell.school}
-            defaultInputSomatic={spell.somaticComponents}
-            defaultInputTitle={spell.title}
-            defaultInputVerbal={spell.verbalComponents}
-            key={spell.title}
-            savedSpells={savedSpells}
-            onMessageUpdate={this.props.onMessageUpdate}
-            onSavedSpellsUpdate={this.onSavedSpellsUpdate}
-          />
-        );
-      }
-      return <p key={spell.title}>spell hidden</p>;
-    });
-  };
-
   render() {
-    const { activeUserId, savedSpells } = this.state;
+    const { savedSpells, activeUserId } = this.state;
     return (
       <Wrapper>
-        <div className="window">
-          <main>
-            <div className="SpellContainer">
-              <h2>Container of Spells</h2>
-              <CreateSpellForm
-                activeUserId={activeUserId}
-                savedSpells={savedSpells}
-                onMessageUpdate={this.props.onMessageUpdate}
-                onSavedSpellsUpdate={this.onSavedSpellsUpdate}
-              />
-              <div className="spell-list">{this.generateSpellList()}</div>
-            </div>
-          </main>
+        <h2>Container of Spells</h2>
+        <div className="spell-list">
+          {savedSpells.map((spell, index) => {
+            // Derive spell properties.
+            const concentration = get(spell, 'concentration');
+            const description = get(spell, 'description');
+            const duration = get(spell, 'duration');
+            const level = get(spell, 'level');
+            const materialComponents = get(spell, 'materialComponents');
+            const range = get(spell, 'range');
+            const readOnly = get(spell, 'readOnly');
+            const ritual = get(spell, 'ritual');
+            const school = get(spell, 'school');
+            const somaticComponents = get(spell, 'somaticComponents');
+            const title = get(spell, 'title');
+            const userId = get(spell, 'userId');
+            const verbalComponents = get(spell, 'verbalComponents');
+
+            if (userId !== activeUserId) {
+              return null;
+            }
+
+            if (!readOnly) {
+              return (
+                <ModifySpellForm
+                  activeUserId={activeUserId}
+                  defaultInputConcetration={concentration}
+                  defaultInputDescription={description}
+                  defaultInputDuration={duration}
+                  defaultInputLevel={level}
+                  defaultInputMaterial={materialComponents}
+                  defaultInputRange={range}
+                  defaultInputRitual={ritual}
+                  defaultInputSchool={school}
+                  defaultInputSomatic={somaticComponents}
+                  defaultInputTitle={title}
+                  defaultInputVerbal={verbalComponents}
+                  key={title}
+                  savedSpells={savedSpells}
+                  onMessageUpdate={this.props.onMessageUpdate}
+                  onSavedSpellsUpdate={this.onSavedSpellsUpdate}
+                />
+              );
+            }
+
+            return (
+              <div className="spell" key={title}>
+                {/* Title */}
+                <span className="spell-title">{title}</span>
+                {/* Edit Icon */}
+                <button className="unlock-icon" type="button" onClick={() => this.toggleReadOnly(index)}>
+                  Edit
+                </button>
+                <button className="delete-icon" type="button" onClick={() => this.deleteSpell(index)}>
+                  Delete
+                </button>
+                <div className="spell-detail">
+                  <span>{level}</span>
+                  <span> - </span>
+                  <span>{school}</span>
+                </div>
+                <div className="spell-detail">
+                  <span>Duration: </span>
+                  <span>{duration}</span>
+                </div>
+                <div className="spell-detail">
+                  <span>Range: </span>
+                  <span>{range}</span>
+                </div>
+                <div className="spell-detail">
+                  <input checked={concentration} readOnly type="checkbox" />
+                  <span>Concentration</span>
+                  <input checked={ritual} readOnly type="checkbox" />
+                  <span>Ritual</span>
+                </div>
+                <div className="spell-detail">
+                  <input checked={materialComponents} readOnly type="checkbox" />
+                  <span>Material</span>
+                  <input checked={somaticComponents} readOnly type="checkbox" />
+                  <span>Somatic</span>
+                  <input checked={verbalComponents} readOnly type="checkbox" />
+                  <span>Verbal</span>
+                </div>
+                <p className="spell-descript-text" readOnly>
+                  {description}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </Wrapper>
     );
