@@ -33,6 +33,10 @@ class SpellsList extends Component {
     };
   }
 
+  UNSAFE_componentWillReceiveProps({ savedSpells }) {
+    this.setState({ savedSpells });
+  }
+
   toggleReadOnly = (index) => {
     // Create deep clone of saved spells.
     const clonedSpells = JSON.parse(JSON.stringify(this.state.savedSpells));
