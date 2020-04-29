@@ -158,31 +158,30 @@ class SpellsList extends Component {
                   />
                   {/* Title */}
                   <span className="spell-title">{title}</span>
-                  <div
-                    className={`spell-buttons${isExpanded ? '' : ' hidden'}`}
-                  >
-                    {/* Edit Icon */}
+                  <div className="spell-buttons">
                     <button
-                      className="unlock-icon"
                       type="button"
-                      onClick={() => this.toggleReadOnly(index)}
+                      onClick={() => this.toggleSpellExpansion(id)}
                     >
-                      Edit
+                      Expand
                     </button>
-                    <button
-                      className="delete-icon"
-                      type="button"
-                      onClick={() => this.deleteSpell(index)}
-                    >
-                      Delete
-                    </button>
+                    <div className={`${isExpanded ? '' : ' hidden'}`}>
+                      <button
+                        className="edit-icon"
+                        type="button"
+                        onClick={() => this.toggleReadOnly(index)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="delete-icon"
+                        type="button"
+                        onClick={() => this.deleteSpell(index)}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => this.toggleSpellExpansion(id)}
-                  >
-                    Expand
-                  </button>
                 </div>
                 <div className={`spell-details${isExpanded ? '' : ' hidden'}`}>
                   {/* <div

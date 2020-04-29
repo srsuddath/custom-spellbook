@@ -24,4 +24,10 @@ export const Wrapper = styled.div`
     width: 100%;
     padding: 0 20px;
   }
+
+  .spell-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
 `;
