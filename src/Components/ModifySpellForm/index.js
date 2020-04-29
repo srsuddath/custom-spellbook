@@ -6,17 +6,17 @@ import { Wrapper } from './styles';
 class ModifySpellForm extends Component {
   static propTypes = {
     activeUserId: PropTypes.number.isRequired,
-    defaultInputConcetration: PropTypes.bool.isRequired,
-    defaultInputDescription: PropTypes.string.isRequired,
-    defaultInputDuration: PropTypes.string.isRequired,
-    defaultInputLevel: PropTypes.string.isRequired,
-    defaultInputMaterial: PropTypes.bool.isRequired,
-    defaultInputRange: PropTypes.string.isRequired,
-    defaultInputRitual: PropTypes.bool.isRequired,
-    defaultInputSchool: PropTypes.string.isRequired,
-    defaultInputSomatic: PropTypes.bool.isRequired,
-    defaultInputTitle: PropTypes.string.isRequired,
-    defaultInputVerbal: PropTypes.bool.isRequired,
+    defaultConcetration: PropTypes.bool.isRequired,
+    defaultDescription: PropTypes.string.isRequired,
+    defaultDuration: PropTypes.string.isRequired,
+    defaultLevel: PropTypes.string.isRequired,
+    defaultMaterialComponents: PropTypes.bool.isRequired,
+    defaultRange: PropTypes.string.isRequired,
+    defaultRitual: PropTypes.bool.isRequired,
+    defaultSchool: PropTypes.string.isRequired,
+    defaultSomaticComponents: PropTypes.bool.isRequired,
+    defaultTitle: PropTypes.string.isRequired,
+    defaultVerbalComponents: PropTypes.bool.isRequired,
     onMessageUpdate: PropTypes.func.isRequired,
     onSavedSpellsUpdate: PropTypes.func.isRequired,
     savedSpells: PropTypes.array.isRequired,
@@ -26,83 +26,79 @@ class ModifySpellForm extends Component {
     super(props);
     this.state = {
       activeUserId: this.props.activeUserId,
-      inputConcentration: this.props.defaultInputConcetration,
-      inputDescription: this.props.defaultInputDescription,
-      inputDuration: this.props.defaultInputDuration,
-      inputLevel: this.props.defaultInputLevel,
-      inputMaterial: this.props.defaultInputMaterial,
-      inputRange: this.props.defaultInputRange,
-      inputRitual: this.props.defaultInputRitual,
-      inputSchool: this.props.defaultInputSchool,
-      inputSomatic: this.props.defaultInputSomatic,
-      inputTitle: this.props.defaultInputTitle,
-      inputVerbal: this.props.defaultInputVerbal,
+      concentration: this.props.defaultConcetration,
+      description: this.props.defaultDescription,
+      duration: this.props.defaultDuration,
+      level: this.props.defaultLevel,
+      materialComponents: this.props.defaultMaterialComponents,
+      range: this.props.defaultRange,
+      ritual: this.props.defaultRitual,
+      school: this.props.defaultSchool,
+      somaticComponents: this.props.defaultSomaticComponents,
+      title: this.props.defaultTitle,
+      verbalComponents: this.props.defaultVerbalComponents,
     };
   }
-
-  componentDidMount() {}
-
-  componentWillUnmount() {}
 
   updateSpell = () => {
     const {
       activeUserId,
-      inputTitle,
-      inputSchool,
-      inputLevel,
-      inputConcentration,
-      inputDuration,
-      inputRitual,
-      inputRange,
-      inputDescription,
-      inputVerbal,
-      inputMaterial,
-      inputSomatic,
+      title,
+      school,
+      level,
+      concentration,
+      duration,
+      ritual,
+      range,
+      description,
+      verbalComponents,
+      materialComponents,
+      somaticComponents,
     } = this.state;
 
     if (activeUserId === '') {
       console.log('Error with User Id');
       return;
     }
-    if (inputSchool === '') {
+    if (school === '') {
       console.log('All spells must have a valid school');
       return;
     }
-    if (inputLevel === '') {
+    if (level === '') {
       console.log('All spells must have a valid level');
       return;
     }
-    if (inputRange === '') {
+    if (range === '') {
       console.log('All spells must have a valid range');
       return;
     }
-    if (inputDuration === '') {
+    if (duration === '') {
       console.log('Must have a valid duration');
       return;
     }
-    if (inputDescription === '') {
+    if (description === '') {
       console.log("Can't have an empty description");
       return;
     }
 
     const updatedSpell = {
-      concentration: inputConcentration,
-      description: inputDescription,
-      duration: inputDuration,
-      level: inputLevel,
-      materialComponents: inputMaterial,
-      range: inputRange,
+      concentration,
+      description,
+      duration,
+      level,
+      materialComponents,
+      range,
       readOnly: true,
-      ritual: inputRitual,
-      school: inputSchool,
-      somaticComponents: inputSomatic,
-      title: inputTitle,
+      ritual,
+      school,
+      somaticComponents,
+      title,
       userId: activeUserId,
-      verbalComponents: inputVerbal,
+      verbalComponents,
     };
 
     const newSavedSpells = this.props.savedSpells.map((spell) => {
-      if (spell.title === inputTitle && spell.userId === activeUserId) {
+      if (spell.title === title && spell.userId === activeUserId) {
         return updatedSpell;
       }
       return spell;
@@ -116,21 +112,20 @@ class ModifySpellForm extends Component {
     this.setState({ [key]: event.target.checked });
   };
 
-  onInputChange = (key) => (event) => {
+  onchange = (key) => (event) => {
     this.setState({ [key]: event.target.value });
   };
 
   render() {
     return (
       <Wrapper>
-        <h3>Create a New Spell</h3>
-        <span>{this.state.inputTitle}</span>
+        <span>{this.state.title}</span>
         <div className="spell-category-options">
           <select
             className="spell-level"
             type="selection-box"
-            value={this.state.inputLevel}
-            onChange={this.onInputChange('inputLevel')}
+            value={this.state.level}
+            onChange={this.onchange('level')}
           >
             <option value="">Spell Level</option>
             <option value="Cantrip">Cantrip</option>
@@ -147,8 +142,8 @@ class ModifySpellForm extends Component {
           <select
             className="spell-school"
             type="selection-box"
-            value={this.state.inputSchool}
-            onChange={this.onInputChange('inputSchool')}
+            value={this.state.school}
+            onChange={this.onchange('school')}
           >
             <option value="">Spell School</option>
             <option value="Abjuration">Abjuration</option>
@@ -165,8 +160,8 @@ class ModifySpellForm extends Component {
           <select
             className="range"
             type="selection-box"
-            value={this.state.inputRange}
-            onChange={this.onInputChange('inputRange')}
+            value={this.state.range}
+            onChange={this.onchange('range')}
           >
             <option value="">Range</option>
             <option value="Touch">Touch</option>
@@ -183,8 +178,8 @@ class ModifySpellForm extends Component {
           <select
             className="duration"
             type="selection-box"
-            value={this.state.inputDuration}
-            onChange={this.onInputChange('inputDuration')}
+            value={this.state.duration}
+            onChange={this.onchange('duration')}
           >
             <option value="">Duration</option>
             <option value="Instantaneous">Instantaneous</option>
@@ -200,35 +195,35 @@ class ModifySpellForm extends Component {
         </div>
         <div className="casting-modifier-options">
           <input
-            checked={this.state.inputConcentration}
+            checked={this.state.concentration}
             type="checkbox"
-            onChange={this.onCheckboxChange('inputConcentration')}
+            onChange={this.onCheckboxChange('concentration')}
           />
           <span>Concentration</span>
           <input
-            checked={this.state.inputRitual}
+            checked={this.state.ritual}
             type="checkbox"
-            onChange={this.onCheckboxChange('inputRitual')}
+            onChange={this.onCheckboxChange('ritual')}
           />
           <span>Ritual</span>
         </div>
         <div className="spell-components">
           <input
-            checked={this.state.inputMaterial}
+            checked={this.state.materialComponents}
             type="checkbox"
-            onChange={this.onCheckboxChange('inputMaterial')}
+            onChange={this.onCheckboxChange('materialComponents')}
           />
           <span>Material</span>
           <input
-            checked={this.state.inputSomatic}
+            checked={this.state.somaticComponents}
             type="checkbox"
-            onChange={this.onCheckboxChange('inputSomatic')}
+            onChange={this.onCheckboxChange('somaticComponents')}
           />
           <span>Somatic</span>
           <input
-            checked={this.state.inputVerbal}
+            checked={this.state.verbalComponents}
             type="checkbox"
-            onChange={this.onCheckboxChange('inputVerbal')}
+            onChange={this.onCheckboxChange('verbalComponents')}
           />
           <span>Verbal</span>
         </div>
@@ -236,8 +231,8 @@ class ModifySpellForm extends Component {
           className="spell-description-box"
           placeholder="Spell Description"
           rows="5"
-          value={this.state.inputDescription}
-          onChange={this.onInputChange('inputDescription')}
+          value={this.state.description}
+          onChange={this.onchange('description')}
         />
         <button type="button" onClick={this.updateSpell}>
           Update

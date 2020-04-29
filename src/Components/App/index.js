@@ -5,7 +5,14 @@ import Login from '../Login';
 import Register from '../Register';
 import ForgottenPassword from '../ForgottenPassword';
 import SpellsList from '../SpellsList';
-import { LOGIN, REGISTER, SPELLS_LIST, FORGOTTEN_PASSWORD } from './PAGES';
+import CreateSpell from '../CreateSpell';
+import {
+  LOGIN,
+  REGISTER,
+  SPELLS_LIST,
+  FORGOTTEN_PASSWORD,
+  CREATE_SPELL,
+} from './PAGES';
 
 class App extends Component {
   constructor(props) {
@@ -17,6 +24,7 @@ class App extends Component {
       message: '',
       page: LOGIN,
       savedUsers: [],
+      savedSpells: [],
     };
   }
 
@@ -30,6 +38,15 @@ class App extends Component {
     // log the imported array of saved users to the console (dev purposes)
     console.log('Saved Users: ');
     console.log(savedUsers);
+
+    const savedSpells = JSON.parse(localStorage.getItem('savedSpells')) || [];
+
+    // save array from local storage to state
+    this.setState({ savedSpells });
+
+    // log the imported array of saved spells to the console (dev purposes)
+    console.log('Saved Spells: ');
+    console.log(savedSpells);
 
     // add event listener to handle "enter" key presses
     document.addEventListener('keydown', this.onKeyDown);
@@ -47,11 +64,14 @@ class App extends Component {
   }
 
   onBeforeUnload = () => {
-    // get saved users state for storage to local storage
-    const { savedUsers } = this.state;
+    // get saved users state and saved spells state for storage to local storage
+    const { savedUsers, savedSpells } = this.state;
 
     // stringify saved users and port it to local storage
     localStorage.setItem('savedUsers', JSON.stringify(savedUsers));
+
+    // stringify saved spells and port it to local storage
+    localStorage.setItem('savedSpells', JSON.stringify(savedSpells));
 
     // remove unload event listener
     window.removeEventListener('beforeunload', this.onBeforeUnload);
@@ -66,9 +86,14 @@ class App extends Component {
     this.setState({ activeUserId });
   };
 
-  // function to update app statesavedUsers from components
+  // function to update app state savedUsers from components
   onSavedUsersUpdate = (savedUsers) => {
     this.setState({ savedUsers });
+  };
+
+  // function to update app state savedSpells from components
+  onSavedSpellsUpdate = (savedSpells) => {
+    this.setState({ savedSpells });
   };
 
   // function to update app state message from components
@@ -89,6 +114,7 @@ class App extends Component {
     // grab relevant state variables
     const {
       savedUsers,
+      savedSpells,
       message,
       activeUserName,
       activeUserId,
@@ -153,7 +179,21 @@ class App extends Component {
         {page === SPELLS_LIST && (
           <SpellsList
             activeUserId={activeUserId}
+            changePage={this.changePage}
             onMessageUpdate={this.onMessageUpdate}
+            onSavedSpellsUpdate={this.onSavedSpellsUpdate}
+            savedSpells={savedSpells}
+          />
+        )}
+
+        {/* Component used to create new spells and add them to a user's spell list */}
+        {page === CREATE_SPELL && (
+          <CreateSpell
+            activeUserId={activeUserId}
+            changePage={this.changePage}
+            onMessageUpdate={this.onMessageUpdate}
+            onSavedSpellsUpdate={this.onSavedSpellsUpdate}
+            savedSpells={savedSpells}
           />
         )}
       </Wrapper>

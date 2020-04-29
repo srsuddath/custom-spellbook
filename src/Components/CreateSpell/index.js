@@ -2,77 +2,53 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import { Wrapper } from './styles';
+import { SPELLS_LIST } from '../App/PAGES';
 
-class CreateSpellForm extends Component {
+class CreateSpell extends Component {
   // type checking for props
   static propTypes = {
     activeUserId: PropTypes.number.isRequired,
     savedSpells: PropTypes.array.isRequired,
-    defaultInputTitle: PropTypes.string,
-    defaultInputSchool: PropTypes.string,
-    defaultInputLevel: PropTypes.string,
-    defaultInputConcetration: PropTypes.bool,
-    defaultInputDuration: PropTypes.string,
-    defaultInputRange: PropTypes.string,
-    defaultInputRitual: PropTypes.bool,
-    defaultInputDescription: PropTypes.string,
-    defaultInputVerbal: PropTypes.bool,
-    defaultInputMaterial: PropTypes.bool,
-    defaultInputSomatic: PropTypes.bool,
-    onMessageUpdate: PropTypes.func,
-    onSavedSpellsUpdate: PropTypes.func,
+    onMessageUpdate: PropTypes.func.isRequired,
+    onSavedSpellsUpdate: PropTypes.func.isRequired,
+    changePage: PropTypes.func.isRequired,
   };
 
-  // set default values for props
-  static defaultProps = {
-    defaultInputTitle: '',
-    defaultInputSchool: '',
-    defaultInputLevel: '',
-    defaultInputConcetration: false,
-    defaultInputDuration: '',
-    defaultInputRange: '',
-    defaultInputRitual: false,
-    defaultInputDescription: '',
-    defaultInputVerbal: false,
-    defaultInputMaterial: false,
-    defaultInputSomatic: false,
-  };
-
-  // constructor, set initial value for state variables to prop inputs
+  // constructor, set initial value for state variables to prop s
   constructor(props) {
     super(props);
     this.state = {
       activeUserId: this.props.activeUserId,
-      inputTitle: this.props.defaultInputTitle,
-      inputSchool: this.props.defaultInputSchool,
-      inputLevel: this.props.defaultInputLevel,
-      inputConcentration: this.props.defaultInputConcetration,
-      inputDuration: this.props.defaultInputDuration,
-      inputRange: this.props.defaultInputRange,
-      inputRitual: this.props.defaultInputRitual,
-      inputDescription: this.props.defaultInputDescription,
-      inputVerbal: this.props.defaultInputVerbal,
-      inputMaterial: this.props.defaultInputMaterial,
-      inputSomatic: this.props.defaultInputSomatic,
+      title: '',
+      school: '',
+      level: '',
+      concentration: false,
+      duration: '',
+      range: '',
+      ritual: false,
+      description: '',
+      verbalComponents: false,
+      materialComponents: false,
+      somaticComponents: false,
     };
   }
 
   // creates a new spell and adds it to the array of saved spells
   createSpell = () => {
-    // get all relevant state data (inputs from forms)
+    // get all relevant state data (s from forms)
     const {
       activeUserId,
-      inputTitle,
-      inputSchool,
-      inputLevel,
-      inputConcentration,
-      inputDuration,
-      inputRitual,
-      inputRange,
-      inputDescription,
-      inputVerbal,
-      inputMaterial,
-      inputSomatic,
+      title,
+      school,
+      level,
+      concentration,
+      duration,
+      ritual,
+      range,
+      description,
+      verbalComponents,
+      materialComponents,
+      somaticComponents,
     } = this.state;
 
     // check to make sure that spell name isnt already taken for that user
@@ -81,7 +57,7 @@ class CreateSpellForm extends Component {
 
     // check each spell to make sure that name & user id combo is not already in user
     this.props.savedSpells.forEach((element) => {
-      if (element.userId === activeUserId && element.title === inputTitle) {
+      if (element.userId === activeUserId && element.title === title) {
         // if spell already exists, set flag and message
         this.props.onMessageUpdate(
           'Spell name is already taken, please try again',
@@ -105,42 +81,42 @@ class CreateSpellForm extends Component {
     }
 
     // break out of creation if no title has been input
-    if (inputTitle === '') {
+    if (title === '') {
       console.log("Can't have an empty title");
       this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
 
     // break out of creation if spell school wasnt set
-    if (inputSchool === '') {
+    if (school === '') {
       console.log('All spells must have a valid school');
       this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
 
     // break out of creation if no level was selected
-    if (inputLevel === '') {
+    if (level === '') {
       console.log('All spells must have a valid level');
       this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
 
     // break out of creation if no range was selected
-    if (inputRange === '') {
+    if (range === '') {
       console.log('All spells must have a valid range');
       this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
 
     // break out of creation if no duration was selected
-    if (inputDuration === '') {
+    if (duration === '') {
       console.log('Must have a valid duration');
       this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
 
     // break out of creation if no description was input
-    if (inputDescription === '') {
+    if (description === '') {
       console.log("Can't have an empty description");
       this.props.onMessageUpdate('All form fields are necessary');
       return;
@@ -149,17 +125,17 @@ class CreateSpellForm extends Component {
     // make a new spell using all the of input fields for its data
     const newSpell = {
       userId: activeUserId,
-      title: inputTitle,
-      school: inputSchool,
-      level: inputLevel,
-      duration: inputDuration,
-      description: inputDescription,
-      concentration: inputConcentration,
-      ritual: inputRitual,
-      range: inputRange,
-      verbalComponents: inputVerbal,
-      somaticComponents: inputSomatic,
-      materialComponents: inputMaterial,
+      title,
+      school,
+      level,
+      duration,
+      description,
+      concentration,
+      ritual,
+      range,
+      verbalComponents,
+      somaticComponents,
+      materialComponents,
       readOnly: true,
     };
 
@@ -168,17 +144,17 @@ class CreateSpellForm extends Component {
 
     // reset the input form to be "blank"
     this.setState({
-      inputTitle: '',
-      inputSchool: '',
-      inputLevel: '',
-      inputConcentration: false,
-      inputDuration: '',
-      inputRange: '',
-      inputRitual: false,
-      inputDescription: '',
-      inputVerbal: false,
-      inputMaterial: false,
-      inputSomatic: false,
+      title: '',
+      school: '',
+      level: '',
+      concentration: false,
+      duration: '',
+      range: '',
+      ritual: false,
+      description: '',
+      verbalComponents: false,
+      materialComponents: false,
+      somaticComponents: false,
     });
 
     // set the message state and update saved spells
@@ -186,13 +162,13 @@ class CreateSpellForm extends Component {
     this.props.onSavedSpellsUpdate(newSavedSpells);
   };
 
-  // function for updating all checkbox inputs
+  // function for updating all checkbox s
   onCheckboxChange = (key) => (event) => {
     this.setState({ [key]: event.target.checked });
   };
 
   // function for updating all regular input fields
-  onInputChange = (key) => (event) => {
+  onchange = (key) => (event) => {
     this.setState({ [key]: event.target.value });
   };
 
@@ -201,24 +177,22 @@ class CreateSpellForm extends Component {
       <Wrapper>
         {/* Title for form */}
         <h3>Create a New Spell</h3>
-
         {/* Spell Title Input */}
         <input
           className="spell-title-box"
           placeholder="Spell Title"
           type="text"
-          value={this.state.inputTitle}
-          onChange={this.onInputChange('inputTitle')}
+          value={this.state.title}
+          onChange={this.onchange('title')}
         />
-
         {/* Spell Level and School */}
         <div className="spell-category-options">
           {/* Spell Level Selection */}
           <select
             className="spell-level"
             type="selection-box"
-            value={this.state.inputLevel}
-            onChange={this.onInputChange('inputLevel')}
+            value={this.state.level}
+            onChange={this.onchange('level')}
           >
             <option value="">Spell Level</option>
             <option value="Cantrip">Cantrip</option>
@@ -237,8 +211,8 @@ class CreateSpellForm extends Component {
           <select
             className="spell-school"
             type="selection-box"
-            value={this.state.inputSchool}
-            onChange={this.onInputChange('inputSchool')}
+            value={this.state.school}
+            onChange={this.onchange('school')}
           >
             <option value="">Spell School</option>
             <option value="Abjuration">Abjuration</option>
@@ -251,13 +225,12 @@ class CreateSpellForm extends Component {
             <option value="Transmutation">Transmutation</option>
           </select>
         </div>
-
         {/* Spell Range Selection */}
         <select
           className="range"
           type="selection-box"
-          value={this.state.inputRange}
-          onChange={this.onInputChange('inputRange')}
+          value={this.state.range}
+          onChange={this.onchange('range')}
         >
           <option value="">Range</option>
           <option value="Touch">Touch</option>
@@ -269,13 +242,12 @@ class CreateSpellForm extends Component {
           <option value="1 Mile">1 Mile</option>
           <option value="10 Miles">10 Miles</option>
         </select>
-
         {/* Spell Duration Selection */}
         <select
           className="duration"
           type="selection-box"
-          value={this.state.inputDuration}
-          onChange={this.onInputChange('inputDuration')}
+          value={this.state.duration}
+          onChange={this.onchange('duration')}
         >
           <option value="">Duration</option>
           <option value="Instantaneous">Instantaneous</option>
@@ -288,70 +260,75 @@ class CreateSpellForm extends Component {
           <option value="1 Month">1 Month</option>
           <option value="1 Year">1 Year</option>
         </select>
-
         {/* Casting Modifier Checkboxes */}
         <div className="casting-modifier-options">
           {/* Concentration Checkbox */}
           <input
-            checked={this.state.inputConcentration}
+            checked={this.state.concentration}
             type="checkbox"
-            onChange={this.onCheckboxChange('inputConcentration')}
+            onChange={this.onCheckboxChange('concentration')}
           />
           <span>Concentration</span>
 
           {/* Ritual Checkbox */}
           <input
-            checked={this.state.inputRitual}
+            checked={this.state.ritual}
             type="checkbox"
-            onChange={this.onCheckboxChange('inputRitual')}
+            onChange={this.onCheckboxChange('ritual')}
           />
           <span>Ritual</span>
         </div>
-
         {/* Spell Components Checkboxes */}
         <div className="spell-components">
-          {/* Material Components Checkbox */}
+          {/* materialComponents Checkbox */}
           <input
-            checked={this.state.inputMaterial}
+            checked={this.state.materialComponents}
             type="checkbox"
-            onChange={this.onCheckboxChange('inputMaterial')}
+            onChange={this.onCheckboxChange('materialComponents')}
           />
           <span>Material</span>
 
-          {/* Somatic Components Checkbox */}
+          {/* somaticComponents Checkbox */}
           <input
-            checked={this.state.inputSomatic}
+            checked={this.state.somaticComponents}
             type="checkbox"
-            onChange={this.onCheckboxChange('inputSomatic')}
+            onChange={this.onCheckboxChange('somaticComponents')}
           />
           <span>Somatic</span>
 
-          {/* Verbal Components Checkbox */}
+          {/* verbalComponents Checkbox */}
           <input
-            checked={this.state.inputVerbal}
+            checked={this.state.verbalComponents}
             type="checkbox"
-            onChange={this.onCheckboxChange('inputVerbal')}
+            onChange={this.onCheckboxChange('verbalComponents')}
           />
 
           <span>Verbal</span>
         </div>
-
         {/* Description Multi-line text box */}
         <textarea
           className="spell-description-box"
           placeholder="Spell Description"
           rows="5"
-          value={this.state.inputDescription}
-          onChange={this.onInputChange('inputDescription')}
+          value={this.state.description}
+          onChange={this.onchange('description')}
         />
-
         {/* Create New Spell Button */}
         <button type="button" onClick={this.createSpell}>
           Submit
+        </button>
+        {/* Return to Spells List Button */}
+        <button
+          type="button"
+          onClick={() => {
+            this.props.changePage(SPELLS_LIST);
+          }}
+        >
+          Go Back
         </button>
       </Wrapper>
     );
   }
 }
 
-export default CreateSpellForm;
+export default CreateSpell;

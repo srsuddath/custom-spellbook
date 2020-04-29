@@ -7,14 +7,28 @@ body,
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #1a1d27; /* Old browsers */
-  background: -moz-linear-gradient(45deg, #1a1d27 1%, #303548 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(45deg, #1a1d27 1%, #303548 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(45deg, #1a1d27 1%, #303548 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: -moz-linear-gradient(
+    45deg,
+    #1a1d27 1%,
+    #303548 100%
+  ); /*FF3.6-15 */
+  background: -webkit-linear-gradient(
+    45deg,
+    #1a1d27 1%,
+    #303548 100%
+  ); /*Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    45deg,
+    #1a1d27 1%,
+    #303548 100%
+  ); /*W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
   font-size: 16px;
 }
 * {
@@ -22,7 +36,8 @@ body,
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 button {

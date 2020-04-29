@@ -5,6 +5,8 @@ import { get } from 'lodash';
 import { Wrapper } from './styles';
 // import CreateSpellForm from '../CreateSpellForm';
 import ModifySpellForm from '../ModifySpellForm';
+import { CREATE_SPELL } from '../App/PAGES';
+
 import alchemyIcon from '../../assets/alchemy.svg';
 import crystalBallIcon from '../../assets/crystal-ball.svg';
 import eyeIcon from '../../assets/eye.svg';
@@ -17,41 +19,19 @@ import wandIcon from '../../assets/wand.svg';
 class SpellsList extends Component {
   static propTypes = {
     activeUserId: PropTypes.number.isRequired,
-    dontSave: PropTypes.bool,
-    onMessageUpdate: PropTypes.func,
+    onMessageUpdate: PropTypes.func.isRequired,
+    changePage: PropTypes.func.isRequired,
+    onSavedSpellsUpdate: PropTypes.func.isRequired,
+    savedSpells: PropTypes.array.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       activeUserId: this.props.activeUserId,
-      savedSpells: [],
+      savedSpells: this.props.savedSpells,
     };
   }
-
-  componentDidMount() {
-    const savedSpells = JSON.parse(localStorage.getItem('savedSpells')) || [];
-    this.setState({ savedSpells });
-    console.log('Saved Spells: ');
-    console.log(savedSpells);
-    window.addEventListener('beforeunload', this.onBeforeUnload);
-  }
-
-  componentWillUnmount() {
-    this.onBeforeUnload();
-  }
-
-  onBeforeUnload = () => {
-    if (!this.props.dontSave) {
-      const { savedSpells } = this.state;
-      localStorage.setItem('savedSpells', JSON.stringify(savedSpells));
-    }
-    window.removeEventListener('beforeunload', this.setStateToLocalStorage);
-  };
-
-  onSavedSpellsUpdate = (savedSpells) => {
-    this.setState({ savedSpells });
-  };
 
   toggleReadOnly = (index) => {
     // Create deep clone of saved spells.
@@ -61,15 +41,15 @@ class SpellsList extends Component {
     clonedSpells[index].readOnly = !clonedSpells[index].readOnly;
 
     // Update state.
-    this.setState({ savedSpells: clonedSpells });
+    this.props.onSavedSpellsUpdate(clonedSpells);
   };
 
   deleteSpell = (index) => {
     // Create deep clone of saved spells.
-    const updatedSpells = this.state.savedSpells;
-    updatedSpells.splice(index, 1);
+    const clonedSpells = JSON.parse(JSON.stringify(this.state.savedSpells));
+    clonedSpells.splice(index, 1);
     // Update state.
-    this.setState({ savedSpells: updatedSpells });
+    this.props.onSavedSpellsUpdate(clonedSpells);
   };
 
   deriveSchoolIcon = (school) => {
@@ -128,21 +108,21 @@ class SpellsList extends Component {
               return (
                 <ModifySpellForm
                   activeUserId={activeUserId}
-                  defaultInputConcetration={concentration}
-                  defaultInputDescription={description}
-                  defaultInputDuration={duration}
-                  defaultInputLevel={level}
-                  defaultInputMaterial={materialComponents}
-                  defaultInputRange={range}
-                  defaultInputRitual={ritual}
-                  defaultInputSchool={school}
-                  defaultInputSomatic={somaticComponents}
-                  defaultInputTitle={title}
-                  defaultInputVerbal={verbalComponents}
+                  defaultConcetration={concentration}
+                  defaultDescription={description}
+                  defaultDuration={duration}
+                  defaultLevel={level}
+                  defaultMaterialComponents={materialComponents}
+                  defaultRange={range}
+                  defaultRitual={ritual}
+                  defaultSchool={school}
+                  defaultSomaticComponents={somaticComponents}
+                  defaultTitle={title}
+                  defaultVerbalComponents={verbalComponents}
                   key={title}
                   savedSpells={savedSpells}
                   onMessageUpdate={this.props.onMessageUpdate}
-                  onSavedSpellsUpdate={this.onSavedSpellsUpdate}
+                  onSavedSpellsUpdate={this.props.onSavedSpellsUpdate}
                 />
               );
             }
@@ -212,6 +192,14 @@ class SpellsList extends Component {
             );
           })}
         </div>
+        <button
+          type="button"
+          onClick={() => {
+            this.props.changePage(CREATE_SPELL);
+          }}
+        >
+          Add a spell
+        </button>
       </Wrapper>
     );
   }
