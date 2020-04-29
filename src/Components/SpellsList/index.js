@@ -29,17 +29,13 @@ class SpellsList extends Component {
     super(props);
     this.state = {
       activeUserId: this.props.activeUserId,
-      savedSpells: this.props.savedSpells,
+      expandedSpellsLookup: {},
     };
-  }
-
-  UNSAFE_componentWillReceiveProps({ savedSpells }) {
-    this.setState({ savedSpells });
   }
 
   toggleReadOnly = (index) => {
     // Create deep clone of saved spells.
-    const clonedSpells = JSON.parse(JSON.stringify(this.state.savedSpells));
+    const clonedSpells = JSON.parse(JSON.stringify(this.props.savedSpells));
 
     // Modify read only state of
     clonedSpells[index].readOnly = !clonedSpells[index].readOnly;
@@ -50,7 +46,7 @@ class SpellsList extends Component {
 
   deleteSpell = (index) => {
     // Create deep clone of saved spells.
-    const clonedSpells = JSON.parse(JSON.stringify(this.state.savedSpells));
+    const clonedSpells = JSON.parse(JSON.stringify(this.props.savedSpells));
     clonedSpells.splice(index, 1);
     // Update state.
     this.props.onSavedSpellsUpdate(clonedSpells);
@@ -83,12 +79,20 @@ class SpellsList extends Component {
     }
   };
 
+  toggleSpellExpansion = (id) => {
+    const expandedSpellsLookup = {
+      ...this.state.expandedSpellsLookup,
+      [id]: !this.state.expandedSpellsLookup[id],
+    };
+    this.setState({ expandedSpellsLookup });
+  };
+
   render() {
-    const { savedSpells, activeUserId } = this.state;
+    const { activeUserId, expandedSpellsLookup } = this.state;
     return (
       <Wrapper>
         <div className="spell-list">
-          {savedSpells.map((spell, index) => {
+          {this.props.savedSpells.map((spell, index) => {
             // Derive spell properties.
             const concentration = get(spell, 'concentration');
             const description = get(spell, 'description');
@@ -103,6 +107,11 @@ class SpellsList extends Component {
             const title = get(spell, 'title');
             const userId = get(spell, 'userId');
             const verbalComponents = get(spell, 'verbalComponents');
+            const id = get(spell, 'id');
+
+            // Derive if the spell is expanded.
+            const isExpanded = get(expandedSpellsLookup, `[${id}]`, false); // O(1)
+            // const isExpanded = expandedSpellsLookup[id] || false; // O(1)
 
             if (userId !== activeUserId) {
               return null;
@@ -123,8 +132,8 @@ class SpellsList extends Component {
                   defaultSomaticComponents={somaticComponents}
                   defaultTitle={title}
                   defaultVerbalComponents={verbalComponents}
-                  key={title}
-                  savedSpells={savedSpells}
+                  key={id}
+                  savedSpells={this.props.savedSpells}
                   onMessageUpdate={this.props.onMessageUpdate}
                   onSavedSpellsUpdate={this.props.onSavedSpellsUpdate}
                 />
@@ -132,7 +141,7 @@ class SpellsList extends Component {
             }
 
             return (
-              <div className="spell" key={title}>
+              <div className="spell" key={id}>
                 <div className="spell-header">
                   <img
                     alt="Spell School Icon"
@@ -140,7 +149,9 @@ class SpellsList extends Component {
                   />
                   {/* Title */}
                   <span className="spell-title">{title}</span>
-                  <div>
+                  <div
+                    className={`spell-buttons${isExpanded ? '' : ' hidden'}`}
+                  >
                     {/* Edit Icon */}
                     <button
                       className="unlock-icon"
@@ -157,41 +168,62 @@ class SpellsList extends Component {
                       Delete
                     </button>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => this.toggleSpellExpansion(id)}
+                  >
+                    Expand
+                  </button>
                 </div>
-                <div>
-                  <span>{level}</span>
-                  <span> - </span>
-                  <span>{school}</span>
+                <div className={`spell-details${isExpanded ? '' : ' hidden'}`}>
+                  {/* <div
+                  className="spell-details"
+                  style={{ display: !isExpanded ? 'hidden' : 'inherit' }}
+                > */}
+                  {/* <SpellDetailsWrapper hidden={!isExpanded}> */}
+                  <div>
+                    <span>{level}</span>
+                    <span> - </span>
+                    <span>{school}</span>
+                  </div>
+                  <div>
+                    <span>Duration: </span>
+                    <span>{duration}</span>
+                  </div>
+                  <div>
+                    <span>Range: </span>
+                    <span>{range}</span>
+                  </div>
+                  <div>
+                    <input checked={concentration} readOnly type="checkbox" />
+                    <span>Concentration</span>
+                    <input checked={ritual} readOnly type="checkbox" />
+                    <span>Ritual</span>
+                  </div>
+                  <div>
+                    <input
+                      checked={materialComponents}
+                      readOnly
+                      type="checkbox"
+                    />
+                    <span>Material</span>
+                    <input
+                      checked={somaticComponents}
+                      readOnly
+                      type="checkbox"
+                    />
+                    <span>Somatic</span>
+                    <input
+                      checked={verbalComponents}
+                      readOnly
+                      type="checkbox"
+                    />
+                    <span>Verbal</span>
+                  </div>
+                  <p className="spell-descript-text" readOnly>
+                    {description}
+                  </p>
                 </div>
-                <div>
-                  <span>Duration: </span>
-                  <span>{duration}</span>
-                </div>
-                <div>
-                  <span>Range: </span>
-                  <span>{range}</span>
-                </div>
-                <div>
-                  <input checked={concentration} readOnly type="checkbox" />
-                  <span>Concentration</span>
-                  <input checked={ritual} readOnly type="checkbox" />
-                  <span>Ritual</span>
-                </div>
-                <div>
-                  <input
-                    checked={materialComponents}
-                    readOnly
-                    type="checkbox"
-                  />
-                  <span>Material</span>
-                  <input checked={somaticComponents} readOnly type="checkbox" />
-                  <span>Somatic</span>
-                  <input checked={verbalComponents} readOnly type="checkbox" />
-                  <span>Verbal</span>
-                </div>
-                <p className="spell-descript-text" readOnly>
-                  {description}
-                </p>
               </div>
             );
           })}

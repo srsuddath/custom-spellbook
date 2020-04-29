@@ -68,3 +68,7 @@ input {
   padding: 7px 10px;
   border-radius: 0px;
 }
+
+.hidden {
+  display: none;
+}

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Wrapper } from './styles';
 import { SPELLS_LIST } from '../App/PAGES';
@@ -137,6 +138,7 @@ class CreateSpell extends Component {
       somaticComponents,
       materialComponents,
       readOnly: true,
+      id: uuidv4(),
     };
 
     // make a new array of saved spells, with the existing array + our newly created spell
