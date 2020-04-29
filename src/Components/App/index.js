@@ -75,6 +75,9 @@ class App extends Component {
 
     // remove unload event listener
     window.removeEventListener('beforeunload', this.onBeforeUnload);
+
+    // uncomment the line below if you need to wipe memory
+    // localStorage.clear();
   };
 
   changePage = (page) => {

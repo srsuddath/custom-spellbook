@@ -30,6 +30,8 @@ class SpellsList extends Component {
     this.state = {
       activeUserId: this.props.activeUserId,
       expandedSpellsLookup: {},
+      isDeleted: false,
+      deletedSpell: undefined,
     };
   }
 
@@ -47,9 +49,16 @@ class SpellsList extends Component {
   deleteSpell = (index) => {
     // Create deep clone of saved spells.
     const clonedSpells = JSON.parse(JSON.stringify(this.props.savedSpells));
-    clonedSpells.splice(index, 1);
+    const deletedSpell = clonedSpells.splice(index, 1)[0];
     // Update state.
     this.props.onSavedSpellsUpdate(clonedSpells);
+    this.setState({ isDeleted: true, deletedSpell });
+  };
+
+  undoDelete = () => {
+    const newSavedSpells = [...this.props.savedSpells, this.state.deletedSpell];
+    this.setState({ isDeleted: false, deletedSpell: undefined });
+    this.props.onSavedSpellsUpdate(newSavedSpells);
   };
 
   deriveSchoolIcon = (school) => {
@@ -88,7 +97,7 @@ class SpellsList extends Component {
   };
 
   render() {
-    const { activeUserId, expandedSpellsLookup } = this.state;
+    const { activeUserId, expandedSpellsLookup, isDeleted } = this.state;
     return (
       <Wrapper>
         <div className="spell-list">
@@ -235,6 +244,14 @@ class SpellsList extends Component {
           }}
         >
           Add a spell
+        </button>
+
+        <button
+          type="button"
+          className={`spell-details${isDeleted ? '' : ' hidden'}`}
+          onClick={this.undoDelete}
+        >
+          Undo Delete
         </button>
       </Wrapper>
     );
