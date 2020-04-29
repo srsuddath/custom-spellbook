@@ -87,7 +87,13 @@ class App extends Component {
 
   render() {
     // grab relevant state variables
-    const { savedUsers, message, activeUserName, activeUserId, page } = this.state;
+    const {
+      savedUsers,
+      message,
+      activeUserName,
+      activeUserId,
+      page,
+    } = this.state;
 
     // render return
     return (
@@ -144,7 +150,12 @@ class App extends Component {
         )}
 
         {/* Component where spells are displayed / added / deleted / modified */}
-        {page === SPELLS_LIST && <SpellsList activeUserId={activeUserId} onMessageUpdate={this.onMessageUpdate} />}
+        {page === SPELLS_LIST && (
+          <SpellsList
+            activeUserId={activeUserId}
+            onMessageUpdate={this.onMessageUpdate}
+          />
+        )}
       </Wrapper>
     );
   }

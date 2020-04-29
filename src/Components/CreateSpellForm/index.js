@@ -83,7 +83,9 @@ class CreateSpellForm extends Component {
     this.props.savedSpells.forEach((element) => {
       if (element.userId === activeUserId && element.title === inputTitle) {
         // if spell already exists, set flag and message
-        this.props.onMessageUpdate('Spell name is already taken, please try again');
+        this.props.onMessageUpdate(
+          'Spell name is already taken, please try again',
+        );
         spellAlreadyExists = true;
       }
     });
@@ -242,7 +244,6 @@ class CreateSpellForm extends Component {
             <option value="Abjuration">Abjuration</option>
             <option value="Conjuration">Conjuration</option>
             <option value="Divination">Divination</option>
-            <option value="Dunamancy">Dunamancy</option>
             <option value="Enchantment">Enchantment</option>
             <option value="Evocation">Evocation</option>
             <option value="Illusion">Illusion</option>
@@ -299,22 +300,38 @@ class CreateSpellForm extends Component {
           <span>Concentration</span>
 
           {/* Ritual Checkbox */}
-          <input checked={this.state.inputRitual} type="checkbox" onChange={this.onCheckboxChange('inputRitual')} />
+          <input
+            checked={this.state.inputRitual}
+            type="checkbox"
+            onChange={this.onCheckboxChange('inputRitual')}
+          />
           <span>Ritual</span>
         </div>
 
         {/* Spell Components Checkboxes */}
         <div className="spell-components">
           {/* Material Components Checkbox */}
-          <input checked={this.state.inputMaterial} type="checkbox" onChange={this.onCheckboxChange('inputMaterial')} />
+          <input
+            checked={this.state.inputMaterial}
+            type="checkbox"
+            onChange={this.onCheckboxChange('inputMaterial')}
+          />
           <span>Material</span>
 
           {/* Somatic Components Checkbox */}
-          <input checked={this.state.inputSomatic} type="checkbox" onChange={this.onCheckboxChange('inputSomatic')} />
+          <input
+            checked={this.state.inputSomatic}
+            type="checkbox"
+            onChange={this.onCheckboxChange('inputSomatic')}
+          />
           <span>Somatic</span>
 
           {/* Verbal Components Checkbox */}
-          <input checked={this.state.inputVerbal} type="checkbox" onChange={this.onCheckboxChange('inputVerbal')} />
+          <input
+            checked={this.state.inputVerbal}
+            type="checkbox"
+            onChange={this.onCheckboxChange('inputVerbal')}
+          />
 
           <span>Verbal</span>
         </div>

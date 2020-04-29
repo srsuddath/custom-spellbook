@@ -3,9 +3,16 @@ import React, { Component } from 'react';
 
 import { get } from 'lodash';
 import { Wrapper } from './styles';
-import CreateSpellForm from '../CreateSpellForm';
+// import CreateSpellForm from '../CreateSpellForm';
 import ModifySpellForm from '../ModifySpellForm';
+import alchemyIcon from '../../assets/alchemy.svg';
+import crystalBallIcon from '../../assets/crystal-ball.svg';
+import eyeIcon from '../../assets/eye.svg';
 import fireIcon from '../../assets/fire.svg';
+import galaxyIcon from '../../assets/galaxy.svg';
+import shieldIcon from '../../assets/shield.svg';
+import skullIcon from '../../assets/skull.svg';
+import wandIcon from '../../assets/wand.svg';
 
 class SpellsList extends Component {
   static propTypes = {
@@ -67,31 +74,28 @@ class SpellsList extends Component {
 
   deriveSchoolIcon = (school) => {
     if (school === 'Abjuration') {
-      return null;
+      return shieldIcon;
     }
     if (school === 'Conjuration') {
-      return null;
+      return galaxyIcon;
     }
     if (school === 'Divination') {
-      return null;
-    }
-    if (school === 'Dunamancy') {
-      return null;
+      return crystalBallIcon;
     }
     if (school === 'Enchantment') {
-      return null;
+      return wandIcon;
     }
     if (school === 'Evocation') {
       return fireIcon;
     }
     if (school === 'Illusion') {
-      return null;
+      return eyeIcon;
     }
     if (school === 'Necromancy') {
-      return null;
+      return skullIcon;
     }
     if (school === 'Transmutation') {
-      return null;
+      return alchemyIcon;
     }
   };
 
@@ -99,7 +103,6 @@ class SpellsList extends Component {
     const { savedSpells, activeUserId } = this.state;
     return (
       <Wrapper>
-        <h2>Container of Spells</h2>
         <div className="spell-list">
           {savedSpells.map((spell, index) => {
             // Derive spell properties.
@@ -146,36 +149,56 @@ class SpellsList extends Component {
 
             return (
               <div className="spell" key={title}>
-                {/* Title */}
-                <span className="spell-title">{title}</span>
-                {/* Edit Icon */}
-                <button className="unlock-icon" type="button" onClick={() => this.toggleReadOnly(index)}>
-                  Edit
-                </button>
-                <button className="delete-icon" type="button" onClick={() => this.deleteSpell(index)}>
-                  Delete
-                </button>
-                <div className="spell-detail">
+                <div className="spell-header">
+                  <img
+                    alt="Spell School Icon"
+                    src={this.deriveSchoolIcon(school)}
+                  />
+                  {/* Title */}
+                  <span className="spell-title">{title}</span>
+                  <div>
+                    {/* Edit Icon */}
+                    <button
+                      className="unlock-icon"
+                      type="button"
+                      onClick={() => this.toggleReadOnly(index)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="delete-icon"
+                      type="button"
+                      onClick={() => this.deleteSpell(index)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+                <div>
                   <span>{level}</span>
                   <span> - </span>
-                  <img alt="no you" src={this.deriveSchoolIcon(school)} />
+                  <span>{school}</span>
                 </div>
-                <div className="spell-detail">
+                <div>
                   <span>Duration: </span>
                   <span>{duration}</span>
                 </div>
-                <div className="spell-detail">
+                <div>
                   <span>Range: </span>
                   <span>{range}</span>
                 </div>
-                <div className="spell-detail">
+                <div>
                   <input checked={concentration} readOnly type="checkbox" />
                   <span>Concentration</span>
                   <input checked={ritual} readOnly type="checkbox" />
                   <span>Ritual</span>
                 </div>
-                <div className="spell-detail">
-                  <input checked={materialComponents} readOnly type="checkbox" />
+                <div>
+                  <input
+                    checked={materialComponents}
+                    readOnly
+                    type="checkbox"
+                  />
                   <span>Material</span>
                   <input checked={somaticComponents} readOnly type="checkbox" />
                   <span>Somatic</span>
