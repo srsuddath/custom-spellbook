@@ -30,8 +30,7 @@ class SpellsList extends Component {
     this.state = {
       activeUserId: this.props.activeUserId,
       expandedSpellsLookup: {},
-      isDeleted: false,
-      deletedSpell: undefined,
+      deletedSpell: {},
     };
   }
 
@@ -52,12 +51,12 @@ class SpellsList extends Component {
     const deletedSpell = clonedSpells.splice(index, 1)[0];
     // Update state.
     this.props.onSavedSpellsUpdate(clonedSpells);
-    this.setState({ isDeleted: true, deletedSpell });
+    this.setState({ deletedSpell });
   };
 
   undoDelete = () => {
     const newSavedSpells = [...this.props.savedSpells, this.state.deletedSpell];
-    this.setState({ isDeleted: false, deletedSpell: undefined });
+    this.setState({ deletedSpell: {} });
     this.props.onSavedSpellsUpdate(newSavedSpells);
   };
 
@@ -97,7 +96,7 @@ class SpellsList extends Component {
   };
 
   render() {
-    const { activeUserId, expandedSpellsLookup, isDeleted } = this.state;
+    const { activeUserId, expandedSpellsLookup, deletedSpell } = this.state;
     return (
       <Wrapper>
         <div className="spell-list">
@@ -120,7 +119,6 @@ class SpellsList extends Component {
 
             // Derive if the spell is expanded.
             const isExpanded = get(expandedSpellsLookup, `[${id}]`, false); // O(1)
-            // const isExpanded = expandedSpellsLookup[id] || false; // O(1)
 
             if (userId !== activeUserId) {
               return null;
@@ -248,7 +246,9 @@ class SpellsList extends Component {
 
         <button
           type="button"
-          className={`spell-details${isDeleted ? '' : ' hidden'}`}
+          className={`spell-details${
+            Object.keys(deletedSpell).length === 0 ? ' hidden' : ''
+          }`}
           onClick={this.undoDelete}
         >
           Undo Delete
