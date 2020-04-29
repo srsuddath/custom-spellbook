@@ -14,6 +14,7 @@ class ModifySpellForm extends Component {
     defaultRange: PropTypes.string.isRequired,
     defaultRitual: PropTypes.bool.isRequired,
     defaultSchool: PropTypes.string.isRequired,
+    defaultCastingSpeed: PropTypes.string.isRequired,
     defaultSomaticComponents: PropTypes.bool.isRequired,
     defaultTitle: PropTypes.string.isRequired,
     defaultVerbalComponents: PropTypes.bool.isRequired,
@@ -34,6 +35,7 @@ class ModifySpellForm extends Component {
       range: this.props.defaultRange,
       ritual: this.props.defaultRitual,
       school: this.props.defaultSchool,
+      castingSpeed: this.props.defaultCastingSpeed,
       somaticComponents: this.props.defaultSomaticComponents,
       title: this.props.defaultTitle,
       verbalComponents: this.props.defaultVerbalComponents,
@@ -50,6 +52,7 @@ class ModifySpellForm extends Component {
       duration,
       ritual,
       range,
+      castingSpeed,
       description,
       verbalComponents,
       materialComponents,
@@ -72,6 +75,10 @@ class ModifySpellForm extends Component {
       console.log('All spells must have a valid range');
       return;
     }
+    if (castingSpeed === '') {
+      console.log('All spells must have a valid casting speed');
+      return;
+    }
     if (duration === '') {
       console.log('Must have a valid duration');
       return;
@@ -91,6 +98,7 @@ class ModifySpellForm extends Component {
       readOnly: true,
       ritual,
       school,
+      castingSpeed,
       somaticComponents,
       title,
       userId: activeUserId,
@@ -156,7 +164,22 @@ class ModifySpellForm extends Component {
             <option value="Transmutation">Transmutation</option>
           </select>
         </div>
-        <div className="range-selection-options">
+        <select
+          className="casting-speed"
+          type="selection-box"
+          value={this.state.castingSpeed}
+          onChange={this.onchange('castingSpeed')}
+        >
+          <option value="">Casting Speed</option>
+          <option value="1 Action">1 Action</option>
+          <option value="1 Bonus Action">1 Bonus Action</option>
+          <option value="1 Minute">1 Minute</option>
+          <option value="10 Minutes">10 Minutes</option>
+          <option value="1 Hour">1 Hour</option>
+          <option value="8 Hours">8 Hours</option>
+        </select>
+        <div>
+          {/* Spell Range Selection */}
           <select
             className="range"
             type="selection-box"
@@ -173,8 +196,7 @@ class ModifySpellForm extends Component {
             <option value="1 Mile">1 Mile</option>
             <option value="10 Miles">10 Miles</option>
           </select>
-        </div>
-        <div className="duration-selection-options">
+          {/* Spell Duration Selection */}
           <select
             className="duration"
             type="selection-box"

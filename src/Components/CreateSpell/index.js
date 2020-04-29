@@ -28,6 +28,7 @@ class CreateSpell extends Component {
       range: '',
       ritual: false,
       description: '',
+      castingSpeed: '',
       verbalComponents: false,
       materialComponents: false,
       somaticComponents: false,
@@ -46,6 +47,7 @@ class CreateSpell extends Component {
       duration,
       ritual,
       range,
+      castingSpeed,
       description,
       verbalComponents,
       materialComponents,
@@ -84,6 +86,12 @@ class CreateSpell extends Component {
     // break out of creation if no title has been input
     if (title === '') {
       console.log("Can't have an empty title");
+      this.props.onMessageUpdate('All form fields are necessary');
+      return;
+    }
+    // break out of creation if no casting speed has been input
+    if (castingSpeed === '') {
+      console.log("Can't have an empty casting speed");
       this.props.onMessageUpdate('All form fields are necessary');
       return;
     }
@@ -132,6 +140,7 @@ class CreateSpell extends Component {
       duration,
       description,
       concentration,
+      castingSpeed,
       ritual,
       range,
       verbalComponents,
@@ -152,6 +161,7 @@ class CreateSpell extends Component {
       concentration: false,
       duration: '',
       range: '',
+      castingSpeed: '',
       ritual: false,
       description: '',
       verbalComponents: false,
@@ -227,41 +237,57 @@ class CreateSpell extends Component {
             <option value="Transmutation">Transmutation</option>
           </select>
         </div>
-        {/* Spell Range Selection */}
         <select
-          className="range"
+          className="casting-speed"
           type="selection-box"
-          value={this.state.range}
-          onChange={this.onchange('range')}
+          value={this.state.castingSpeed}
+          onChange={this.onchange('castingSpeed')}
         >
-          <option value="">Range</option>
-          <option value="Touch">Touch</option>
-          <option value="15 Feet">15 Feet</option>
-          <option value="30 Feet">30 Feet</option>
-          <option value="60 Feet">60 Feet</option>
-          <option value="120 Feet">120 Feet</option>
-          <option value="500 Feet">500 Feet</option>
-          <option value="1 Mile">1 Mile</option>
-          <option value="10 Miles">10 Miles</option>
-        </select>
-        {/* Spell Duration Selection */}
-        <select
-          className="duration"
-          type="selection-box"
-          value={this.state.duration}
-          onChange={this.onchange('duration')}
-        >
-          <option value="">Duration</option>
-          <option value="Instantaneous">Instantaneous</option>
-          <option value="1 Round">1 Round</option>
+          <option value="">Casting Speed</option>
+          <option value="1 Action">1 Action</option>
+          <option value="1 Bonus Action">1 Bonus Action</option>
           <option value="1 Minute">1 Minute</option>
           <option value="10 Minutes">10 Minutes</option>
           <option value="1 Hour">1 Hour</option>
           <option value="8 Hours">8 Hours</option>
-          <option value="1 Day">1 Day</option>
-          <option value="1 Month">1 Month</option>
-          <option value="1 Year">1 Year</option>
         </select>
+        <div>
+          {/* Spell Range Selection */}
+          <select
+            className="range"
+            type="selection-box"
+            value={this.state.range}
+            onChange={this.onchange('range')}
+          >
+            <option value="">Range</option>
+            <option value="Touch">Touch</option>
+            <option value="15 Feet">15 Feet</option>
+            <option value="30 Feet">30 Feet</option>
+            <option value="60 Feet">60 Feet</option>
+            <option value="120 Feet">120 Feet</option>
+            <option value="500 Feet">500 Feet</option>
+            <option value="1 Mile">1 Mile</option>
+            <option value="10 Miles">10 Miles</option>
+          </select>
+          {/* Spell Duration Selection */}
+          <select
+            className="duration"
+            type="selection-box"
+            value={this.state.duration}
+            onChange={this.onchange('duration')}
+          >
+            <option value="">Duration</option>
+            <option value="Instantaneous">Instantaneous</option>
+            <option value="1 Round">1 Round</option>
+            <option value="1 Minute">1 Minute</option>
+            <option value="10 Minutes">10 Minutes</option>
+            <option value="1 Hour">1 Hour</option>
+            <option value="8 Hours">8 Hours</option>
+            <option value="1 Day">1 Day</option>
+            <option value="1 Month">1 Month</option>
+            <option value="1 Year">1 Year</option>
+          </select>
+        </div>
         {/* Casting Modifier Checkboxes */}
         <div className="casting-modifier-options">
           {/* Concentration Checkbox */}

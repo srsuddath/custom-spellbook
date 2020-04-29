@@ -111,6 +111,7 @@ class SpellsList extends Component {
             const readOnly = get(spell, 'readOnly');
             const ritual = get(spell, 'ritual');
             const school = get(spell, 'school');
+            const castingSpeed = get(spell, 'castingSpeed');
             const somaticComponents = get(spell, 'somaticComponents');
             const title = get(spell, 'title');
             const userId = get(spell, 'userId');
@@ -136,6 +137,7 @@ class SpellsList extends Component {
                   defaultRange={range}
                   defaultRitual={ritual}
                   defaultSchool={school}
+                  defaultCastingSpeed={castingSpeed}
                   defaultSomaticComponents={somaticComponents}
                   defaultTitle={title}
                   defaultVerbalComponents={verbalComponents}
@@ -192,6 +194,10 @@ class SpellsList extends Component {
                     <span>{level}</span>
                     <span> - </span>
                     <span>{school}</span>
+                  </div>
+                  <div>
+                    <span>Casting Speed: </span>
+                    <span>{castingSpeed}</span>
                   </div>
                   <div>
                     <span>Duration: </span>
