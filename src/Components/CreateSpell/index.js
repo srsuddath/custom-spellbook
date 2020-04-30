@@ -174,7 +174,7 @@ class CreateSpell extends Component {
     this.props.onSavedSpellsUpdate(newSavedSpells);
   };
 
-  // function for updating all checkbox s
+  // function for updating all checkboxs
   onCheckboxChange = (key) => (event) => {
     this.setState({ [key]: event.target.checked });
   };

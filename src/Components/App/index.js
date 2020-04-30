@@ -19,10 +19,10 @@ class App extends Component {
     super(props);
     // set initial state values
     this.state = {
-      activeUserId: '',
-      activeUserName: '',
+      activeUserId: 0,
+      activeUserName: 'Sam',
       message: '',
-      page: LOGIN,
+      page: SPELLS_LIST,
       savedUsers: [],
       savedSpells: [],
     };
@@ -144,7 +144,9 @@ class App extends Component {
         </header>
 
         {/* Message  */}
-        <h3 className="message">{message}</h3>
+        <h3 className={`message${page !== SPELLS_LIST ? '' : ' hidden'}`}>
+          {message}
+        </h3>
 
         {/* Login Component */}
         {page === LOGIN && (

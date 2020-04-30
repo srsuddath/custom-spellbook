@@ -7,14 +7,17 @@ import { Wrapper } from './styles';
 import ModifySpellForm from '../ModifySpellForm';
 import { CREATE_SPELL } from '../App/PAGES';
 
-import alchemyIcon from '../../assets/alchemy.svg';
-import crystalBallIcon from '../../assets/crystal-ball.svg';
-import eyeIcon from '../../assets/eye.svg';
-import fireIcon from '../../assets/fire.svg';
-import galaxyIcon from '../../assets/galaxy.svg';
-import shieldIcon from '../../assets/shield.svg';
-import skullIcon from '../../assets/skull.svg';
-import wandIcon from '../../assets/wand.svg';
+import Alchemy from '../../assets/Alchemy';
+import CrystalBall from '../../assets/CrystalBall';
+import Eye from '../../assets/Eye';
+import Fire from '../../assets/Fire';
+import Galaxy from '../../assets/Galaxy';
+import Shield from '../../assets/Shield';
+import Skull from '../../assets/Skull';
+import Wand from '../../assets/Wand';
+import ExpandIcon from '../../assets/Expand';
+import EditIcon from '../../assets/Edit';
+import TrashIcon from '../../assets/Trash';
 
 class SpellsList extends Component {
   static propTypes = {
@@ -62,28 +65,28 @@ class SpellsList extends Component {
 
   deriveSchoolIcon = (school) => {
     if (school === 'Abjuration') {
-      return shieldIcon;
+      return Shield;
     }
     if (school === 'Conjuration') {
-      return galaxyIcon;
+      return Galaxy;
     }
     if (school === 'Divination') {
-      return crystalBallIcon;
+      return CrystalBall;
     }
     if (school === 'Enchantment') {
-      return wandIcon;
+      return Wand;
     }
     if (school === 'Evocation') {
-      return fireIcon;
+      return Fire;
     }
     if (school === 'Illusion') {
-      return eyeIcon;
+      return Eye;
     }
     if (school === 'Necromancy') {
-      return skullIcon;
+      return Skull;
     }
     if (school === 'Transmutation') {
-      return alchemyIcon;
+      return Alchemy;
     }
   };
 
@@ -99,147 +102,6 @@ class SpellsList extends Component {
     const { activeUserId, expandedSpellsLookup, deletedSpell } = this.state;
     return (
       <Wrapper>
-        <div className="spell-list">
-          {this.props.savedSpells.map((spell, index) => {
-            // Derive spell properties.
-            const concentration = get(spell, 'concentration');
-            const description = get(spell, 'description');
-            const duration = get(spell, 'duration');
-            const level = get(spell, 'level');
-            const materialComponents = get(spell, 'materialComponents');
-            const range = get(spell, 'range');
-            const readOnly = get(spell, 'readOnly');
-            const ritual = get(spell, 'ritual');
-            const school = get(spell, 'school');
-            const castingSpeed = get(spell, 'castingSpeed');
-            const somaticComponents = get(spell, 'somaticComponents');
-            const title = get(spell, 'title');
-            const userId = get(spell, 'userId');
-            const verbalComponents = get(spell, 'verbalComponents');
-            const id = get(spell, 'id');
-
-            // Derive if the spell is expanded.
-            const isExpanded = get(expandedSpellsLookup, `[${id}]`, false); // O(1)
-
-            if (userId !== activeUserId) {
-              return null;
-            }
-
-            if (!readOnly) {
-              return (
-                <ModifySpellForm
-                  activeUserId={activeUserId}
-                  defaultConcetration={concentration}
-                  defaultDescription={description}
-                  defaultDuration={duration}
-                  defaultLevel={level}
-                  defaultMaterialComponents={materialComponents}
-                  defaultRange={range}
-                  defaultRitual={ritual}
-                  defaultSchool={school}
-                  defaultCastingSpeed={castingSpeed}
-                  defaultSomaticComponents={somaticComponents}
-                  defaultTitle={title}
-                  defaultVerbalComponents={verbalComponents}
-                  key={id}
-                  savedSpells={this.props.savedSpells}
-                  onMessageUpdate={this.props.onMessageUpdate}
-                  onSavedSpellsUpdate={this.props.onSavedSpellsUpdate}
-                />
-              );
-            }
-
-            return (
-              <div className="spell" key={id}>
-                <div className="spell-header">
-                  <img
-                    alt="Spell School Icon"
-                    src={this.deriveSchoolIcon(school)}
-                  />
-                  {/* Title */}
-                  <span className="spell-title">{title}</span>
-                  <div className="spell-buttons">
-                    <button
-                      type="button"
-                      onClick={() => this.toggleSpellExpansion(id)}
-                    >
-                      Expand
-                    </button>
-                    <div className={`${isExpanded ? '' : ' hidden'}`}>
-                      <button
-                        className="edit-icon"
-                        type="button"
-                        onClick={() => this.toggleReadOnly(index)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="delete-icon"
-                        type="button"
-                        onClick={() => this.deleteSpell(index)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className={`spell-details${isExpanded ? '' : ' hidden'}`}>
-                  {/* <div
-                  className="spell-details"
-                  style={{ display: !isExpanded ? 'hidden' : 'inherit' }}
-                > */}
-                  {/* <SpellDetailsWrapper hidden={!isExpanded}> */}
-                  <div>
-                    <span>{level}</span>
-                    <span> - </span>
-                    <span>{school}</span>
-                  </div>
-                  <div>
-                    <span>Casting Speed: </span>
-                    <span>{castingSpeed}</span>
-                  </div>
-                  <div>
-                    <span>Duration: </span>
-                    <span>{duration}</span>
-                  </div>
-                  <div>
-                    <span>Range: </span>
-                    <span>{range}</span>
-                  </div>
-                  <div>
-                    <input checked={concentration} readOnly type="checkbox" />
-                    <span>Concentration</span>
-                    <input checked={ritual} readOnly type="checkbox" />
-                    <span>Ritual</span>
-                  </div>
-                  <div>
-                    <input
-                      checked={materialComponents}
-                      readOnly
-                      type="checkbox"
-                    />
-                    <span>Material</span>
-                    <input
-                      checked={somaticComponents}
-                      readOnly
-                      type="checkbox"
-                    />
-                    <span>Somatic</span>
-                    <input
-                      checked={verbalComponents}
-                      readOnly
-                      type="checkbox"
-                    />
-                    <span>Verbal</span>
-                  </div>
-                  <p className="spell-descript-text" readOnly>
-                    {description}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
         <button
           type="button"
           onClick={() => {
@@ -258,6 +120,134 @@ class SpellsList extends Component {
         >
           Undo Delete
         </button>
+
+        {this.props.savedSpells.map((spell, index) => {
+          // Derive spell properties.
+          const concentration = get(spell, 'concentration');
+          const description = get(spell, 'description');
+          const duration = get(spell, 'duration');
+          const level = get(spell, 'level');
+          const materialComponents = get(spell, 'materialComponents');
+          const range = get(spell, 'range');
+          const readOnly = get(spell, 'readOnly');
+          const ritual = get(spell, 'ritual');
+          const school = get(spell, 'school');
+          const castingSpeed = get(spell, 'castingSpeed');
+          const somaticComponents = get(spell, 'somaticComponents');
+          const title = get(spell, 'title');
+          const userId = get(spell, 'userId');
+          const verbalComponents = get(spell, 'verbalComponents');
+          const id = get(spell, 'id');
+
+          // Derive if the spell is expanded.
+          const isExpanded = get(expandedSpellsLookup, `[${id}]`, false); // O(1)
+
+          // Derive school icon
+          const SchoolIcon = this.deriveSchoolIcon(school);
+
+          if (userId !== activeUserId) {
+            return null;
+          }
+
+          if (!readOnly) {
+            return (
+              <ModifySpellForm
+                activeUserId={activeUserId}
+                defaultConcetration={concentration}
+                defaultDescription={description}
+                defaultDuration={duration}
+                defaultLevel={level}
+                defaultMaterialComponents={materialComponents}
+                defaultRange={range}
+                defaultRitual={ritual}
+                defaultSchool={school}
+                defaultCastingSpeed={castingSpeed}
+                defaultSomaticComponents={somaticComponents}
+                defaultTitle={title}
+                defaultVerbalComponents={verbalComponents}
+                key={id}
+                savedSpells={this.props.savedSpells}
+                onMessageUpdate={this.props.onMessageUpdate}
+                onSavedSpellsUpdate={this.props.onSavedSpellsUpdate}
+              />
+            );
+          }
+
+          return (
+            <div className="spell" key={id}>
+              <div className="spell-header">
+                <div className="spell-reference">
+                  <SchoolIcon />
+                </div>
+                {/* Title */}
+                <span className="spell-title">{title}</span>
+                <div className="spell-buttons">
+                  <div className={`${isExpanded ? '' : ' hidden'}`}>
+                    <EditIcon
+                      className="icon-button"
+                      onClick={() => this.toggleReadOnly(index)}
+                    />
+                    <TrashIcon
+                      className="icon-button"
+                      onClick={() => this.deleteSpell(index)}
+                    />
+                  </div>
+                  <ExpandIcon
+                    className={`icon-button chevron${
+                      isExpanded ? '' : ' rotate'
+                    }`}
+                    onClick={() => this.toggleSpellExpansion(id)}
+                  />
+                </div>
+              </div>
+              <div className={`spell-details${isExpanded ? '' : ' hidden'}`}>
+                {/* <div
+                  className="spell-details"
+                  style={{ display: !isExpanded ? 'hidden' : 'inherit' }}
+                > */}
+                {/* <SpellDetailsWrapper hidden={!isExpanded}> */}
+                <div>
+                  <span>{level}</span>
+                  <span> - </span>
+                  <span>{school}</span>
+                </div>
+                <div>
+                  <span>Casting Speed: </span>
+                  <span>{castingSpeed}</span>
+                </div>
+                <div>
+                  <span>Duration: </span>
+                  <span>{duration}</span>
+                </div>
+                <div>
+                  <span>Range: </span>
+                  <span>{range}</span>
+                </div>
+                <div>
+                  <input checked={concentration} readOnly type="checkbox" />
+                  <span>Concentration</span>
+                  <input checked={ritual} readOnly type="checkbox" />
+                  <span>Ritual</span>
+                </div>
+                <div className="spell-components">
+                  <input
+                    checked={materialComponents}
+                    readOnly
+                    type="checkbox"
+                  />
+                  <span>Material</span>
+                  <input checked={somaticComponents} readOnly type="checkbox" />
+                  <span>Somatic</span>
+                  <input checked={verbalComponents} readOnly type="checkbox" />
+                  <span>Verbal</span>
+                </div>
+                <p className="spell-descript-text" readOnly>
+                  {description}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </Wrapper>
     );
   }
