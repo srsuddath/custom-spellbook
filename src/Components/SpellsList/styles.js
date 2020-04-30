@@ -22,11 +22,31 @@ export const Wrapper = styled.div`
       margin-top: 20px;
       border-top: 1px solid #3a4054;
     }
+
+    .icon-button {
+      background: none;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+      height: 14px;
+      width: 14px;
+
+      path {
+        transition: fill 0.3s ease;
+      }
+      &:hover path {
+        fill: #ffffff;
+      }
+    }
+
+    button {
+      padding: 6px 10px;
+    }
   }
 
   svg {
-    height: 35px;
-    width: 35px;
+    height: 25px;
+    width: 25px;
     padding: 5px;
     border-radius: 50%;
     margin: 0 2px;
@@ -35,7 +55,7 @@ export const Wrapper = styled.div`
     box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
     fill: #96a3dd;
     transition: box-shadow 0.3s ease, background 0.3s ease;
-
+    overflow: visible;
     background: #434069; /* Old browsers */
     background: -moz-linear-gradient(
       90deg,
@@ -73,12 +93,12 @@ export const Wrapper = styled.div`
       text-align: center;
       justify-content: center;
       color: #96a3dd;
-      font-size: 16px;
+      font-size: 0.6rem;
       border-radius: 50%;
       margin: 0 2px;
-      padding: 0 0 1px 0;
-      height: 30px;
-      width: 30px;
+      padding: 2px;
+      height: 23px;
+      width: 23px;
       background: #434069; /* Old browsers */
       background: -moz-linear-gradient(
         90deg,
@@ -111,15 +131,15 @@ export const Wrapper = styled.div`
     justify-content: flex-end;
     flex: 1;
   }
-
-  .icon-button {
+  .spell-other-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
     margin: 0 2px;
-    border-radius: 30%;
-    path {
-      transition: fill 0.3s ease;
-    }
-    &:hover path {
-      fill: #ffffff;
+
+    button {
+      margin: 0 2px;
     }
   }
 

@@ -41,6 +41,10 @@ code {
 }
 
 button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   padding: 5px 20px;
   border-radius: 2px;
   color: #ffffff;
@@ -51,6 +55,7 @@ button {
   box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
   outline: none;
   cursor: pointer;
+  font-size: 0.7rem;
   transition: box-shadow 0.2s ease;
 }
 
