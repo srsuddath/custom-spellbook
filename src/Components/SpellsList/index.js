@@ -232,18 +232,28 @@ class SpellsList extends Component {
               <div className="spell-header">
                 <div className="spell-reference">
                   <SchoolIcon />
-                  <span className="reference-icon">
+                  <span
+                    className={`${!isExpanded ? 'reference-icon' : ' hidden'}`}
+                  >
                     {this.deriveLevelIcon(level)}
                   </span>
-                  <span className="reference-icon">
+                  <span
+                    className={`${!isExpanded ? 'reference-icon' : ' hidden'}`}
+                  >
                     {this.deriveCastingSpeedIcon(castingSpeed)}
                   </span>
                   <span
-                    className={`${concentration ? 'reference-icon' : 'hidden'}`}
+                    className={`${
+                      concentration && !isExpanded ? 'reference-icon' : 'hidden'
+                    }`}
                   >
                     C
                   </span>
-                  <span className={`${ritual ? 'reference-icon' : 'hidden'}`}>
+                  <span
+                    className={`${
+                      ritual && !isExpanded ? 'reference-icon' : 'hidden'
+                    }`}
+                  >
                     R
                   </span>
                 </div>
