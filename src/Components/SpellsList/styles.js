@@ -29,6 +29,7 @@ export const Wrapper = styled.div`
     width: 35px;
     padding: 5px;
     border-radius: 50%;
+    margin: 0 2px;
     -webkit-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
@@ -76,8 +77,8 @@ export const Wrapper = styled.div`
       border-radius: 50%;
       margin: 0 2px;
       padding: 0 0 1px 0;
-      height: 35px;
-      width: 35px;
+      height: 30px;
+      width: 30px;
       background: #434069; /* Old browsers */
       background: -moz-linear-gradient(
         90deg,
@@ -102,6 +103,7 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     text-align: center;
+    font-size: 20px;
   }
   .spell-buttons {
     display: flex;

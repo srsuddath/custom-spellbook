@@ -90,7 +90,7 @@ class SpellsList extends Component {
     }
   };
 
-  deriveLevel(level) {
+  deriveLevelIcon(level) {
     if (level === 'Cantrip') {
       return '0th';
     }
@@ -122,6 +122,27 @@ class SpellsList extends Component {
       return '9th';
     }
   }
+
+  deriveCastingSpeedIcon = (castingSpeed) => {
+    if (castingSpeed === '1 Action') {
+      return 'A';
+    }
+    if (castingSpeed === '1 Bonus Action') {
+      return 'BA';
+    }
+    if (castingSpeed === '1 Minute') {
+      return '1m';
+    }
+    if (castingSpeed === '10 Minutes') {
+      return '10m';
+    }
+    if (castingSpeed === '1 Hour') {
+      return '1h';
+    }
+    if (castingSpeed === '8 Hours') {
+      return '8h';
+    }
+  };
 
   toggleSpellExpansion = (id) => {
     const expandedSpellsLookup = {
@@ -212,7 +233,18 @@ class SpellsList extends Component {
                 <div className="spell-reference">
                   <SchoolIcon />
                   <span className="reference-icon">
-                    {this.deriveLevel(level)}
+                    {this.deriveLevelIcon(level)}
+                  </span>
+                  <span className="reference-icon">
+                    {this.deriveCastingSpeedIcon(castingSpeed)}
+                  </span>
+                  <span
+                    className={`${concentration ? 'reference-icon' : 'hidden'}`}
+                  >
+                    C
+                  </span>
+                  <span className={`${ritual ? 'reference-icon' : 'hidden'}`}>
+                    R
                   </span>
                 </div>
                 {/* Title */}
