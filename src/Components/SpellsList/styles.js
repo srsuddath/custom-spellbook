@@ -65,6 +65,36 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     flex: 1;
+
+    .reference-icon {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      color: #96a3dd;
+      font-size: 16px;
+      border-radius: 50%;
+      margin: 0 2px;
+      padding: 0 0 1px 0;
+      height: 35px;
+      width: 35px;
+      background: #434069; /* Old browsers */
+      background: -moz-linear-gradient(
+        90deg,
+        #373d51 1%,
+        #434069 100%
+      ); /*FF3.6-15 */
+      background: -webkit-linear-gradient(
+        90deg,
+        #373d51 1%,
+        #434069 100%
+      ); /*Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(
+        90deg,
+        #373d51 1%,
+        #434069 100%
+      ); /*W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    }
   }
   .spell-title {
     flex: 1;
@@ -81,6 +111,8 @@ export const Wrapper = styled.div`
   }
 
   .icon-button {
+    margin: 0 2px;
+    border-radius: 30%;
     path {
       transition: fill 0.3s ease;
     }

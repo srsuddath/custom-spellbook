@@ -19,10 +19,10 @@ class App extends Component {
     super(props);
     // set initial state values
     this.state = {
-      activeUserId: 0,
-      activeUserName: 'Sam',
+      activeUserId: '', // 0,
+      activeUserName: '', // 'Sam',
       message: '',
-      page: SPELLS_LIST,
+      page: LOGIN, // SPELLS_LIST,
       savedUsers: [],
       savedSpells: [],
     };

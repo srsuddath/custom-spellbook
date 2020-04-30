@@ -90,6 +90,39 @@ class SpellsList extends Component {
     }
   };
 
+  deriveLevel(level) {
+    if (level === 'Cantrip') {
+      return '0th';
+    }
+    if (level === '1st Level') {
+      return '1st';
+    }
+    if (level === '2nd Level') {
+      return '2nd';
+    }
+    if (level === '3rd Level') {
+      return '3rd';
+    }
+    if (level === '4th Level') {
+      return '4th';
+    }
+    if (level === '5th Level') {
+      return '5th';
+    }
+    if (level === '6th Level') {
+      return '6th';
+    }
+    if (level === '7th Level') {
+      return '7th';
+    }
+    if (level === '8th Level') {
+      return '8th';
+    }
+    if (level === '9th Level') {
+      return '9th';
+    }
+  }
+
   toggleSpellExpansion = (id) => {
     const expandedSpellsLookup = {
       ...this.state.expandedSpellsLookup,
@@ -178,6 +211,9 @@ class SpellsList extends Component {
               <div className="spell-header">
                 <div className="spell-reference">
                   <SchoolIcon />
+                  <span className="reference-icon">
+                    {this.deriveLevel(level)}
+                  </span>
                 </div>
                 {/* Title */}
                 <span className="spell-title">{title}</span>
