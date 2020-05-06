@@ -116,6 +116,10 @@ export const Wrapper = styled.div`
         #434069 100%
       ); /*W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     }
+
+    .bigger-text {
+      font-size: 0.8rem;
+    }
   }
   .spell-title {
     flex: 1;

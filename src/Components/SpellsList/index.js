@@ -194,7 +194,7 @@ class SpellsList extends Component {
           const id = get(spell, 'id');
 
           // Derive if the spell is expanded.
-          const isExpanded = get(expandedSpellsLookup, `[${id}]`, false); // O(1)
+          const isExpanded = get(expandedSpellsLookup, `[${id}]`, false);
 
           // Derive school icon
           const SchoolIcon = this.deriveSchoolIcon(school);
@@ -243,15 +243,17 @@ class SpellsList extends Component {
                     {this.deriveCastingSpeedIcon(castingSpeed)}
                   </span>
                   <span
-                    className={`${
-                      concentration && !isExpanded ? 'reference-icon' : 'hidden'
+                    className={`bigger-text${
+                      concentration && !isExpanded
+                        ? ' reference-icon'
+                        : ' hidden'
                     }`}
                   >
                     C
                   </span>
                   <span
-                    className={`${
-                      ritual && !isExpanded ? 'reference-icon' : 'hidden'
+                    className={`bigger-text${
+                      ritual && !isExpanded ? ' reference-icon' : ' hidden'
                     }`}
                   >
                     R

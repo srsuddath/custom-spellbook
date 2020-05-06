@@ -59,6 +59,19 @@ button {
   transition: box-shadow 0.2s ease;
 }
 
+select {
+  width: 210px;
+  margin: 2px 0 2px;
+  padding: 5px 0 3px;
+  font-size: 0.8rem;
+  color: #ffffff;
+  background: #32384a;
+  border-color: #ffffff;
+  border: none;
+  text-indent: 3px;
+  border-radius: 0px;
+}
+
 button:hover {
   -webkit-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
