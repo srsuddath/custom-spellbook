@@ -7,7 +7,6 @@ export default function Alchemy(props) {
       viewBox="0 0 56 56"
       width={56}
       xmlns="http://www.w3.org/2000/svg"
-      fill="#96A3DD"
       title="Alchemy"
       {...props}
     >

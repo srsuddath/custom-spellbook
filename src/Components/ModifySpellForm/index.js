@@ -223,13 +223,6 @@ class ModifySpellForm extends Component {
           <span className="label">Ritual</span>
         </div>
 
-        {/*  test code here */}
-        <label className="checkbox-label" htmlFor="normalCheckbox">
-          <input className="checkbox" type="checkbox" id="normalCheckbox" />
-          <span className="custom-checkbox"></span>
-        </label>
-        {/* test code here */}
-
         <div className="spell-components">
           <input
             className="checkbox"
@@ -256,13 +249,13 @@ class ModifySpellForm extends Component {
         <textarea
           className="spell-description"
           placeholder="Spell Description"
-          rows="5"
           value={this.state.description}
           onChange={this.onchange('description')}
         />
         <button type="button" onClick={this.updateSpell}>
           Update
         </button>
+        <span className="end-form-span"></span>
       </Wrapper>
     );
   }

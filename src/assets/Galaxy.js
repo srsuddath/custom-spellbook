@@ -7,7 +7,6 @@ export default function Galaxy(props) {
       viewBox="-22 0 512 512"
       width="512pt"
       xmlns="http://www.w3.org/2000/svg"
-      fill="#96A3DD"
       title="Galaxy"
       {...props}
     >

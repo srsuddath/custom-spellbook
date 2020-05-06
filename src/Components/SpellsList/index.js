@@ -157,6 +157,7 @@ class SpellsList extends Component {
     return (
       <Wrapper>
         <button
+          className="header-button"
           type="button"
           onClick={() => {
             this.props.changePage(CREATE_SPELL);
@@ -167,7 +168,7 @@ class SpellsList extends Component {
 
         <button
           type="button"
-          className={`spell-details${
+          className={`${
             Object.keys(deletedSpell).length === 0 ? ' hidden' : ''
           }`}
           onClick={this.undoDelete}
@@ -293,49 +294,55 @@ class SpellsList extends Component {
                 </div>
               </div>
               <div className={`spell-details${isExpanded ? '' : ' hidden'}`}>
-                {/* <div
-                  className="spell-details"
-                  style={{ display: !isExpanded ? 'hidden' : 'inherit' }}
-                > */}
-                {/* <SpellDetailsWrapper hidden={!isExpanded}> */}
-                <div>
-                  <span>{level}</span>
-                  <span> - </span>
-                  <span>{school}</span>
+                <div className="top-spell-details">
+                  <div>
+                    <span>{level}</span>
+                    <span> - </span>
+                    <span>{school}</span>
+                  </div>
+                  <div>
+                    <span>Casting Speed: </span>
+                    <span>{castingSpeed}</span>
+                  </div>
+                  <div>
+                    <span>Duration: </span>
+                    <span>{duration}</span>
+                  </div>
+
+                  <div>
+                    <span>Range: </span>
+                    <span>{range}</span>
+                  </div>
                 </div>
-                <div>
-                  <span>Casting Speed: </span>
-                  <span>{castingSpeed}</span>
+                <div className="lower-spell-details">
+                  <div>
+                    <input checked={concentration} readOnly type="checkbox" />
+                    <span>Concentration</span>
+                    <input checked={ritual} readOnly type="checkbox" />
+                    <span>Ritual</span>
+                  </div>
+                  <div className="spell-components">
+                    <input
+                      checked={materialComponents}
+                      readOnly
+                      type="checkbox"
+                    />
+                    <span>Material</span>
+                    <input
+                      checked={somaticComponents}
+                      readOnly
+                      type="checkbox"
+                    />
+                    <span>Somatic</span>
+                    <input
+                      checked={verbalComponents}
+                      readOnly
+                      type="checkbox"
+                    />
+                    <span>Verbal</span>
+                  </div>
                 </div>
-                <div>
-                  <span>Duration: </span>
-                  <span>{duration}</span>
-                </div>
-                <div>
-                  <span>Range: </span>
-                  <span>{range}</span>
-                </div>
-                <div>
-                  <input checked={concentration} readOnly type="checkbox" />
-                  <span>Concentration</span>
-                  <input checked={ritual} readOnly type="checkbox" />
-                  <span>Ritual</span>
-                </div>
-                <div className="spell-components">
-                  <input
-                    checked={materialComponents}
-                    readOnly
-                    type="checkbox"
-                  />
-                  <span>Material</span>
-                  <input checked={somaticComponents} readOnly type="checkbox" />
-                  <span>Somatic</span>
-                  <input checked={verbalComponents} readOnly type="checkbox" />
-                  <span>Verbal</span>
-                </div>
-                <p className="spell-descript-text" readOnly>
-                  {description}
-                </p>
+                <p className="spell-description">{description}</p>
               </div>
             </div>
           );

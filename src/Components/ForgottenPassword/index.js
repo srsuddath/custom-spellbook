@@ -100,7 +100,14 @@ class ForgottenPassword extends Component {
   // function to update a found user's password
   updatePassword = () => {
     // get state data
-    const { passwordInput, retypePasswordInput, usernameInput, nameInput, userIndex, preserveUserID } = this.state;
+    const {
+      passwordInput,
+      retypePasswordInput,
+      usernameInput,
+      nameInput,
+      userIndex,
+      preserveUserID,
+    } = this.state;
 
     // check to make sure passwords match
     if (passwordInput !== retypePasswordInput) {
@@ -169,7 +176,11 @@ class ForgottenPassword extends Component {
                 value={this.state.usernameInput}
                 onChange={this.onInputChange('usernameInput')}
               />
-              <button className="action-button" type="submit" onClick={this.findUserInfo}>
+              <button
+                className="action-button"
+                type="submit"
+                onClick={this.findUserInfo}
+              >
                 Find Me
               </button>
             </>
@@ -201,14 +212,18 @@ class ForgottenPassword extends Component {
               />
 
               {/* submit button to update password */}
-              <button className="action-button" type="button" onClick={this.updatePassword}>
+              <button
+                className="action-button"
+                type="button"
+                onClick={this.updatePassword}
+              >
                 Update
               </button>
             </>
           )}
           {/* button to "quit out" and return to login screen */}
           <button className="link" type="button" onClick={this.goHome}>
-            Return To Sign In
+            Return To Login
           </button>
         </div>
       </Wrapper>

@@ -12,7 +12,6 @@ export default function Skull(props) {
       viewBox="0 0 512.001 512.001"
       style={{ enableBackground: 'new 0 0 512.001 512.001' }}
       xmlSpace="preserve"
-      fill="#96A3DD"
       title="Skull"
       width="512.001"
       height="512.001"

@@ -187,21 +187,18 @@ class CreateSpell extends Component {
   render() {
     return (
       <Wrapper>
-        {/* Title for form */}
-        <h3>Create a New Spell</h3>
-        {/* Spell Title Input */}
-        <input
-          className="spell-title-box"
-          placeholder="Spell Title"
-          type="text"
-          value={this.state.title}
-          onChange={this.onchange('title')}
-        />
-        {/* Spell Level and School */}
-        <div className="spell-category-options">
-          {/* Spell Level Selection */}
+        <div className="new-spell-form">
+          {/* Title for form */}
+          <h3>Create a New Spell</h3>
+          {/* Spell Title Input */}
+          <input
+            className="spell-title"
+            placeholder="Spell Title"
+            type="text"
+            value={this.state.title}
+            onChange={this.onchange('title')}
+          />
           <select
-            className="spell-level"
             type="selection-box"
             value={this.state.level}
             onChange={this.onchange('level')}
@@ -218,10 +215,7 @@ class CreateSpell extends Component {
             <option value="8th Level">8th Level</option>
             <option value="9th Level">9th Level</option>
           </select>
-
-          {/* Spell School Selection */}
           <select
-            className="spell-school"
             type="selection-box"
             value={this.state.school}
             onChange={this.onchange('school')}
@@ -236,123 +230,115 @@ class CreateSpell extends Component {
             <option value="Necromancy">Necromancy</option>
             <option value="Transmutation">Transmutation</option>
           </select>
-        </div>
-        <select
-          className="casting-speed"
-          type="selection-box"
-          value={this.state.castingSpeed}
-          onChange={this.onchange('castingSpeed')}
-        >
-          <option value="">Casting Speed</option>
-          <option value="1 Action">1 Action</option>
-          <option value="1 Bonus Action">1 Bonus Action</option>
-          <option value="1 Minute">1 Minute</option>
-          <option value="10 Minutes">10 Minutes</option>
-          <option value="1 Hour">1 Hour</option>
-          <option value="8 Hours">8 Hours</option>
-        </select>
-        <div>
+          <select
+            type="selection-box"
+            value={this.state.castingSpeed}
+            onChange={this.onchange('castingSpeed')}
+          >
+            <option value="">Casting Speed</option>
+            <option value="1 Action">Casting Speed: 1 Action</option>
+            <option value="1 Bonus Action">
+              Casting Speed: 1 Bonus Action
+            </option>
+            <option value="1 Minute">Casting Speed: 1 Minute</option>
+            <option value="10 Minutes">Casting Speed: 10 Minutes</option>
+            <option value="1 Hour">Casting Speed: 1 Hour</option>
+            <option value="8 Hours">Casting Speed: 8 Hours</option>
+          </select>
           {/* Spell Range Selection */}
           <select
-            className="range"
             type="selection-box"
             value={this.state.range}
             onChange={this.onchange('range')}
           >
             <option value="">Range</option>
-            <option value="Touch">Touch</option>
-            <option value="15 Feet">15 Feet</option>
-            <option value="30 Feet">30 Feet</option>
-            <option value="60 Feet">60 Feet</option>
-            <option value="120 Feet">120 Feet</option>
-            <option value="500 Feet">500 Feet</option>
-            <option value="1 Mile">1 Mile</option>
-            <option value="10 Miles">10 Miles</option>
+            <option value="Touch">Range: Touch</option>
+            <option value="15 Feet">Range: 15 Feet</option>
+            <option value="30 Feet">Range: 30 Feet</option>
+            <option value="60 Feet">Range: 60 Feet</option>
+            <option value="120 Feet">Range: 120 Feet</option>
+            <option value="500 Feet">Range: 500 Feet</option>
+            <option value="1 Mile">Range: 1 Mile</option>
+            <option value="10 Miles">Range: 10 Miles</option>
           </select>
           {/* Spell Duration Selection */}
           <select
-            className="duration"
             type="selection-box"
             value={this.state.duration}
             onChange={this.onchange('duration')}
           >
             <option value="">Duration</option>
-            <option value="Instantaneous">Instantaneous</option>
-            <option value="1 Round">1 Round</option>
-            <option value="1 Minute">1 Minute</option>
-            <option value="10 Minutes">10 Minutes</option>
-            <option value="1 Hour">1 Hour</option>
-            <option value="8 Hours">8 Hours</option>
-            <option value="1 Day">1 Day</option>
-            <option value="1 Month">1 Month</option>
-            <option value="1 Year">1 Year</option>
+            <option value="Instantaneous">Duration: Instantaneous</option>
+            <option value="1 Round">Duration: 1 Round</option>
+            <option value="1 Minute">Duration: 1 Minute</option>
+            <option value="10 Minutes">Duration: 10 Minutes</option>
+            <option value="1 Hour">Duration: 1 Hour</option>
+            <option value="8 Hours">Duration: 8 Hours</option>
+            <option value="1 Day">Duration: 1 Day</option>
+            <option value="1 Month">Duration: 1 Month</option>
+            <option value="1 Year">Duration: 1 Year</option>
           </select>
+          <div className="casting-modifiers">
+            <input
+              className="checkbox"
+              checked={this.state.concentration}
+              type="checkbox"
+              onChange={this.onCheckboxChange('concentration')}
+            />
+            <span className="label">Concentration</span>
+            <input
+              className="checkbox"
+              checked={this.state.ritual}
+              type="checkbox"
+              onChange={this.onCheckboxChange('ritual')}
+            />
+            <span className="label">Ritual</span>
+          </div>
+
+          <div className="spell-components">
+            <input
+              className="checkbox"
+              checked={this.state.materialComponents}
+              type="checkbox"
+              onChange={this.onCheckboxChange('materialComponents')}
+            />
+            <span className="label">Material</span>
+            <input
+              className="checkbox"
+              checked={this.state.somaticComponents}
+              type="checkbox"
+              onChange={this.onCheckboxChange('somaticComponents')}
+            />
+            <span className="label">Somatic</span>
+            <input
+              className="checkbox"
+              checked={this.state.verbalComponents}
+              type="checkbox"
+              onChange={this.onCheckboxChange('verbalComponents')}
+            />
+            <span className="label">Verbal</span>
+          </div>
+          <textarea
+            className="spell-description"
+            placeholder="  Spell Description..."
+            value={this.state.description}
+            onChange={this.onchange('description')}
+          />
+          {/* Create New Spell Button */}
+          <button type="button" onClick={this.createSpell}>
+            Submit
+          </button>
         </div>
-        {/* Casting Modifier Checkboxes */}
-        <div className="casting-modifier-options">
-          {/* Concentration Checkbox */}
-          <input
-            checked={this.state.concentration}
-            type="checkbox"
-            onChange={this.onCheckboxChange('concentration')}
-          />
-          <span>Concentration</span>
 
-          {/* Ritual Checkbox */}
-          <input
-            checked={this.state.ritual}
-            type="checkbox"
-            onChange={this.onCheckboxChange('ritual')}
-          />
-          <span>Ritual</span>
-        </div>
-        {/* Spell Components Checkboxes */}
-        <div className="spell-components">
-          {/* materialComponents Checkbox */}
-          <input
-            checked={this.state.materialComponents}
-            type="checkbox"
-            onChange={this.onCheckboxChange('materialComponents')}
-          />
-          <span>Material</span>
-
-          {/* somaticComponents Checkbox */}
-          <input
-            checked={this.state.somaticComponents}
-            type="checkbox"
-            onChange={this.onCheckboxChange('somaticComponents')}
-          />
-          <span>Somatic</span>
-
-          {/* verbalComponents Checkbox */}
-          <input
-            checked={this.state.verbalComponents}
-            type="checkbox"
-            onChange={this.onCheckboxChange('verbalComponents')}
-          />
-
-          <span>Verbal</span>
-        </div>
-        {/* Description Multi-line text box */}
-        <textarea
-          className="spell-description-box"
-          placeholder="Spell Description"
-          rows="5"
-          value={this.state.description}
-          onChange={this.onchange('description')}
-        />
-        {/* Create New Spell Button */}
-        <button type="button" onClick={this.createSpell}>
-          Submit
-        </button>
         {/* Return to Spells List Button */}
         <button
+          className="go-home"
           type="button"
           onClick={() => {
             this.props.changePage(SPELLS_LIST);
           }}
         >
-          Go Back
+          Return
         </button>
       </Wrapper>
     );

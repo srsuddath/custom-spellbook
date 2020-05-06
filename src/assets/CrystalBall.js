@@ -12,7 +12,6 @@ export default function CrystalBall(props) {
       viewBox="0 0 512 512"
       style={{ enableBackground: 'new 0 0 512 512' }}
       xmlSpace="preserve"
-      fill="#96A3DD"
       title="CrystalBall"
       width={512}
       height={512}

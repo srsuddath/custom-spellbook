@@ -19,13 +19,13 @@ class App extends Component {
     super(props);
     // set initial state values
     this.state = {
-      // activeUserId: '',
-      activeUserId: 0,
-      // activeUserName: '',
-      activeUserName: 'Sam',
+      activeUserId: '',
+      // activeUserId: 0,
+      activeUserName: '',
+      // activeUserName: 'Sam',
       message: '',
-      // page: LOGIN,
-      page: SPELLS_LIST,
+      page: LOGIN,
+      // page: SPELLS_LIST,
       savedUsers: [],
       savedSpells: [],
     };
@@ -84,7 +84,7 @@ class App extends Component {
   };
 
   changePage = (page) => {
-    this.setState({ page });
+    this.setState({ page, message: '' });
   };
 
   // function to update app state activeUserId from components
@@ -133,7 +133,7 @@ class App extends Component {
         {/* Title */}
         <header>
           <div />
-          <h1>Custom Spellbook Generator</h1>
+          <h1>Custom Spellbook</h1>
           <div className="user-info">
             {activeUserName && (
               <>

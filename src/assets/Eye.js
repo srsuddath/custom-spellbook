@@ -7,7 +7,6 @@ export default function Eye(props) {
       viewBox="0 0 56 42"
       width={512}
       xmlns="http://www.w3.org/2000/svg"
-      fill="#96A3DD"
       title="Eye"
       {...props}
     >

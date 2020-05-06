@@ -12,7 +12,6 @@ export default function Shield(props) {
       viewBox="0 0 31.694 31.694"
       style={{ enableBackground: 'new 0 0 31.694 31.694' }}
       xmlSpace="preserve"
-      fill="#96A3DD"
       title="Shield"
       width="31.694"
       height="31.694"

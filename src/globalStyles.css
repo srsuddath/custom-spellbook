@@ -65,11 +65,12 @@ select {
   padding: 5px 0 3px;
   font-size: 0.8rem;
   color: #ffffff;
-  background: #32384a;
+  background: transparent;
   border-color: #ffffff;
   border: none;
   text-indent: 3px;
   border-radius: 0px;
+  border: 1px solid #383e50;
 }
 
 button:hover {

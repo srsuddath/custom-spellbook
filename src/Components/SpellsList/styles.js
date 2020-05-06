@@ -147,11 +147,47 @@ export const Wrapper = styled.div`
     }
   }
 
+  .header-button {
+    margin: 0 0 7px;
+  }
+
   .chevron {
     transform: rotate(270deg);
   }
 
   .rotate {
     transform: rotate(90deg);
+  }
+  .spell-details {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+  }
+  .top-spell-details {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 0.8rem;
+    margin: 10px 0 10px;
+  }
+  .lower-spell-details {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 0.8rem;
+  }
+  .spell-description {
+    margin: 5px 0 9px 50px;
+    padding: 7px 0 3px;
+    font-size: 0.8rem;
+    text-align: left;
+    color: #ffffff;
+    background: transparent;
+    border: none;
+    white-space: pre-wrap;
+  }
+  .hidden {
+    display: none;
   }
 `;
