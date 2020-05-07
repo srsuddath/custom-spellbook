@@ -178,7 +178,7 @@ export const Wrapper = styled.div`
     font-size: 0.8rem;
   }
   .spell-description {
-    margin: 5px 0 9px 50px;
+    margin: 5px 0 9px 5px;
     padding: 7px 0 3px;
     font-size: 0.8rem;
     text-align: left;
