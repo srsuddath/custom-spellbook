@@ -42,7 +42,7 @@ Once input, you will be allowed to create a new password.
 ### Creating Spells
 A form makes creating a spell with all the information you could possibly need easier than ever.
 
-<iframe src='https://gfycat.com/ifr/FortunateEnviousHalcyon' frameborder='0' scrolling='no' allowfullscreen width='300' ></iframe>
+![Usage](https://thumbs.gfycat.com/FortunateEnviousHalcyon-small.gif)
 
 ### Using the app
 Once you have created your spells, you can:
@@ -50,7 +50,7 @@ Once you have created your spells, you can:
  - edit their information
  - delete and re-add them to your list
 
-<iframe src='https://gfycat.com/ifr/CarelessWellgroomedIberianbarbel' frameborder='0' scrolling='no' allowfullscreen width='640'></iframe>
+![Usage](https://thumbs.gfycat.com/CarelessWellgroomedIberianbarbel-small.gif)
 
 
 
