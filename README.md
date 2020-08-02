@@ -1,6 +1,6 @@
 
 # Custom Spellbook Manager
-![custom spellbook](/assets/images/readme-logo.png)
+![custom spellbook](/public/images/readme-logo.png)
 
 Create and manage a collection of user-input spells for 5th edition D&D
 
@@ -41,14 +41,17 @@ Once input, you will be allowed to create a new password.
 
 ### Creating Spells
 A form makes creating a spell with all the information you could possibly need easier than ever.
-![Create](https://gfycat.com/fortunateenvioushalcyon)
+
+<iframe src='https://gfycat.com/ifr/FortunateEnviousHalcyon' frameborder='0' scrolling='no' allowfullscreen width='300' ></iframe>
 
 ### Using the app
 Once you have created your spells, you can:
  - collapse and expand their information (notice the quick reference icons on the left)
  - edit their information
  - delete and re-add them to your list
-![Use](https://gfycat.com/carelesswellgroomediberianbarbel)
+
+<iframe src='https://gfycat.com/ifr/CarelessWellgroomedIberianbarbel' frameborder='0' scrolling='no' allowfullscreen width='640'></iframe>
+
 
 
 ## Contributing
