@@ -1,5 +1,6 @@
-<div style="display: flex; align-items: center; margin-bottom: 20px;"><img alt="logo" src="https://github.com/SolonTheWizard/custom-spellbook/raw/master/public/logo192.png" style="max-height: 40px; margin-right: 20px;"><h1 style="margin: 0;">Custom Spellbook Manager</h1></div>
+<img alt="logo" src="https://github.com/SolonTheWizard/custom-spellbook/raw/master/public/logo192.png" style="max-height: 40px;">
 
+# Custom Spellbook Manager
 Create and manage a collection of user-input spells for 5th edition D&D
 
 
