@@ -26,18 +26,20 @@ View it at [custom-spellbook.web.app](https://custom-spellbook.web.app/).
 ### Start by Registering
 Each user will need to register for their spellbook to be saved. Each user's collection of spells is stored independently in local storage.
 
-<img src='/documentation/register-page.png' width='300px'>
+<img src='/documentation/register-page.png' width='400px'>
 
 ### Log in to your newly created account
 Logging in is easy! you just have to input your username and password.
 
 If you have trouble loggin in to your account, click the "Forgot my password" link instead
-<img src='/documentation/login-page.png' width='300px'>
+
+<img src='/documentation/login-page.png' width='400px'>
 
 ### Resetting your password
 In order to reset your password, you'll need to remember your username and the name you used to register your account.
 Once input, you will be allowed to create a new password.
-<img src='/documentation/reset-page.png' width='300px'>
+
+<img src='/documentation/reset-page.png' width='400px'>
 
 ### Creating Spells
 A form makes creating a spell with all the information you could possibly need easier than ever.
@@ -56,7 +58,7 @@ Once you have created your spells, you can:
 
 ## Contributing
 
-Do you see any errors? Want to add your own functionality or switch up the prompt api?
+Do you see any errors? Want to add your own functionality or switch something up?
 
 #### Steps
 
