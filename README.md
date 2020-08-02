@@ -1,6 +1,6 @@
 
 # Custom Spellbook Manager
-![custom spellbook](/documentation/readme-logo.png)
+![custom spellbook](/public/logo512.png)
 
 Create and manage a collection of user-input spells for 5th edition D&D
 
