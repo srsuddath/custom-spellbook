@@ -27,6 +27,7 @@ View it at [custom-spellbook.web.app](https://custom-spellbook.web.app/).
 Each user will need to register for their spellbook to be saved. Each user's collection of spells is stored independently in local storage.
 
 ![register page](/public/images/register-page.png | width=250).
+<img src='/public/images/register-page.png' width='250px'>
 
 ## Contributing
 
